@@ -69,3 +69,190 @@ h1, h2, h3, h4, h5, h6 {
 	font-size: inherit;
 	font-weight: 400;
 }
+
+body {
+	color: #FFF;
+	font-family: "Roboto", sans-serif;
+	font-size: 16px;
+	line-height: 19px;
+	background: #111827;
+}
+
+h1 {
+	font-size: 80px;
+	line-height: 94px;
+	font-weight: 400;
+}
+
+h2 {
+	font-size: 40px;
+	line-height: 47px;
+}
+
+h3 {
+	font-size: 32px;
+	line-height: 38px;
+}
+
+h4 {
+	font-size: 20px;
+	line-height: 23px;
+	font-weight: 500;
+}
+
+h5 {
+	font-size: 20px;
+	line-height: 23px;
+}
+
+.header {
+	position: fixed;
+	width: 100%;
+	background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.5)), color-stop(100%, rgba(0, 0, 0, 0)), to(rgba(0, 0, 0, 0)));
+	background: linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0) 100%, rgba(0, 0, 0, 0) 100%);
+	-webkit-backdrop-filter: blur(5px);
+	        backdrop-filter: blur(5px);
+}
+.header__container {
+	position: relative;
+	width: 100%;
+	max-width: 1366px;
+	margin: 0 auto;
+	padding: 24px 20px;
+}
+.header__menu ul {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	    -ms-flex-direction: row;
+	        flex-direction: row;
+	gap: 10px;
+	-webkit-box-align: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+	-webkit-box-pack: end;
+	    -ms-flex-pack: end;
+	        justify-content: flex-end;
+}
+.header__menu ul li a {
+	display: inline-block;
+	padding: 4.5px 16px;
+	font-size: 20px;
+	line-height: 23px;
+	color: #fff;
+	border-radius: 50px;
+	-webkit-transition: all 0.3s ease;
+	transition: all 0.3s ease;
+}
+.header__burger {
+	position: relative;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	    -ms-flex-direction: row;
+	        flex-direction: row;
+	gap: 0px;
+	-webkit-box-align: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+	-webkit-box-pack: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
+	display: none;
+	width: 30px;
+	height: 30px;
+	background: transparent;
+}
+.header__burger svg:nth-child(1) {
+	width: 30px;
+	height: 20px;
+}
+.header__burger svg:nth-child(2) {
+	display: none;
+	width: 20px;
+	height: 20px;
+}
+
+@media (hover: hover) {
+	.header__menu ul li a:hover {
+		background: #2C66C3;
+	}
+}
+@media (max-width: 575.5px) {
+	.header__menu {
+		position: absolute;
+		top: -500px;
+		left: 105vw;
+		width: 100%;
+		padding: 80px 0;
+		background: #1E293B;
+		-webkit-transition: opacity 0.4s ease-out, visibility 0.4s ease-out, left 0.4s ease-out, top 0.4s ease-out, border-radius 0.5s linear;
+		transition: opacity 0.4s ease-out, visibility 0.4s ease-out, left 0.4s ease-out, top 0.4s ease-out, border-radius 0.5s linear;
+		border-radius: 0 0 0 100%;
+		overflow: hidden;
+		opacity: 0;
+		visibility: hidden;
+	}
+	.header__menu ul {
+		-webkit-box-orient: vertical;
+		-webkit-box-direction: normal;
+		    -ms-flex-direction: column;
+		        flex-direction: column;
+		gap: 40px;
+	}
+	.header__menu ul li a {
+		padding: 0;
+		font-size: 40px;
+		line-height: 47px;
+		border-radius: 0;
+		background: transparent !important;
+	}
+	.header__container {
+		display: -webkit-box;
+		display: -ms-flexbox;
+		display: flex;
+		-webkit-box-orient: horizontal;
+		-webkit-box-direction: normal;
+		    -ms-flex-direction: row;
+		        flex-direction: row;
+		gap: 0px;
+		-webkit-box-align: center;
+		    -ms-flex-align: center;
+		        align-items: center;
+		-webkit-box-pack: end;
+		    -ms-flex-pack: end;
+		        justify-content: flex-end;
+		padding: 20px;
+	}
+	.header__container_open-burger .header__menu {
+		top: 0;
+		left: 0;
+		border-radius: 0;
+		visibility: visible;
+		opacity: 1;
+	}
+	.header__container_open-burger .header__burger svg:nth-child(1) {
+		display: none;
+	}
+	.header__container_open-burger .header__burger svg:nth-child(2) {
+		display: inline-block;
+	}
+	.header__burger {
+		display: -webkit-box;
+		display: -ms-flexbox;
+		display: flex;
+	}
+}
+.main {
+	padding: 80px 0 0 0;
+}
+
+@media (max-width: 575.5px) {
+	.main {
+		padding: 70px 0 0 0;
+	}
+}
