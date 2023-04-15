@@ -81,7 +81,8 @@ body {
 h1 {
 	font-size: 80px;
 	line-height: 94px;
-	font-weight: 400;
+	font-style: italic;
+	font-weight: 500;
 }
 
 h2 {
@@ -105,8 +106,19 @@ h5 {
 	line-height: 23px;
 }
 
+@media (max-width: 575.5px) {
+	h1 {
+		font-size: 40px;
+		line-height: 47px;
+	}
+	h3 {
+		font-size: 20px;
+		line-height: 23px;
+	}
+}
 .header {
 	position: fixed;
+	z-index: 100;
 	width: 100%;
 	background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.5)), color-stop(100%, rgba(0, 0, 0, 0)), to(rgba(0, 0, 0, 0)));
 	background: linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0) 100%, rgba(0, 0, 0, 0) 100%);
@@ -254,5 +266,111 @@ h5 {
 @media (max-width: 575.5px) {
 	.main {
 		padding: 70px 0 0 0;
+	}
+}
+.home__container {
+	max-width: 782px;
+	margin: 0 auto;
+	padding: 20px 20px 0 20px;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	    -ms-flex-direction: row;
+	        flex-direction: row;
+	gap: 60px;
+	-webkit-box-align: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+	-webkit-box-pack: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
+}
+.home__left {
+	text-align: right;
+}
+.home__left-hello {
+	position: relative;
+	display: inline-block;
+	padding: 0 80px 0 0;
+}
+.home__left-hello:before {
+	content: "";
+	position: absolute;
+	top: -1px;
+	left: -57px;
+	display: inline-block;
+	width: 40px;
+	height: 40px;
+	background: url("../img/hello.svg") no-repeat;
+	background-size: 100% 100%;
+}
+.home__left-name {
+	position: relative;
+	padding: 15px 80px 35px 0;
+}
+.home__left-name:after {
+	content: "[ Oleksandr ]";
+	position: absolute;
+	bottom: 20px;
+	right: 90px;
+	font-size: 22px;
+	line-height: 22px;
+	font-weight: 300;
+	font-style: normal;
+}
+.home__left-code {
+	color: #2CB67D;
+}
+.home__right img {
+	width: 300px;
+}
+
+@media (max-width: 785px) {
+	.home__container {
+		gap: 45px;
+	}
+}
+@media (max-width: 767.5px) {
+	.home__container {
+		padding-top: 40px;
+		-webkit-box-orient: vertical;
+		-webkit-box-direction: normal;
+		    -ms-flex-direction: column;
+		        flex-direction: column;
+		gap: 80px;
+	}
+	.home__left-hello {
+		padding: 0 95px 0 0;
+	}
+}
+@media (max-width: 575.5px) {
+	.home__container {
+		padding-top: 20px;
+		gap: 40px;
+	}
+	.home__left-hello {
+		padding: 0 62px 0 0;
+	}
+	.home__left-hello:before {
+		top: 0;
+		left: -33px;
+		width: 23px;
+		height: 23px;
+	}
+	.home__left-name {
+		padding: 10px 65px 31px 0;
+	}
+	.home__left-name:after {
+		bottom: 15px;
+		right: 65px;
+		font-size: 16px;
+		line-height: 16px;
+		font-weight: 300;
+		font-style: normal;
+	}
+	.home__right img {
+		width: 200px;
 	}
 }
