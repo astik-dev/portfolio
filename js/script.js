@@ -1,15 +1,25 @@
 const headerContainer = document.querySelector(".header__container");
+
 let burgerMenuBtnStatus = "close";
+let openClosePermissionProjectPopup = true;
 
 
 
 function findParent (eventTarget, className, NumberOfParents) {
 	if (eventTarget.classList.contains(className)) {
-		openCloseBurgerMenu();
+		checkClassName(className, eventTarget);
 	} else if (NumberOfParents != 0) {
 		findParent (eventTarget.parentNode, className, NumberOfParents-1);
 	} else {
 		return false;
+	}
+}
+
+function checkClassName (className, eventTarget) {
+	if (className == "header__burger") {
+		openCloseBurgerMenu();
+	} else if (className == "projects__item" || "project-popup__close") {
+		openCloseProjectPopup(eventTarget);
 	}
 }
 
@@ -23,8 +33,205 @@ function openCloseBurgerMenu () {
 	}
 }
 
+function openCloseProjectPopup(eventTarget) {
+	if (openClosePermissionProjectPopup == true) {
+		openClosePermissionProjectPopup = false;
+
+		
+		
+
+
+		if (!document.querySelector(".open-project-popup")) {
+
+			// Checking which project was clicked
+			const projectsItemAll = document.querySelectorAll(".projects__item");
+			let projectsItemIndex;
+
+			projectsItemAll.forEach((item, index) => {
+				if (eventTarget == item) {
+					projectsItemIndex = index;
+				}
+			});
+
+
+			// Getting data from JSON
+			let pFolder = projects[projectsItemIndex].folder,
+				pTitle = projects[projectsItemIndex].title,
+				pDescription = projects[projectsItemIndex].description,
+				pRepository = projects[projectsItemIndex].repository,
+				pDemo = projects[projectsItemIndex].demo,
+				pScreenshots = projects[projectsItemIndex].screenshots;
+
+
+			// Set title & description
+			const projectPopupTitle = document.querySelector(".project-popup__container h3");
+			const projectPopupText = document.querySelector(".project-popup__container p");
+
+			projectPopupTitle.textContent = pTitle;
+			projectPopupText.textContent = pDescription;
+
+
+			// Set buttons
+			const projectPopupBtnR = document.querySelector(".project-popup__btn:nth-child(1)");
+			const projectPopupBtnD = document.querySelector(".project-popup__btn:nth-child(2)");
+
+			if (pRepository != "") {
+				projectPopupBtnR.href = pRepository;
+				projectPopupBtnR.classList.remove("project-popup__btn_disabled");
+			} else {
+				disableBtn(projectPopupBtnR);
+			}
+
+			if (pDemo != "") {
+				projectPopupBtnD.href = pDemo;
+				projectPopupBtnD.classList.remove("project-popup__btn_disabled");
+			} else {
+				disableBtn(projectPopupBtnD);
+			}
+
+			function disableBtn(btn) {
+				btn.removeAttribute("href");
+				btn.classList.add("project-popup__btn_disabled");
+			}
+
+
+			// Creating links to all screenshots
+			function generateUrl(screenshots, folder1, folder2) {
+				let urls = [];
+				for (let i = 1; i <= screenshots; i++) {
+					urls.push(`img/projects/${folder1}/${folder2}/${i}.png`);
+				}
+				return urls;
+			}
+			let imgFullSize = generateUrl(pScreenshots, pFolder, "full-size");
+
+
+			// Generate screenshots slides
+			function generateSlides(screenshots) {
+				let slides;
+				for (let i = 1; i <= screenshots; i++) {
+					slide = `<div class="project-popup__image-slide swiper-slide">
+								<a href="${imgFullSize[i-1]}" target="_blank">
+									<img src="img/1x1.png" data-src="${imgFullSize[i-1]}" style="height: 1px; width: 1px;" alt="Project image" class="img-lazy-loading">
+								</a>
+							</div>`;
+
+					if (slides) {
+						slides = slides + slide;
+					} else {
+						slides = slide;
+					}
+				}
+				return slides;
+			}
+
+			document.querySelector(".project-popup__image-swiper-wrapper")
+				.innerHTML = generateSlides(pScreenshots);
+
+
+
+
+
+			// Lazy loading
+			let lazyImages = document.querySelectorAll(".img-lazy-loading[data-src]");
+
+			const lazyImagesObserver = new IntersectionObserver(
+				(entries, observer) => {
+					entries.forEach((entry) => {
+						if (entry.isIntersecting) {
+							setTimeout(() => {
+								entry.target.src = entry.target.dataset.src;
+								entry.target.removeAttribute("style");
+								//observer.unobserve(entry.target);
+							}, 300);
+						}
+					});
+				},
+				{
+					rootMargin: "0px 0px 0px 0px",
+				},
+			);
+
+			lazyImages.forEach(image => lazyImagesObserver.observe(image));
+		} else {
+			let lazyImages = document.querySelectorAll(".img-lazy-loading[data-src]");
+
+			setTimeout(() => {
+				lazyImages.forEach(image => {
+					image.style.width = "0px";
+					image.style.height = "0px";
+					image.src = "img/1x1.png";
+				});
+			}, 100);
+			
+		}
+
+		document.querySelector("body").classList.toggle("open-project-popup");
+
+		setTimeout(() => {
+			openClosePermissionProjectPopup = true;
+		}, 300);
+	}
+}
+
 
 
 document.addEventListener("click", (event) => {
+
+	// Header burger
 	findParent (event.target, "header__burger", 3);
+
+	// Project popup
+	findParent (event.target, "projects__item", 3);	
+	findParent (event.target, "project-popup__close", 3);
+	if (event.target.classList.contains("project-popup")) {
+		openCloseProjectPopup();
+	}
 });
+
+
+
+const swiperProjectPopup = new Swiper('.project-popup__image-swiper', {
+	// Navigation arrows
+	navigation: {
+	    nextEl: '.project-popup__image-swiper-nav_right',
+	    prevEl: '.project-popup__image-swiper-nav_left',
+	},
+
+	pagination: {
+	    el: '.project-popup__swiper-pagination',
+	    type: 'fraction',
+	},
+
+  	simulateTouch: false,
+	allowTouchMove: false,
+});
+
+
+
+let projects;
+fetch('projects.json')
+	.then(response => response.json())
+	.then(data => {
+		projects = data;
+		generateProjects(4);
+	});
+
+const projectsItems = document.querySelector(".projects__items");
+
+function generateProjects(amt) {
+	for (let i = 0; i < amt; i++) {
+
+		let img400 = "img/projects/" + projects[i].folder + "/400.jpg";
+		let title = projects[i].title;
+
+		let projectItem = `<div class="projects__item">
+								<img src="${img400}" alt="Project image">
+								<div class="projects__item-title">
+									<h5>${title}</h5>
+								</div>
+							</div>`
+
+		projectsItems.insertAdjacentHTML("beforeend", projectItem);
+	}
+}
