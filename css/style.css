@@ -306,6 +306,38 @@ h5 {
 	height: 40px;
 	background: url("../img/hello.svg") no-repeat;
 	background-size: 100% 100%;
+	-webkit-animation: hello 2.2s infinite;
+	        animation: hello 2.2s infinite;
+	-webkit-animation-timing-function: linear;
+	        animation-timing-function: linear;
+}
+@-webkit-keyframes hello {
+	0% {
+		-webkit-transform: rotate(15deg);
+		        transform: rotate(15deg);
+	}
+	50% {
+		-webkit-transform: rotate(0deg);
+		        transform: rotate(0deg);
+	}
+	100% {
+		-webkit-transform: rotate(15deg);
+		        transform: rotate(15deg);
+	}
+}
+@keyframes hello {
+	0% {
+		-webkit-transform: rotate(15deg);
+		        transform: rotate(15deg);
+	}
+	50% {
+		-webkit-transform: rotate(0deg);
+		        transform: rotate(0deg);
+	}
+	100% {
+		-webkit-transform: rotate(15deg);
+		        transform: rotate(15deg);
+	}
 }
 .home__left-name {
 	position: relative;
