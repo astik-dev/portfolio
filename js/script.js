@@ -274,3 +274,26 @@ function generateSkills() {
 		skillsItems.insertAdjacentHTML("beforeend", currentSkill);
 	});
 }
+
+
+
+let contacts;
+fetch('contacts.json')
+	.then(response => response.json())
+	.then(data => {
+		contacts = data;
+		generateContacts();
+	});
+
+function generateContacts() {
+	const contactsItems = document.querySelector(".contacts__items");
+
+	contacts.forEach((contact) => {
+
+		let currentContact = `<a href="${contact.link}" target="_blank" title="${contact.title}" class="contacts__item">
+								  <img src="img/contacts/${contact.img}" alt="Contact link logo">
+							  </a>`
+
+		contactsItems.insertAdjacentHTML("beforeend", currentContact);
+	});
+}

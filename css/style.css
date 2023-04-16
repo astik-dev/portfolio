@@ -260,7 +260,7 @@ h5 {
 	}
 }
 .main {
-	padding: 80px 0 200px 0;
+	padding: 80px 0 80px 0;
 }
 
 @media (max-width: 575.5px) {
@@ -926,5 +926,60 @@ h5 {
 @media (max-width: 652px) {
 	.skills__item {
 		width: auto;
+	}
+}
+.contacts__container {
+	max-width: 790px;
+	width: 100%;
+	margin: 0 auto;
+	padding: 40px 20px 0 20px;
+}
+.contacts__items {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	    -ms-flex-direction: row;
+	        flex-direction: row;
+	gap: 20px;
+	-webkit-box-align: start;
+	    -ms-flex-align: start;
+	        align-items: flex-start;
+	-webkit-box-pack: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
+	-ms-flex-wrap: wrap;
+	    flex-wrap: wrap;
+}
+.contacts__item {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	    -ms-flex-direction: row;
+	        flex-direction: row;
+	gap: 10px;
+	-webkit-box-align: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+	-webkit-box-pack: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
+	width: 60px;
+	height: 60px;
+	background: #1E293B;
+	border-radius: 50px;
+	-webkit-transition: all 0.3s ease;
+	transition: all 0.3s ease;
+}
+.contacts__item img {
+	width: 25px;
+}
+
+@media (hover: hover) {
+	.contacts__item:hover {
+		background: #2C66C3;
 	}
 }

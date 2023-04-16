@@ -218,7 +218,7 @@ h5 {
 
 
 .main {
-	padding: 80px 0 200px 0;
+	padding: 80px 0 80px 0;
 }
 
 @media (max-width: 575.5px) {
@@ -896,6 +896,42 @@ h5 {
 	.skills {
 		&__item {
 			width: auto;
+		}
+	}
+}
+
+
+
+.contacts {
+
+	&__container {
+		@include container(750px, 40px);
+	}
+	&__items {
+		@include flex(flex, row, 20px, flex-start, center);
+		flex-wrap: wrap;	
+	}
+	&__item {
+		@include flex(flex, row, 10px, center, center);
+		width: 60px;
+		height: 60px;
+
+		background: #1E293B;
+		border-radius: 50px;
+
+		transition: $anim;
+
+		img {
+			width: 25px;
+		}
+	}
+}
+
+@media (hover: hover) {
+	.contacts {
+
+		&__item:hover {
+			background: #2C66C3;
 		}
 	}
 }

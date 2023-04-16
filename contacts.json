@@ -1,0 +1,22 @@
+[
+	{
+		"img": "freelancehunt.png",
+		"link": "https://freelancehunt.com/en/freelancer/AST_ASTIK.html",
+		"title": "Freelancehunt"
+	},
+	{
+		"img": "github.svg",
+		"link": "https://github.com/ast-astik",
+		"title": "GitHub"
+	},
+	{
+		"img": "tg.png",
+		"link": "#",
+		"title": "Telegram"
+	},
+	{
+		"img": "mail.png",
+		"link": "mailto:astik.developer@gmail.com",
+		"title": "Email"
+	}
+]
