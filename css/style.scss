@@ -862,3 +862,48 @@ h5 {
 		}
 	}
 }
+
+
+
+.skills {
+	&__container {
+		@include container(750px, 40px);
+	}
+
+	&__items {
+		@include flex(flex, row, 10px, flex-start, center);
+		flex-wrap: wrap;
+		width: inherit;
+	}
+
+	&__item {
+		@include flex(flex, row, 10px, center, flex-start);
+		width: calc(33.333% - 7.5px);
+		padding: 10px;
+
+		border: 3px solid #293548;
+		border-radius: 8px;
+
+		img {
+			width: 40px;
+			height: 40px;
+		}
+	}
+}
+
+@media (max-width: 652px) {
+	.skills {
+		&__item {
+			//width: calc(50% - 5px);
+			width: auto;
+		}
+	}
+}
+@media (max-width: 450px) {
+	.skills {
+		&__item {
+			//width: 100%;
+			//width: auto;
+		}
+	}
+}

@@ -1,0 +1,30 @@
+[
+	{
+		"img": "html.svg",
+		"name": "HTML 5"
+	},
+	{
+		"img": "css.svg",
+		"name": "CSS 3"
+	},
+	{
+		"img": "js.svg",
+		"name": "JavaScript"
+	},
+	{
+		"img": "scss.png",
+		"name": "SCSS"
+	},
+	{
+		"img": "figma.svg",
+		"name": "Figma"
+	},
+	{
+		"img": "git.svg",
+		"name": "Git"
+	},
+	{
+		"img": "bem.svg",
+		"name": "BEM"
+	}
+]

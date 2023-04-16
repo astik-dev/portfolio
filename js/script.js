@@ -235,3 +235,27 @@ function generateProjects(amt) {
 		projectsItems.insertAdjacentHTML("beforeend", projectItem);
 	}
 }
+
+
+
+let skills;
+fetch('skills.json')
+	.then(response => response.json())
+	.then(data => {
+		skills = data;
+		generateSkills();
+	});
+
+function generateSkills() {
+	const skillsItems = document.querySelector(".skills__items");
+
+	skills.forEach((skill) => {
+
+		let currentSkill = `<div class="skills__item">
+								<img src="img/skills/${skill.img}" alt="Skill logo"> 
+								<h4>${skill.name}</h4>
+							</div>`
+
+		skillsItems.insertAdjacentHTML("beforeend", currentSkill);
+	});
+}
