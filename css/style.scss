@@ -852,6 +852,7 @@ h5 {
 
 
 .open-project-popup {
+	overflow-y: hidden;
 
 	.project-popup {
 		opacity: 1;
@@ -894,16 +895,7 @@ h5 {
 @media (max-width: 652px) {
 	.skills {
 		&__item {
-			//width: calc(50% - 5px);
 			width: auto;
-		}
-	}
-}
-@media (max-width: 450px) {
-	.skills {
-		&__item {
-			//width: 100%;
-			//width: auto;
 		}
 	}
 }

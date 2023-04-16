@@ -33,15 +33,14 @@ function openCloseBurgerMenu () {
 	}
 }
 
+
 function openCloseProjectPopup(eventTarget) {
 	if (openClosePermissionProjectPopup == true) {
 		openClosePermissionProjectPopup = false;
-
-		
-		
-
-
+	
 		if (!document.querySelector(".open-project-popup")) {
+
+			overflowScrollPadding("add");
 
 			// Checking which project was clicked
 			const projectsItemAll = document.querySelectorAll(".projects__item");
@@ -130,8 +129,6 @@ function openCloseProjectPopup(eventTarget) {
 
 
 
-
-
 			// Lazy loading
 			let lazyImages = document.querySelectorAll(".img-lazy-loading[data-src]");
 
@@ -154,6 +151,8 @@ function openCloseProjectPopup(eventTarget) {
 
 			lazyImages.forEach(image => lazyImagesObserver.observe(image));
 		} else {
+			overflowScrollPadding("remove");
+
 			let lazyImages = document.querySelectorAll(".img-lazy-loading[data-src]");
 
 			setTimeout(() => {
@@ -171,6 +170,22 @@ function openCloseProjectPopup(eventTarget) {
 		setTimeout(() => {
 			openClosePermissionProjectPopup = true;
 		}, 300);
+	}
+}
+
+function getScrollSize() {
+	let scrollWidth = window.innerWidth - document.documentElement.clientWidth;
+	return scrollWidth;
+}
+function overflowScrollPadding(addRemove) {
+	if (addRemove == "remove") {
+		document.querySelector("body").removeAttribute("style");
+		document.querySelector(".header").removeAttribute("style");
+	} else if (addRemove == "add") {
+		let scrl = getScrollSize();
+
+		document.querySelector("body").style.paddingRight = `${scrl}px`;
+		document.querySelector(".header").style.paddingRight = `${scrl}px`;
 	}
 }
 

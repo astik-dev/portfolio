@@ -861,6 +861,9 @@ h5 {
 		height: 15px;
 	}
 }
+.open-project-popup {
+	overflow-y: hidden;
+}
 .open-project-popup .project-popup {
 	opacity: 1;
 	visibility: visible;
