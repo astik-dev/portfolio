@@ -1,5 +1,10 @@
 [
 	{
+		"img": "mail.png",
+		"link": "mailto:astik.developer@gmail.com",
+		"title": "Email"
+	},
+	{
 		"img": "freelancehunt.png",
 		"link": "https://freelancehunt.com/en/freelancer/AST_ASTIK.html",
 		"title": "Freelancehunt"
@@ -11,12 +16,12 @@
 	},
 	{
 		"img": "tg.png",
-		"link": "#",
+		"link": "https://t.me/ast_dev",
 		"title": "Telegram"
 	},
 	{
-		"img": "mail.png",
-		"link": "mailto:astik.developer@gmail.com",
-		"title": "Email"
+		"img": "inst.png",
+		"link": "https://www.instagram.com/4st1k/",
+		"title": "Instagram"
 	}
 ]
