@@ -5,6 +5,9 @@
 
 $anim: all 0.3s ease;
 
+$section-gap: 100px;
+$section-gap-min: 70px;
+
 
 
 @mixin font ($fs, $lh) {
@@ -404,7 +407,7 @@ h5 {
 .projects {
 
 	&__container {
-		@include container(820px, 40px);
+		@include container(820px, $section-gap);
 	}
 
 	&__items {
@@ -490,6 +493,18 @@ h5 {
 			}
 		}	
 	}
+
+	&__btn-load-more {
+		padding: 15px 50px;
+
+		@include font(20px, 20px);
+		color: #fff;
+
+		background: #1E293B;
+		border-radius: 50px;
+
+		transition: $anim;
+	}
 }
 
 @media (hover: hover) {
@@ -509,6 +524,9 @@ h5 {
 					opacity: 1;
 				}
 			}
+		}
+		&__btn-load-more:hover {
+			background: #2C66C3;
 		}
 	}
 }
@@ -541,6 +559,9 @@ h5 {
 
 @media (max-width: 575.5px) {
 	.projects {
+		&__container {
+			padding-top: $section-gap-min;
+		}
 		&__items {
 			flex-direction: column;
 			flex-wrap: nowrap;
@@ -868,7 +889,7 @@ h5 {
 
 .skills {
 	&__container {
-		@include container(750px, 40px);
+		@include container(750px, $section-gap);
 	}
 
 	&__items {
@@ -900,12 +921,20 @@ h5 {
 	}
 }
 
+@media (max-width: 575.5px) {
+	.skills {
+		&__container {
+			padding-top: $section-gap-min;
+		}
+	}
+}
+
 
 
 .contacts {
 
 	&__container {
-		@include container(750px, 40px);
+		@include container(750px, $section-gap);
 	}
 	&__items {
 		@include flex(flex, row, 20px, flex-start, center);
@@ -938,6 +967,11 @@ h5 {
 
 @media (max-width: 575.5px) {
 	.contacts {
+
+		&__container {
+			padding-top: $section-gap-min;
+		}
+
 		&__items {
 			gap: 10px;
 		}

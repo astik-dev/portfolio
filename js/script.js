@@ -230,13 +230,45 @@ fetch('projects.json')
 	.then(response => response.json())
 	.then(data => {
 		projects = data;
-		generateProjects(4);
+
+		let amt = 4;
+		generateProjects(amt, "start");
+		if (projects.length > amt) {
+			document.querySelector(".projects__container")
+				.insertAdjacentHTML("beforeend", 
+									`<button class="projects__btn-load-more" onClick="generateProjects(4, 'load more')">Load More</button>`);
+		}
 	});
 
 const projectsItems = document.querySelector(".projects__items");
 
-function generateProjects(amt) {
-	for (let i = 0; i < amt; i++) {
+// mode: "start", "load more".
+function generateProjects(amt, mode) {
+
+	let startIndex;
+
+	if (mode == "start") {
+		startIndex = 0;
+	} else if (mode == "load more") {
+
+		let loadedProjects = document.querySelectorAll(".projects__item").length;
+
+		let difference = projects.length - loadedProjects;
+
+		if (difference > amt) {
+			startIndex = projects.length - difference;
+			amt += startIndex;
+		} else {
+			startIndex = projects.length - difference;
+			amt = projects.length;
+			document.querySelector(".projects__container").removeChild(document.querySelector(".projects__btn-load-more"));
+		}
+	}
+
+	console.log(startIndex);
+	console.log(amt);
+
+	for (let i = startIndex; i < amt; i++) {
 
 		let img400 = "img/projects/" + projects[i].folder + "/400.jpg";
 		let title = projects[i].title;

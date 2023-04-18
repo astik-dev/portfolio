@@ -30,5 +30,13 @@
 		"repository": "",
 		"demo": "",
 		"screenshots": 4
+	},
+	{
+		"folder": "coffee-website",
+		"title": "Coffee website",
+		"description": "Responsive coffee website from Figma. Functional: 1) Hovering the mouse over interactive elements adds animated effects; 2) Hiding menu and showing hamburger menu for small screens; 3) Responsiveness for different screen sizes. Technologies: HTML, CSS, JavaScript, SCSS,FLEXBOX, GRID, BEM, Responsiveness",
+		"repository": "https://github.com/ast-astik/practice_website_coffee",
+		"demo": "https://ast-astik.github.io/practice_website_coffee/",
+		"screenshots": 1
 	}
 ]
