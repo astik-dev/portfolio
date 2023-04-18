@@ -301,7 +301,7 @@ function generateContacts() {
 
 
 // Smooth scroll
-const headerMenuLinks = document.querySelectorAll('a[href*="#"]');
+const headerMenuLinks = document.querySelectorAll('.header__menu a[href*="#"]');
 
 for (let headerMenuLink of headerMenuLinks) {
   headerMenuLink.addEventListener('click', function (e) {
