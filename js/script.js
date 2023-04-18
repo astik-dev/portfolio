@@ -241,7 +241,7 @@ function generateProjects(amt) {
 		let title = projects[i].title;
 
 		let projectItem = `<div class="projects__item">
-								<img src="${img400}" alt="Project image">
+								<img src="${img400}" alt="${title}">
 								<div class="projects__item-title">
 									<h5>${title}</h5>
 								</div>
@@ -267,7 +267,7 @@ function generateSkills() {
 	skills.forEach((skill) => {
 
 		let currentSkill = `<div class="skills__item">
-								<img src="img/skills/${skill.img}" alt="Skill logo"> 
+								<img src="img/skills/${skill.img}" alt="${skill.name}"> 
 								<h4>${skill.name}</h4>
 							</div>`
 
@@ -291,7 +291,7 @@ function generateContacts() {
 	contacts.forEach((contact) => {
 
 		let currentContact = `<a href="${contact.link}" target="_blank" title="${contact.title}" class="contacts__item">
-								  <img src="img/contacts/${contact.img}" alt="Contact link logo">
+								  <img src="img/contacts/${contact.img}" alt="${contact.title}">
 							  </a>`
 
 		contactsItems.insertAdjacentHTML("beforeend", currentContact);
