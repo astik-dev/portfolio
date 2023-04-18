@@ -126,6 +126,7 @@ function openCloseProjectPopup(eventTarget) {
 
 			document.querySelector(".project-popup__image-swiper-wrapper")
 				.innerHTML = generateSlides(pScreenshots);
+			swiperProjectPopup.slideTo(0, 1, false);
 
 
 
