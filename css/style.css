@@ -670,6 +670,9 @@ h5 {
 }
 .project-popup__image-slide img {
 	width: 100%;
+	min-height: 100%;
+	-o-object-fit: cover;
+	   object-fit: cover;
 }
 .project-popup__swiper-pagination {
 	position: absolute;

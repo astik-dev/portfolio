@@ -270,11 +270,11 @@ function generateProjects(amt, mode) {
 
 	for (let i = startIndex; i < amt; i++) {
 
-		let img400 = "img/projects/" + projects[i].folder + "/400.jpg";
+		let img800 = "img/projects/" + projects[i].folder + "/800.jpg";
 		let title = projects[i].title;
 
 		let projectItem = `<div class="projects__item">
-								<img src="${img400}" alt="${title}">
+								<img src="${img800}" alt="${title}">
 								<div class="projects__item-title">
 									<h5>${title}</h5>
 								</div>

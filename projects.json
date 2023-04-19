@@ -2,7 +2,7 @@
 	{
 		"folder": "IPLight",
 		"title": "IPLight",
-		"description": "Adaptive and cross-browser 23 website pages based on the Figma design.",
+		"description": "Responsive and cross-browser 23 website pages based on the Figma design.",
 		"repository": "",
 		"demo": "",
 		"screenshots": 23
@@ -26,10 +26,18 @@
 	{
 		"folder": "ZELWIN",
 		"title": "ZELWIN",
-		"description": "Adaptive 4 pages of the ZELWIN website based on the Figma design.",
+		"description": "Responsive 4 pages of the ZELWIN website based on the Figma design.",
 		"repository": "",
 		"demo": "",
 		"screenshots": 4
+	},
+	{
+		"folder": "IPtek",
+		"title": "IPtek",
+		"description": "Responsive and cross-browser 24 website pages based on the Figma design.",
+		"repository": "",
+		"demo": "",
+		"screenshots": 24
 	},
 	{
 		"folder": "coffee-website",
@@ -38,5 +46,69 @@
 		"repository": "https://github.com/ast-astik/practice_website_coffee",
 		"demo": "https://ast-astik.github.io/practice_website_coffee/",
 		"screenshots": 1
+	},
+	{
+		"folder": "binary",
+		"title": "binary",
+		"description": "Responsive landing page binary",
+		"repository": "",
+		"demo": "",
+		"screenshots": 1
+	},
+	{
+		"folder": "vintage-bike",
+		"title": "Vintage bike",
+		"description": "Responsive landing page Vintage bike",
+		"repository": "",
+		"demo": "",
+		"screenshots": 1
+	},
+	{
+		"folder": "shark-sushi",
+		"title": "SHARK SUSHI",
+		"description": "Responsive multilink page SHARK SUSHI.",
+		"repository": "",
+		"demo": "https://www.multi-shark.online/",
+		"screenshots": 1
+	},
+	{
+		"folder": "pet-food",
+		"title": "Pet food",
+		"description": "Pet food store",
+		"repository": "",
+		"demo": "",
+		"screenshots": 1
+	},
+	{
+		"folder": "payment-page",
+		"title": "Payment page",
+		"description": "Responsive payment page for ukr.wotcodes.net",
+		"repository": "",
+		"demo": "https://ukr.wotcodes.net/payment/pay.php?account=123&zapros=123",
+		"screenshots": 1
+	},
+	{
+		"folder": "prom-card",
+		"title": "Product card",
+		"description": "Responsive product card for Prom.ua",
+		"repository": "",
+		"demo": "https://kiev.prom.ua/p713639520-karkas-stola-metallicheskij.html",
+		"screenshots": 1
+	},
+	{
+		"folder": "touch-up-kit",
+		"title": "Touch up kit",
+		"description": "Creating 2 responsive blocks for touch-up-kit.com",
+		"repository": "",
+		"demo": "https://touch-up-kit.com",
+		"screenshots": 1
+	},
+	{
+		"folder": "pages-mobile-app",
+		"title": "Mobile app",
+		"description": "3 responsive pages for mobile application",
+		"repository": "",
+		"demo": "",
+		"screenshots": 3
 	}
 ]
