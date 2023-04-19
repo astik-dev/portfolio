@@ -265,22 +265,41 @@ function generateProjects(amt, mode) {
 		}
 	}
 
-	console.log(startIndex);
-	console.log(amt);
-
 	for (let i = startIndex; i < amt; i++) {
 
 		let img800 = "img/projects/" + projects[i].folder + "/800.jpg";
 		let title = projects[i].title;
 
 		let projectItem = `<div class="projects__item">
-								<img src="${img800}" alt="${title}">
+								<img src="img/1x1.png" data-src="${img800}" alt="${title}">
 								<div class="projects__item-title">
 									<h5>${title}</h5>
 								</div>
 							</div>`
 
 		projectsItems.insertAdjacentHTML("beforeend", projectItem);
+
+
+
+		// Lazy loading for preview image
+		let newLazyImg = projectsItems.querySelector(".projects__item:last-child img");
+
+		console.log(newLazyImg);
+
+		const newObserver = new IntersectionObserver(
+			(entries, observer) => {
+				entries.forEach((entry) => {
+					if (entry.isIntersecting) {
+						entry.target.src = entry.target.dataset.src;
+					}
+				});
+			},
+			{
+				rootMargin: "200px 0px 200px 0px",
+			},
+		);
+
+		newObserver.observe(newLazyImg);
 	}
 }
 
