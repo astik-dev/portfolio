@@ -284,8 +284,6 @@ function generateProjects(amt, mode) {
 		// Lazy loading for preview image
 		let newLazyImg = projectsItems.querySelector(".projects__item:last-child img");
 
-		console.log(newLazyImg);
-
 		const newObserver = new IntersectionObserver(
 			(entries, observer) => {
 				entries.forEach((entry) => {

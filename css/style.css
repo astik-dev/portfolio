@@ -108,8 +108,8 @@ h5 {
 
 @media (max-width: 575.5px) {
 	h1 {
-		font-size: 40px;
-		line-height: 47px;
+		font-size: 55px;
+		line-height: 64px;
 	}
 	h3 {
 		font-size: 20px;
@@ -384,7 +384,7 @@ h5 {
 		gap: 40px;
 	}
 	.home__left-hello {
-		padding: 0 62px 0 0;
+		padding: 0 44px 0 0;
 	}
 	.home__left-hello:before {
 		top: 0;
@@ -393,11 +393,11 @@ h5 {
 		height: 23px;
 	}
 	.home__left-name {
-		padding: 10px 65px 31px 0;
+		padding: 10px 48px 31px 0;
 	}
 	.home__left-name:after {
 		bottom: 15px;
-		right: 65px;
+		right: 48px;
 		font-size: 16px;
 		line-height: 16px;
 		font-weight: 300;
