@@ -1,6 +1,9 @@
 // Reset CSS
 @import "reset.scss";
 
+// Fonts
+@import "fonts.scss";
+
 
 
 $anim: all 0.3s ease;
@@ -306,6 +309,7 @@ h5 {
 	&__right {
 
 		img {
+			height: 379px;
 			width: 300px;
 		}
 	}
@@ -376,6 +380,7 @@ h5 {
 		&__right {
 
 			img {
+				height: 253px;
 				width: 200px;
 			}
 		}
@@ -1035,6 +1040,7 @@ h5 {
 			@include grid(grid, auto 1fr auto, 8px, center, left);
 		
 			img {
+				width: 23px;
 				height: 23px;
 				border-radius: 20px;
 			}
@@ -1047,6 +1053,7 @@ h5 {
 				}
 
 				svg {
+					width: 23px;
 					height: 23px;
 				}
 			}
@@ -1160,6 +1167,7 @@ h5 {
 
 		img {
 			width: 25px;
+			max-height: 25px;
 		}
 	}
 }
