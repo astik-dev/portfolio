@@ -1280,7 +1280,7 @@ h5 {
 }
 .contacts__item img {
 	width: 25px;
-	max-height: 25px;
+	height: 25px;
 }
 
 @media (hover: hover) {
@@ -1301,5 +1301,6 @@ h5 {
 	}
 	.contacts__item img {
 		width: 22px;
+		height: 22px;
 	}
 }
