@@ -1014,7 +1014,7 @@ h5 {
 .reviews {
 
 	&__container {
-		@include container(900px, $section-gap);
+		@include container(720px, $section-gap);
 	}
 	&__items {
 		position: relative;
