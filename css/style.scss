@@ -23,6 +23,14 @@ $section-gap-min: 70px;
 	justify-content: $jc;
 }
 
+@mixin grid ($g, $gtc, $gap, $ai, $jc) {
+	display: $g;
+	grid-template-columns: $gtc;
+	gap: $gap;
+	align-items: $ai;
+	justify-content: $jc;
+}
+
 @mixin container ($mw, $p) {
 	        // $mw + (padding left, right)
 	max-width: $mw + 40px;
@@ -597,6 +605,74 @@ h5 {
 
 
 
+.project-popup__image-swiper-nav,
+.reviews__swiper-nav {
+	position: absolute;
+	top: calc(50% - 15px);
+
+	width: 30px;
+	height: 30px;
+
+	border-radius: 30px;
+	background: transparent;
+
+	cursor: pointer;
+
+	transition: $anim;
+
+	&:before,
+	&:after {
+		content: "";
+
+		position: absolute;
+		left: 7px;
+
+		width: 13px;
+		height: 3px;
+
+		background: #D4D7DA;
+		border-radius: 3px;
+	}
+
+	&:before {
+		top: 9.5px;
+
+		transform: rotate(-45deg);
+	}
+
+	&:after {
+		bottom: 9.5px;
+		
+		transform: rotate(45deg);
+	}
+
+	&_left {
+		left: 0;
+	}
+	&_right {
+		right: 0;
+
+		transform: rotate(180deg);
+	}
+
+	&:disabled {
+		background: transparent !important;
+
+		cursor: auto;
+
+		opacity: 0.3;
+	}
+}
+
+@media (hover: hover) {
+	.project-popup__image-swiper-nav:hover,
+	.reviews__swiper-nav:hover {
+		background: #293548;
+	}
+}
+
+
+
 .project-popup {
 	position: fixed;
 	z-index: 200;
@@ -812,8 +888,6 @@ h5 {
 		&__btn_disabled:hover {
 			background: #161B22;
 		}
-
-		&__image-swiper-nav:hover,
 		&__close:hover {
 			background: #293548;
 		}
@@ -934,6 +1008,134 @@ h5 {
 		}
 	}
 }
+
+
+
+.reviews {
+
+	&__container {
+		@include container(900px, $section-gap);
+	}
+	&__items {
+		position: relative;
+
+		width: 100%;
+		padding: 0 40px;
+
+		border-bottom: 51px solid transparent;
+	}
+	&__slide {
+		padding: 20px 20px 15px 20px;
+
+		background: #293548;
+		border-radius: 15px;
+
+		&-top {
+			padding: 0 25px;
+			@include grid(grid, auto 1fr auto, 8px, center, left);
+		
+			img {
+				height: 23px;
+				border-radius: 20px;
+			}
+
+			h4 {
+				@include flex(flex, row, 8px, center, flex-start);
+
+				span {
+					padding: 2px 0 0 0;
+				}
+
+				svg {
+					height: 23px;
+				}
+			}
+		}
+
+		& > p {
+			margin: 14px 0;
+
+			font-weight: 300;
+		}
+
+		&-bottom {
+			@include flex(flex, row, 0, center, space-between);
+
+			span, a {
+				@include font(14px, 16px);
+				font-weight: 300;
+				color: #fff;
+
+				opacity: 0.6;
+			}
+
+			span {
+				font-style: italic;
+			}
+			
+			a {
+				text-decoration: underline;
+
+				transition: $anim;
+			}
+		}
+	}
+	&__swiper-pagination {
+		left: 50%;
+		bottom: -51px;
+
+		padding: 6px 15px;
+		width: auto;
+		background: #293548;
+		border-radius: 50px;
+
+		transform: translate(-50%, 0);
+	}
+}
+
+@media (hover: hover) {
+	.reviews {
+		&__slide {
+			&-bottom {
+				a:hover {
+					opacity: 0.8;
+				}
+			}
+		}
+	}
+}
+
+@media (max-width: 767.5px) {
+	.reviews {
+
+		&__container {
+			padding-left: 0;
+			padding-right: 0;
+		}
+
+		&__items {
+			padding: 0;
+		}
+
+		&__swiper {
+			padding: 0 20px;
+		}
+		&__swiper-nav {
+			display: none;
+		}
+	}
+}
+@media (max-width: 575.5px) {
+	.reviews {
+		&__slide {
+			padding: 15px 15px 10px 15px;
+
+			&-top {
+				padding: 0;
+			}
+		}
+	}
+}	
 
 
 
