@@ -1,6 +1,7 @@
 [
 	{
 		"img": "freelancehunt.png",
+		"imgWEBP": "freelancehunt.webp",
 		"link": "https://freelancehunt.com/en/freelancer/AST_ASTIK.html",
 		"title": "Freelancehunt"
 	},
@@ -11,11 +12,13 @@
 	},
 	{
 		"img": "tg.png",
+		"imgWEBP": "tg.webp",
 		"link": "https://t.me/ast_dev",
 		"title": "Telegram"
 	},
 	{
 		"img": "mail.png",
+		"imgWEBP": "mail.webp",
 		"link": "mailto:astik.developer@gmail.com",
 		"title": "Email"
 	}

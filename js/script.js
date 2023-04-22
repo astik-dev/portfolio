@@ -267,11 +267,16 @@ function generateProjects(amt, mode) {
 
 	for (let i = startIndex; i < amt; i++) {
 
-		let img800 = "img/projects/" + projects[i].folder + "/800.jpg";
+		let img800 = "img/projects/" + projects[i].folder + "/800";
 		let title = projects[i].title;
 
 		let projectItem = `<div class="projects__item">
-								<img src="img/1x1.png" data-src="${img800}" alt="${title}">
+								<picture>
+									<source type="image/webp" data-src="${img800}.webp">
+									<source type="image/jpeg" data-src="${img800}.jpg">
+									<img src="img/1x1.png" data-src="${img800}.jpg" alt="${title}">
+								</picture>
+								<!--<img src="img/1x1.png" data-src="${img800}" alt="${title}">-->
 								<div class="projects__item-title">
 									<h5>${title}</h5>
 								</div>
@@ -282,13 +287,20 @@ function generateProjects(amt, mode) {
 
 
 		// Lazy loading for preview image
-		let newLazyImg = projectsItems.querySelector(".projects__item:last-child img");
+		let newLazyImg = projectsItems.querySelector(".projects__item:last-child picture");
 
 		const newObserver = new IntersectionObserver(
 			(entries, observer) => {
 				entries.forEach((entry) => {
 					if (entry.isIntersecting) {
-						entry.target.src = entry.target.dataset.src;
+
+						let sourceWEBP = entry.target.querySelector("source:nth-child(1)");
+						let sourceJPEG = entry.target.querySelector("source:nth-child(2)");
+						let img = entry.target.querySelector("img");
+
+						sourceWEBP.srcset = sourceWEBP.dataset.src;
+						sourceJPEG.srcset = sourceJPEG.dataset.src;
+						img.src = img.dataset.src;
 					}
 				});
 			},
@@ -316,10 +328,22 @@ function generateSkills() {
 
 	skills.forEach((skill) => {
 
+		let imgElem;
+
+		if (skill.imgWEBP) {
+			imgElem = `<picture>
+						   <source type="image/webp" srcset="img/skills/${skill.imgWEBP}">
+						   <source type="image/png" srcset="img/skills/${skill.img}">
+						   <img src="img/skills/${skill.img}" alt="${skill.name}">
+					   </picture>`;
+		} else {
+			imgElem = `<img src="img/skills/${skill.img}" alt="${skill.name}">`;
+		}
+
 		let currentSkill = `<div class="skills__item">
-								<img src="img/skills/${skill.img}" alt="${skill.name}"> 
+								${imgElem}
 								<h4>${skill.name}</h4>
-							</div>`
+							</div>`;
 
 		skillsItems.insertAdjacentHTML("beforeend", currentSkill);
 	});
@@ -344,9 +368,16 @@ fetch('reviews.json')
 
 		reviews.forEach((review) => {
 
-			let reviewAvatar = review.avatar;
-			if (review.avatar == "") {reviewAvatar = "img/reviews/user-avatar.svg"}
-			else {reviewAvatar = `img/reviews/avatar/${review.avatar}`}
+			let reviewAvatar;
+			if (review.avatar == "") {
+				reviewAvatar = `<img src="img/reviews/user-avatar.svg" alt="Avatar">`;
+			} else {
+				reviewAvatar = `<picture>
+									<source type="image/webp" srcset="img/reviews/avatar/${review.avatar}.webp">
+									<source type="image/jpeg" srcset="img/reviews/avatar/${review.avatar}.jpg">
+									<img src="img/reviews/avatar/${review.avatar}.jpg" alt="Avatar">
+								</picture>`;
+			}
 
 			gradeColor = "#2CB67D";
 			if (Number(review.grade) < 5) {gradeColor = "#fa1111"}
@@ -354,7 +385,7 @@ fetch('reviews.json')
 
 			let currentReview =`<div class="reviews__slide swiper-slide">
 									<div class="reviews__slide-top">
-										<img src="${reviewAvatar}" alt="Avatar">
+										${reviewAvatar}
 										<h5>${review.name}</h5>
 										<h4 class="reviews__slide-grade">
 											<span style="color: ${gradeColor};">${review.grade}/10</span>
@@ -415,8 +446,19 @@ function generateContacts() {
 
 	contacts.forEach((contact) => {
 
+		let imgElem;
+		if (contact.imgWEBP) {
+			imgElem = `<picture>
+						   <source type="image/webp" srcset="img/contacts/${contact.imgWEBP}">
+						   <source type="image/png" srcset="img/contacts/${contact.img}">
+						   <img src="img/contacts/${contact.img}" alt="${contact.title}">
+					   </picture>`;
+		} else {
+			imgElem = `<img src="img/contacts/${contact.img}" alt="${contact.title}">`;
+		}
+
 		let currentContact = `<a href="${contact.link}" target="_blank" title="${contact.title}" class="contacts__item">
-								  <img src="img/contacts/${contact.img}" alt="${contact.title}">
+								  ${imgElem}
 							  </a>`
 
 		contactsItems.insertAdjacentHTML("beforeend", currentContact);
