@@ -11,15 +11,9 @@
 		"title": "GitHub"
 	},
 	{
-		"img": "tg.png",
-		"imgWEBP": "tg.webp",
-		"link": "https://t.me/ast_dev",
-		"title": "Telegram"
-	},
-	{
-		"img": "mail.png",
-		"imgWEBP": "mail.webp",
-		"link": "mailto:astik.developer@gmail.com",
-		"title": "Email"
+		"img": "upwork.png",
+		"imgWEBP": "upwork.webp",
+		"link": "https://www.upwork.com/freelancers/astikdev",
+		"title": "Upwork"
 	}
 ]
