@@ -64,6 +64,14 @@
 		"screenshots": 1
 	},
 	{
+		"folder": "dexvpn",
+		"title": "DexVpn",
+		"description": "Creating 6 responsive dashboard pages for DexVpn.",
+		"repository": "https://github.com/ast-astik/dexvpn",
+		"demo": "https://ast-astik.github.io/dexvpn/",
+		"screenshots": 6
+	},
+	{
 		"folder": "shark-sushi",
 		"title": "SHARK SUSHI",
 		"description": "Responsive multilink page SHARK SUSHI.",
