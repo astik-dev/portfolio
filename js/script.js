@@ -276,7 +276,6 @@ function generateProjects(amt, mode) {
 									<source type="image/jpeg" data-src="${img800}.jpg">
 									<img src="img/1x1.png" data-src="${img800}.jpg" alt="${title}">
 								</picture>
-								<!--<img src="img/1x1.png" data-src="${img800}" alt="${title}">-->
 								<div class="projects__item-title">
 									<h5>${title}</h5>
 								</div>
