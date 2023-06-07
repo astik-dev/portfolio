@@ -221,6 +221,12 @@ const swiperProjectPopup = new Swiper('.project-popup__image-swiper', {
 
   	simulateTouch: false,
 	allowTouchMove: false,
+
+	on: {
+		slideChange: function () {
+			dataLayer.push({'event': 'project_slideChange'});
+		},
+	},
 });
 
 
@@ -427,6 +433,12 @@ fetch('reviews.json')
 
 			effect: "flip",
 			speed: 450,
+
+			on: {
+				slideChange: function () {
+					dataLayer.push({'event': 'reviews_slideChange'});
+				},
+			},
 		});
 	});
 
