@@ -42,6 +42,35 @@ function openCloseProjectPopup(eventTarget) {
 
 			overflowScrollPadding("add");
 
+
+			// Toggle scroll event for all ".swiper-slide" elements (Google Tag Manager)
+			function toggleScrollEvent(action) {
+
+				let cssSelector = ".project-popup__image-swiper-wrapper .swiper-slide";
+
+				if (document.querySelector(cssSelector)) {
+					if (action == "add") {
+						document.querySelectorAll(cssSelector).forEach((slide) => {
+							slide.addEventListener('scroll', scrollEvent, { once: true });
+						});
+					} else if (action == "remove") {
+						document.querySelectorAll(cssSelector).forEach((slide) => {
+							slide.removeEventListener('scroll', scrollEvent);
+						});
+					}
+				}		
+			}
+			function scrollEvent(event) {
+				let link = event.target.querySelector("a").href;
+				let startIndex = link.indexOf("/projects/") + 10; // 10 = "/projects/" length
+				let trimmedLink = link.substring(startIndex);
+				dataLayer.push({'event': 'project_slideScroll', 'projectTrimmedLink': trimmedLink});
+			}
+
+
+			toggleScrollEvent("remove");
+
+
 			// Checking which project was clicked
 			const projectsItemAll = document.querySelectorAll(".projects__item");
 			let projectsItemIndex;
@@ -127,6 +156,7 @@ function openCloseProjectPopup(eventTarget) {
 			document.querySelector(".project-popup__image-swiper-wrapper")
 				.innerHTML = generateSlides(pScreenshots);
 			swiperProjectPopup.slideTo(0, 1, false);
+			toggleScrollEvent("add");
 
 
 
