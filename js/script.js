@@ -27,6 +27,7 @@ function openCloseBurgerMenu () {
 	if (burgerMenuBtnStatus == "close") {
 		burgerMenuBtnStatus = "open";
 		headerContainer.classList.add("header__container_open-burger");
+		dataLayer.push({'event': 'open_burgerMenu'});
 	} else {
 		burgerMenuBtnStatus = "close";
 		headerContainer.classList.remove("header__container_open-burger");
