@@ -11,16 +11,16 @@
 		"folder": "Notes",
 		"title": "Notes",
 		"description": "Notes - web application for creating notes. Functional: 1) Note management: Saving note; Deleting note; Create new note; Style settings for creating each new note; 2) Note style settings: Text alignment; Text color and note button color; Bold text; Text cursiveness; Text underlining; Text size; Line height size; Adding horizontal scroll; 3) Additional functionality: Popup windows; If notes or settings are not saved, then when you close/refresh the tab, a pop-up window appears asking you to confirm closing/refreshing the page without saving; When the page loads, the last opened note opens (if there was one); Autosave notes when switching between notes or creating a new one; Set default settings; Deleting all notes; Set default settings and delete all notes at once.",
-		"repository": "https://github.com/ast-astik/notes",
-		"demo": "https://ast-astik.github.io/notes/",
+		"repository": "https://github.com/astik-dev/notes",
+		"demo": "https://astik-dev.github.io/notes/",
 		"screenshots": 2
 	},
 	{
 		"folder": "car-rental-landing-page",
 		"title": "Car rental landing page",
 		"description": "Responsive car rental landing page Vendugo (Adventure do and go) from Figma. Functional: 1) SwiperJS sliders. 2) Lazy loading images to speed up page loading. 3) Hovering the mouse over interactive elements adds animated effects. 4) Hide menu and show hamburger menu for mobile screens. 5) Responsiveness for different screen sizes. Technologies: HTML5, CSS3 (SCSS, FLEXBOX, GRID), JavaScript (SwiperJS, IntersectionObserver), BEM, Responsiveness, Lazy loading images.",
-		"repository": "https://github.com/ast-astik/car_rental_landing_page",
-		"demo": "https://ast-astik.github.io/car_rental_landing_page/",
+		"repository": "https://github.com/astik-dev/car_rental_landing_page",
+		"demo": "https://astik-dev.github.io/car_rental_landing_page/",
 		"screenshots": 1
 	},
 	{
@@ -43,16 +43,16 @@
 		"folder": "coffee-website",
 		"title": "Coffee website",
 		"description": "Responsive coffee website from Figma. Functional: 1) Hovering the mouse over interactive elements adds animated effects; 2) Hiding menu and showing hamburger menu for small screens; 3) Responsiveness for different screen sizes. Technologies: HTML, CSS, JavaScript, SCSS,FLEXBOX, GRID, BEM, Responsiveness",
-		"repository": "https://github.com/ast-astik/practice_website_coffee",
-		"demo": "https://ast-astik.github.io/practice_website_coffee/",
+		"repository": "https://github.com/astik-dev/practice_website_coffee",
+		"demo": "https://astik-dev.github.io/practice_website_coffee/",
 		"screenshots": 1
 	},
 	{
 		"folder": "red-cap-must-cry",
 		"title": "Red Cap Must Cry",
 		"description": "Red Cap Must Cry is a freelance project where I have implemented the front-end development for a 3-page website based on a Figma design. Functional: 1. Smooth scrolling; 2. Hide menu and show hamburger menu for mobile screens; 3. SwiperJS sliders; 4. Hovering the mouse over interactive elements adds animated effects; 5. Popup windows; 6. Responsiveness for different screen sizes; 7. Input field validation. Technologies: HTML5, CSS3 (SCSS), JavaScript, BEM.",
-		"repository": "https://github.com/ast-astik/red-cap-must-cry",
-		"demo": "https://ast-astik.github.io/red-cap-must-cry/",
+		"repository": "https://github.com/astik-dev/red-cap-must-cry",
+		"demo": "https://astik-dev.github.io/red-cap-must-cry/",
 		"screenshots": 3
 	},
 	{
@@ -75,8 +75,8 @@
 		"folder": "dexvpn",
 		"title": "DexVpn",
 		"description": "Creating 6 responsive dashboard pages for DexVpn.",
-		"repository": "https://github.com/ast-astik/dexvpn",
-		"demo": "https://ast-astik.github.io/dexvpn/",
+		"repository": "https://github.com/astik-dev/dexvpn",
+		"demo": "https://astik-dev.github.io/dexvpn/",
 		"screenshots": 6
 	},
 	{
@@ -99,8 +99,8 @@
 		"folder": "wedding-invitation",
 		"title": "Wedding invitation",
 		"description": "This project showcases a wedding invitation page that I have developed as a freelance project, based on a design mockup in Figma. The page is beautifully designed and includes animations to enhance the user experience. The page serves as an invitation to a wedding event, providing essential information and creating an engaging atmosphere for the guests. Functional: 1. Animation; 2. Responsiveness for different screen sizes. Technologies: HTML5, CSS3 (SCSS), JavaScript, BEM.",
-		"repository": "https://github.com/ast-astik/wedding-invitation",
-		"demo": "https://ast-astik.github.io/wedding-invitation/",
+		"repository": "https://github.com/astik-dev/wedding-invitation",
+		"demo": "https://astik-dev.github.io/wedding-invitation/",
 		"screenshots": 1
 	},
 	{
