@@ -510,6 +510,18 @@ h5 {
 			}
 		}	
 	}
+	&__item_empty {
+		.projects__item-title {
+
+			&:before {
+				background: transparent;
+			}
+
+			h5 {
+				min-height: 28px;
+			}
+		}
+	}
 
 	&__btn-load-more {
 		padding: 15px 50px;
@@ -568,6 +580,13 @@ h5 {
 
 				h5 {
 					padding: 0 0 3px 0;
+				}
+			}
+		}
+		&__item_empty {
+			.projects__item-title {
+				h5 {
+					min-height: 26px;
 				}
 			}
 		}
@@ -1086,6 +1105,9 @@ h5 {
 				transition: $anim;
 			}
 		}
+	}
+	&__slide_empty {
+		height: 150px;
 	}
 	&__swiper-pagination {
 		left: 50%;

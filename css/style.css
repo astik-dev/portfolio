@@ -614,6 +614,12 @@ h5 {
 	-webkit-transition: all 0.3s ease;
 	transition: all 0.3s ease;
 }
+.projects__item_empty .projects__item-title:before {
+	background: transparent;
+}
+.projects__item_empty .projects__item-title h5 {
+	min-height: 28px;
+}
 .projects__btn-load-more {
 	padding: 15px 50px;
 	font-size: 20px;
@@ -655,6 +661,9 @@ h5 {
 	}
 	.projects__item-title h5 {
 		padding: 0 0 3px 0;
+	}
+	.projects__item_empty .projects__item-title h5 {
+		min-height: 26px;
 	}
 }
 @media (max-width: 575.5px) {
@@ -1192,6 +1201,9 @@ h5 {
 	text-decoration: underline;
 	-webkit-transition: all 0.3s ease;
 	transition: all 0.3s ease;
+}
+.reviews__slide_empty {
+	height: 150px;
 }
 .reviews__swiper-pagination {
 	left: 50%;

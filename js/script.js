@@ -19,7 +19,9 @@ function checkClassName (className, eventTarget) {
 	if (className == "header__burger") {
 		openCloseBurgerMenu();
 	} else if (className == "projects__item" || className ==  "project-popup__close") {
-		openCloseProjectPopup(eventTarget);
+		if (!eventTarget.classList.contains("projects__item_empty")) {
+			openCloseProjectPopup(eventTarget);
+		}
 	}
 }
 
@@ -262,6 +264,15 @@ const swiperProjectPopup = new Swiper('.project-popup__image-swiper', {
 
 
 
+function removeEmptyItems(className, itemsContainer) {
+	if (itemsContainer.querySelector(className)) {
+		itemsContainer.querySelectorAll(className).forEach(emptyItem => {
+			emptyItem.remove();
+		});
+	}
+}
+
+
 let projects;
 fetch('projects.json')
 	.then(response => response.json())
@@ -286,6 +297,7 @@ function generateProjects(amt, mode) {
 
 	if (mode == "start") {
 		startIndex = 0;
+		removeEmptyItems(".projects__item_empty", projectsItems);
 	} else if (mode == "load more") {
 
 		let loadedProjects = document.querySelectorAll(".projects__item").length;
@@ -362,6 +374,8 @@ fetch('skills.json')
 function generateSkills() {
 	const skillsItems = document.querySelector(".skills__items");
 
+	removeEmptyItems(".skills__item_empty", skillsItems);
+
 	skills.forEach((skill) => {
 
 		let imgElem;
@@ -401,6 +415,8 @@ fetch('reviews.json')
 
 
 		const reviewsSwiperWrapper = document.querySelector(".reviews__swiper-wrapper");
+
+		removeEmptyItems(".reviews__slide_empty", reviewsSwiperWrapper);
 
 		reviews.forEach((review) => {
 
@@ -485,6 +501,8 @@ fetch('contacts.json')
 
 function generateContacts() {
 	const contactsItems = document.querySelector(".contacts__items");
+
+	removeEmptyItems(".contacts__item_empty", contactsItems);
 
 	contacts.forEach((contact) => {
 
