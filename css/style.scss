@@ -289,9 +289,7 @@ h5 {
 
 			padding: 15px 80px 35px 0;
 
-			&:after {
-				content: '[ Oleksandr ]';
-
+			span {
 				position: absolute;
 				bottom: 20px;
 				right: 90px;
@@ -366,13 +364,11 @@ h5 {
 			&-name {
 				padding: 10px 48px 31px 0;
 
-				&:after {
+				span {
 					bottom: 15px;
 					right: 48px;
 
 					@include font(16px, 16px);
-					font-weight: 300;
-					font-style: normal;
 				}
 			}
 		}

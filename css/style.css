@@ -427,8 +427,7 @@ h5 {
 	position: relative;
 	padding: 15px 80px 35px 0;
 }
-.home__left-name:after {
-	content: "[ Oleksandr ]";
+.home__left-name span {
 	position: absolute;
 	bottom: 20px;
 	right: 90px;
@@ -480,13 +479,11 @@ h5 {
 	.home__left-name {
 		padding: 10px 48px 31px 0;
 	}
-	.home__left-name:after {
+	.home__left-name span {
 		bottom: 15px;
 		right: 48px;
 		font-size: 16px;
 		line-height: 16px;
-		font-weight: 300;
-		font-style: normal;
 	}
 	.home__right img {
 		height: 253px;
@@ -753,7 +750,7 @@ h5 {
 
 @media (hover: hover) {
 	.project-popup__image-swiper-nav:hover,
-.reviews__swiper-nav:hover {
+	.reviews__swiper-nav:hover {
 		background: #293548;
 	}
 }
