@@ -74,9 +74,9 @@
 	{
 		"folder": "dexvpn",
 		"title": "DexVpn",
-		"description": "Creating 6 responsive dashboard pages for DexVpn.",
-		"repository": "https://github.com/astik-dev/dexvpn",
-		"demo": "https://astik-dev.github.io/dexvpn/",
+		"description": "Creating 6 responsive dashboard pages for DexVpn. Functional: 1) Input field validation; 2) Hide menu and show hamburger menu for mobile screens; 3) Spoilers; 4) Hovering the mouse over interactive elements adds animated effects; 5) Popup windows; 6) Responsiveness for different screen sizes.",
+		"repository": "",
+		"demo": "",
 		"screenshots": 6
 	},
 	{
