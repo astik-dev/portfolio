@@ -136,6 +136,14 @@
 		"screenshots": 1
 	},
 	{
+		"folder": "prom-klinker",
+		"title": "Product card",
+		"description": "Responsive product card for prom.ua",
+		"repository": "https://github.com/astik-dev/prom-klinker",
+		"demo": "https://astik-dev.github.io/prom-klinker/",
+		"screenshots": 1
+	},
+	{
 		"folder": "pages-mobile-app",
 		"title": "Mobile app",
 		"description": "3 responsive pages for mobile application",
