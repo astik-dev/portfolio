@@ -152,6 +152,14 @@
 		"screenshots": 3
 	},
 	{
+		"folder": "synology-login-page",
+		"title": "Login page",
+		"description": "Responsive login page.",
+		"repository": "",
+		"demo": "",
+		"screenshots": 1
+	},
+	{
 		"folder": "character-generator",
 		"title": "Character generator",
 		"description": "Character generator - web application for random character generation. JavaScript generates a random number within a specified range, which is needed to select a random image.",
