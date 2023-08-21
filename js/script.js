@@ -29,7 +29,7 @@ function openCloseBurgerMenu () {
 	if (burgerMenuBtnStatus == "close") {
 		burgerMenuBtnStatus = "open";
 		headerContainer.classList.add("header__container_open-burger");
-		dataLayer.push({'event': 'open_burgerMenu'});
+		gtmEvent({'event': 'open_burgerMenu'});
 	} else {
 		burgerMenuBtnStatus = "close";
 		headerContainer.classList.remove("header__container_open-burger");
@@ -67,7 +67,7 @@ function openCloseProjectPopup(eventTarget) {
 				let link = event.target.querySelector("a").href;
 				let startIndex = link.indexOf("/projects/") + 10; // 10 = "/projects/" length
 				let trimmedLink = link.substring(startIndex);
-				dataLayer.push({'event': 'project_slideScroll', 'projectTrimmedLink': trimmedLink});
+				gtmEvent({'event': 'project_slideScroll', 'projectTrimmedLink': trimmedLink});
 			}
 
 
@@ -257,7 +257,7 @@ const swiperProjectPopup = new Swiper('.project-popup__image-swiper', {
 
 	on: {
 		slideChange: function () {
-			dataLayer.push({'event': 'project_slideChange'});
+			gtmEvent({'event': 'project_slideChange'});
 		},
 	},
 });
@@ -483,7 +483,7 @@ fetch('reviews.json')
 
 			on: {
 				slideChange: function () {
-					dataLayer.push({'event': 'reviews_slideChange'});
+					gtmEvent({'event': 'reviews_slideChange'});
 				},
 			},
 		});
@@ -523,6 +523,14 @@ function generateContacts() {
 
 		contactsItems.insertAdjacentHTML("beforeend", currentContact);
 	});
+}
+
+
+
+function gtmEvent(object) {
+	if (typeof dataLayer !== "undefined" && Array.isArray(dataLayer)) {
+		dataLayer.push(object);
+	}
 }
 
 
