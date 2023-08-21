@@ -1234,6 +1234,9 @@ h5 {
 	}
 }
 @media (max-width: 575.5px) {
+	.reviews__container {
+		padding-top: 70px;
+	}
 	.reviews__slide {
 		padding: 15px 15px 10px 15px;
 	}

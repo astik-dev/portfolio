@@ -1152,6 +1152,11 @@ h5 {
 }
 @media (max-width: 575.5px) {
 	.reviews {
+		
+		&__container {
+			padding-top: $section-gap-min;
+		}
+
 		&__slide {
 			padding: 15px 15px 10px 15px;
 
