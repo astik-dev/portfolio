@@ -111,7 +111,7 @@
 		"avatar": "",
 		"name": "Leonid K.",
 		"grade": "10",
-		"text": "Great performer! Did everything quickly and with high quality. Made edits to my requirements instantly.",
+		"text": "Great developer! Did everything quickly and with high quality. Made edits to my requirements instantly.",
 		"date": "04.03.2023",
 		"linkText": "freelancehunt.com",
 		"link": "https://freelancehunt.com/en/project/php-html-dizayn/1181094.html"
@@ -120,7 +120,7 @@
 		"avatar": "",
 		"name": "Ivan T.",
 		"grade": "10",
-		"text": "Everything is great. I recommend! Oleksandr is an excellent performer. He pays close attention to questions and comments.",
+		"text": "Everything is great. I recommend! Oleksandr is an excellent developer. He pays close attention to questions and comments.",
 		"date": "06.03.2023",
 		"linkText": "freelancehunt.com",
 		"link": "https://freelancehunt.com/en/project/prodolzhenie-dopolnitelnyie-stranitsyi/1178822.html"
@@ -138,7 +138,7 @@
 		"avatar": "",
 		"name": "Daniel P.",
 		"grade": "10",
-		"text": "The task turned out to be more difficult than initially expected, but it did not cause any problems. A flexible and knowledgeable performer. Always in touch. Thank you!",
+		"text": "The task turned out to be more difficult than initially expected, but it did not cause any problems. A flexible and knowledgeable developer. Always in touch. Thank you!",
 		"date": "16.03.2023",
 		"linkText": "freelancehunt.com",
 		"link": "https://freelancehunt.com/en/project/verstka-kartochki-tovara-dlya-prom/1185671.html"
@@ -250,5 +250,41 @@
 		"date": "18.07.2023",
 		"linkText": "freelancehunt.com",
 		"link": "https://freelancehunt.com/en/project/html-igra/1245890.html"
+	},
+	{
+		"avatar": "igor_k",
+		"name": "Igor K.",
+		"grade": "10",
+		"text": "I've worked with this developer not for the first time, everything is great.",
+		"date": "30.07.2023",
+		"linkText": "freelancehunt.com",
+		"link": "https://freelancehunt.com/en/project/sdelat-html-igru/1250137.html"
+	},
+	{
+		"avatar": "igor_k",
+		"name": "Igor K.",
+		"grade": "10",
+		"text": "Everything quickly and qualitatively. Not the first time working together, I recommend!",
+		"date": "31.07.2023",
+		"linkText": "freelancehunt.com",
+		"link": "https://freelancehunt.com/en/project/html-igra/1250766.html"
+	},
+	{
+		"avatar": "",
+		"name": "Dmitry D.",
+		"grade": "10",
+		"text": "Good HTML markup specialist.",
+		"date": "01.08.2023",
+		"linkText": "freelancehunt.com",
+		"link": "https://freelancehunt.com/en/project/verstka-stranitsa/1248631.html"
+	},
+	{
+		"avatar": "",
+		"name": "Dmitry D.",
+		"grade": "10",
+		"text": "A good specialist - a good HTML markup",
+		"date": "12.08.2023",
+		"linkText": "freelancehunt.com",
+		"link": "https://freelancehunt.com/en/project/verstka/1252095.html"
 	}
 ]
