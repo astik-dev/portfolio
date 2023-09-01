@@ -17,6 +17,14 @@
 		"name": "SCSS"
 	},
 	{
+		"img": "wordpress.svg",
+		"name": "WordPress"
+	},
+	{
+		"img": "php.svg",
+		"name": "PHP"
+	},
+	{
 		"img": "figma.svg",
 		"name": "Figma"
 	},
