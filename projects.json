@@ -8,12 +8,12 @@
 		"screenshots": 23
 	},
 	{
-		"folder": "Notes",
-		"title": "Notes",
-		"description": "Notes - web application for creating notes. Functional: 1) Note management: Saving note; Deleting note; Create new note; Style settings for creating each new note; 2) Note style settings: Text alignment; Text color and note button color; Bold text; Text cursiveness; Text underlining; Text size; Line height size; Adding horizontal scroll; 3) Additional functionality: Popup windows; If notes or settings are not saved, then when you close/refresh the tab, a pop-up window appears asking you to confirm closing/refreshing the page without saving; When the page loads, the last opened note opens (if there was one); Autosave notes when switching between notes or creating a new one; Set default settings; Deleting all notes; Set default settings and delete all notes at once.",
-		"repository": "https://github.com/astik-dev/notes",
-		"demo": "https://astik-dev.github.io/notes/",
-		"screenshots": 2
+		"folder": "coffee-website",
+		"title": "Coffee website",
+		"description": "Responsive coffee website from Figma. Functional: 1) Hovering the mouse over interactive elements adds animated effects; 2) Hiding menu and showing hamburger menu for small screens; 3) Responsiveness for different screen sizes. Technologies: HTML, CSS, JavaScript, SCSS,FLEXBOX, GRID, BEM, Responsiveness",
+		"repository": "https://github.com/astik-dev/practice_website_coffee",
+		"demo": "https://astik-dev.github.io/practice_website_coffee/",
+		"screenshots": 1
 	},
 	{
 		"folder": "car-rental-landing-page",
@@ -28,7 +28,7 @@
 		"title": "ZELWIN",
 		"description": "Responsive 4 pages of the ZELWIN website based on the Figma design.",
 		"repository": "",
-		"demo": "",
+		"demo": "https://zelwin.agency/",
 		"screenshots": 4
 	},
 	{
@@ -40,12 +40,12 @@
 		"screenshots": 24
 	},
 	{
-		"folder": "coffee-website",
-		"title": "Coffee website",
-		"description": "Responsive coffee website from Figma. Functional: 1) Hovering the mouse over interactive elements adds animated effects; 2) Hiding menu and showing hamburger menu for small screens; 3) Responsiveness for different screen sizes. Technologies: HTML, CSS, JavaScript, SCSS,FLEXBOX, GRID, BEM, Responsiveness",
-		"repository": "https://github.com/astik-dev/practice_website_coffee",
-		"demo": "https://astik-dev.github.io/practice_website_coffee/",
-		"screenshots": 1
+		"folder": "Notes",
+		"title": "Notes",
+		"description": "Notes - web application for creating notes. Functional: 1) Note management: Saving note; Deleting note; Create new note; Style settings for creating each new note; 2) Note style settings: Text alignment; Text color and note button color; Bold text; Text cursiveness; Text underlining; Text size; Line height size; Adding horizontal scroll; 3) Additional functionality: Popup windows; If notes or settings are not saved, then when you close/refresh the tab, a pop-up window appears asking you to confirm closing/refreshing the page without saving; When the page loads, the last opened note opens (if there was one); Autosave notes when switching between notes or creating a new one; Set default settings; Deleting all notes; Set default settings and delete all notes at once.",
+		"repository": "https://github.com/astik-dev/notes",
+		"demo": "https://astik-dev.github.io/notes/",
+		"screenshots": 2
 	},
 	{
 		"folder": "red-cap-must-cry",
@@ -54,6 +54,14 @@
 		"repository": "https://github.com/astik-dev/red-cap-must-cry",
 		"demo": "https://astik-dev.github.io/red-cap-must-cry/",
 		"screenshots": 3
+	},
+	{
+		"folder": "car-parts-store",
+		"title": "Car parts store",
+		"description": "Car Parts Store is a freelance project in which I created 9 responsive pages for an online store based on a Figma design. Functional: 1) Hide menu and show hamburger menu for mobile screens. 2) OwlCarousel2 slider. 3) Hovering the mouse over interactive elements adds animated effects. 4) Tabs. 5) Responsiveness for different screen sizes.",
+		"repository": "https://github.com/astik-dev/car-parts-store",
+		"demo": "https://astik-dev.github.io/car-parts-store/",
+		"screenshots": 9
 	},
 	{
 		"folder": "binary",
