@@ -6,12 +6,12 @@ let openClosePermissionProjectPopup = true;
 
 
 function findParent (eventTarget, className, NumberOfParents) {
-	if (eventTarget.classList.contains(className)) {
+	if (eventTarget === document) {
+		return false;
+	} else if (eventTarget.classList.contains(className)) {
 		checkClassName(className, eventTarget);
 	} else if (NumberOfParents != 0) {
 		findParent (eventTarget.parentNode, className, NumberOfParents-1);
-	} else {
-		return false;
 	}
 }
 
