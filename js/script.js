@@ -40,8 +40,8 @@ function openCloseBurgerMenu () {
 function openCloseProjectPopup(eventTarget) {
 	if (openClosePermissionProjectPopup == true) {
 		openClosePermissionProjectPopup = false;
-	
-		if (!document.querySelector(".open-project-popup")) {
+
+		if (!document.querySelector(".open-project-popup") && eventTarget !== undefined) {
 
 			overflowScrollPadding("add");
 
