@@ -1,5 +1,3 @@
-const headerContainer = document.querySelector(".header__container");
-
 let burgerMenuBtnStatus = "close";
 let openClosePermissionProjectPopup = true;
 
@@ -26,6 +24,7 @@ function checkClassName (className, eventTarget) {
 }
 
 function openCloseBurgerMenu () {
+	const headerContainer = document.querySelector(".header__container");
 	if (burgerMenuBtnStatus == "close") {
 		burgerMenuBtnStatus = "open";
 		headerContainer.classList.add("header__container_open-burger");
