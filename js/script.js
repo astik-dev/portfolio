@@ -52,11 +52,11 @@ function openCloseProjectPopup(eventTarget) {
 
 				if (dqs(cssSelector)) {
 					if (action == "add") {
-						document.querySelectorAll(cssSelector).forEach((slide) => {
+						dqsa(cssSelector).forEach((slide) => {
 							slide.addEventListener('scroll', scrollEvent, { once: true });
 						});
 					} else if (action == "remove") {
-						document.querySelectorAll(cssSelector).forEach((slide) => {
+						dqsa(cssSelector).forEach((slide) => {
 							slide.removeEventListener('scroll', scrollEvent);
 						});
 					}
@@ -74,7 +74,7 @@ function openCloseProjectPopup(eventTarget) {
 
 
 			// Checking which project was clicked
-			const projectsItemAll = document.querySelectorAll(".projects__item");
+			const projectsItemAll = dqsa(".projects__item");
 			let projectsItemIndex;
 
 			projectsItemAll.forEach((item, index) => {
@@ -163,7 +163,7 @@ function openCloseProjectPopup(eventTarget) {
 
 
 			// Lazy loading
-			let lazyImages = document.querySelectorAll(".img-lazy-loading[data-src]");
+			let lazyImages = dqsa(".img-lazy-loading[data-src]");
 
 			const lazyImagesObserver = new IntersectionObserver(
 				(entries, observer) => {
@@ -186,7 +186,7 @@ function openCloseProjectPopup(eventTarget) {
 		} else {
 			overflowScrollPadding("remove");
 
-			let lazyImages = document.querySelectorAll(".img-lazy-loading[data-src]");
+			let lazyImages = dqsa(".img-lazy-loading[data-src]");
 
 			setTimeout(() => {
 				lazyImages.forEach(image => {
@@ -299,7 +299,7 @@ function generateProjects(amt, mode) {
 		removeEmptyItems(".projects__item_empty", projectsItems);
 	} else if (mode == "load more") {
 
-		let loadedProjects = document.querySelectorAll(".projects__item").length;
+		let loadedProjects = dqsa(".projects__item").length;
 
 		let difference = projects.length - loadedProjects;
 
@@ -535,7 +535,7 @@ function gtmEvent(object) {
 
 
 // Smooth scroll
-const headerMenuLinks = document.querySelectorAll('.header__menu a[href*="#"]');
+const headerMenuLinks = dqsa('.header__menu a[href*="#"]');
 
 for (let headerMenuLink of headerMenuLinks) {
   headerMenuLink.addEventListener('click', function (e) {
