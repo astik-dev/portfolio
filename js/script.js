@@ -24,7 +24,7 @@ function checkClassName (className, eventTarget) {
 }
 
 function openCloseBurgerMenu () {
-	const headerContainer = document.querySelector(".header__container");
+	const headerContainer = dqs(".header__container");
 	if (burgerMenuBtnStatus == "close") {
 		burgerMenuBtnStatus = "open";
 		headerContainer.classList.add("header__container_open-burger");
@@ -40,7 +40,7 @@ function openCloseProjectPopup(eventTarget) {
 	if (openClosePermissionProjectPopup == true) {
 		openClosePermissionProjectPopup = false;
 
-		if (!document.querySelector(".open-project-popup") && eventTarget !== undefined) {
+		if (!dqs(".open-project-popup") && eventTarget !== undefined) {
 
 			overflowScrollPadding("add");
 
@@ -50,7 +50,7 @@ function openCloseProjectPopup(eventTarget) {
 
 				let cssSelector = ".project-popup__image-swiper-wrapper .swiper-slide";
 
-				if (document.querySelector(cssSelector)) {
+				if (dqs(cssSelector)) {
 					if (action == "add") {
 						document.querySelectorAll(cssSelector).forEach((slide) => {
 							slide.addEventListener('scroll', scrollEvent, { once: true });
@@ -94,16 +94,16 @@ function openCloseProjectPopup(eventTarget) {
 
 
 			// Set title & description
-			const projectPopupTitle = document.querySelector(".project-popup__container h3");
-			const projectPopupText = document.querySelector(".project-popup__container p");
+			const projectPopupTitle = dqs(".project-popup__container h3");
+			const projectPopupText = dqs(".project-popup__container p");
 
 			projectPopupTitle.textContent = pTitle;
 			projectPopupText.textContent = pDescription;
 
 
 			// Set buttons
-			const projectPopupBtnR = document.querySelector(".project-popup__btn:nth-child(1)");
-			const projectPopupBtnD = document.querySelector(".project-popup__btn:nth-child(2)");
+			const projectPopupBtnR = dqs(".project-popup__btn:nth-child(1)");
+			const projectPopupBtnD = dqs(".project-popup__btn:nth-child(2)");
 
 			if (pRepository != "") {
 				projectPopupBtnR.href = pRepository;
@@ -155,7 +155,7 @@ function openCloseProjectPopup(eventTarget) {
 				return slides;
 			}
 
-			document.querySelector(".project-popup__image-swiper-wrapper")
+			dqs(".project-popup__image-swiper-wrapper")
 				.innerHTML = generateSlides(pScreenshots);
 			swiperProjectPopup.slideTo(0, 1, false);
 			toggleScrollEvent("add");
@@ -198,7 +198,7 @@ function openCloseProjectPopup(eventTarget) {
 			
 		}
 
-		document.querySelector("body").classList.toggle("open-project-popup");
+		dqs("body").classList.toggle("open-project-popup");
 
 		setTimeout(() => {
 			openClosePermissionProjectPopup = true;
@@ -212,13 +212,13 @@ function getScrollSize() {
 }
 function overflowScrollPadding(addRemove) {
 	if (addRemove == "remove") {
-		document.querySelector("body").removeAttribute("style");
-		document.querySelector(".header").removeAttribute("style");
+		dqs("body").removeAttribute("style");
+		dqs(".header").removeAttribute("style");
 	} else if (addRemove == "add") {
 		let scrl = getScrollSize();
 
-		document.querySelector("body").style.paddingRight = `${scrl}px`;
-		document.querySelector(".header").style.paddingRight = `${scrl}px`;
+		dqs("body").style.paddingRight = `${scrl}px`;
+		dqs(".header").style.paddingRight = `${scrl}px`;
 	}
 }
 
@@ -281,13 +281,13 @@ fetch('projects.json')
 		let amt = 4;
 		generateProjects(amt, "start");
 		if (projects.length > amt) {
-			document.querySelector(".projects__container")
+			dqs(".projects__container")
 				.insertAdjacentHTML("beforeend", 
 									`<button class="projects__btn-load-more" onClick="generateProjects(4, 'load more')">Load More</button>`);
 		}
 	});
 
-const projectsItems = document.querySelector(".projects__items");
+const projectsItems = dqs(".projects__items");
 
 // mode: "start", "load more".
 function generateProjects(amt, mode) {
@@ -309,7 +309,7 @@ function generateProjects(amt, mode) {
 		} else {
 			startIndex = projects.length - difference;
 			amt = projects.length;
-			document.querySelector(".projects__container").removeChild(document.querySelector(".projects__btn-load-more"));
+			dqs(".projects__container").removeChild(dqs(".projects__btn-load-more"));
 		}
 	}
 
@@ -371,7 +371,7 @@ fetch('skills.json')
 	});
 
 function generateSkills() {
-	const skillsItems = document.querySelector(".skills__items");
+	const skillsItems = dqs(".skills__items");
 
 	removeEmptyItems(".skills__item_empty", skillsItems);
 
@@ -413,7 +413,7 @@ fetch('reviews.json')
 		
 
 
-		const reviewsSwiperWrapper = document.querySelector(".reviews__swiper-wrapper");
+		const reviewsSwiperWrapper = dqs(".reviews__swiper-wrapper");
 
 		removeEmptyItems(".reviews__slide_empty", reviewsSwiperWrapper);
 
@@ -499,7 +499,7 @@ fetch('contacts.json')
 	});
 
 function generateContacts() {
-	const contactsItems = document.querySelector(".contacts__items");
+	const contactsItems = dqs(".contacts__items");
 
 	removeEmptyItems(".contacts__item_empty", contactsItems);
 

@@ -27,11 +27,11 @@ function getCookie(cookieName) {
 }
 
 function toggleCloseStyleCookiesPopup () {
-	document.querySelector(".cookies-popup").classList.toggle("cookies-popup_close");
+	dqs(".cookies-popup").classList.toggle("cookies-popup_close");
 }
 
 function addCookiesPopup () {
-	document.querySelector(".wrapper").insertAdjacentHTML("afterbegin", cookiesPopupHTML);
+	dqs(".wrapper").insertAdjacentHTML("afterbegin", cookiesPopupHTML);
 	setTimeout(() => {
 		toggleCloseStyleCookiesPopup();
 	}, 100);
@@ -40,7 +40,7 @@ function addCookiesPopup () {
 function removeCookiesPopup () {
 	toggleCloseStyleCookiesPopup();
 	setTimeout(() => {
-		document.querySelector(".cookies-popup").remove();
+		dqs(".cookies-popup").remove();
 	}, 300);
 }
 
@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 			// Excluding the display of the popup on the Privacy Policy
 			// page based on the presence of the .privacy element.
-			if (!document.querySelector(".privacy")) {
+			if (!dqs(".privacy")) {
 				addCookiesPopup();
 			}
 		}
