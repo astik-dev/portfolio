@@ -4,7 +4,7 @@ let openClosePermissionProjectPopup = true;
 
 
 function findParent (eventTarget, className, NumberOfParents) {
-	if (eventTarget === document) {
+	if (eventTarget === doc) {
 		return false;
 	} else if (eventTarget.classList.contains(className)) {
 		checkClassName(className, eventTarget);
@@ -207,7 +207,7 @@ function openCloseProjectPopup(eventTarget) {
 }
 
 function getScrollSize() {
-	let scrollWidth = window.innerWidth - document.documentElement.clientWidth;
+	let scrollWidth = window.innerWidth - doc.documentElement.clientWidth;
 	return scrollWidth;
 }
 function overflowScrollPadding(addRemove) {
@@ -224,7 +224,7 @@ function overflowScrollPadding(addRemove) {
 
 
 
-document.addEventListener("click", (event) => {
+doc.addEventListener("click", (event) => {
 
 	// Header burger
 	findParent (event.target, "header__burger", 3);
@@ -551,18 +551,18 @@ function currentYPosition() {
     // Firefox, Chrome, Opera, Safari
     if (self.pageYOffset) return self.pageYOffset;
     // Internet Explorer 6 - standards mode
-    if (document.documentElement && document.documentElement.scrollTop)
-        return document.documentElement.scrollTop;
+    if (doc.documentElement && doc.documentElement.scrollTop)
+        return doc.documentElement.scrollTop;
     // Internet Explorer 6, 7 and 8
-    if (document.body.scrollTop) return document.body.scrollTop;
+    if (doc.body.scrollTop) return doc.body.scrollTop;
     return 0;
 }
 
 function elmYPosition(eID) {
-    var elm = document.getElementById(eID);
+    var elm = doc.getElementById(eID);
     var y = elm.offsetTop;
     var node = elm;
-    while (node.offsetParent && node.offsetParent != document.body) {
+    while (node.offsetParent && node.offsetParent != doc.body) {
         node = node.offsetParent;
         y += node.offsetTop;
     } return y;

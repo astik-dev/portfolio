@@ -13,7 +13,7 @@ const cookiesPopupHTML =   `<div class="cookies-popup cookies-popup_close">
 
 function getCookie(cookieName) {
   	const name = cookieName + "=";
-  	const decodedCookie = decodeURIComponent(document.cookie);
+  	const decodedCookie = decodeURIComponent(doc.cookie);
   	const cookieArray = decodedCookie.split(';');
 
   	for (let i = 0; i < cookieArray.length; i++) {
@@ -57,7 +57,7 @@ function cookiesDecline() {
 
 function setCookieConsent (value) {
 	let sixMonthsInSeconds = 6 * 30 * 24 * 60 * 60;
-	document.cookie = `consent=${value}; max-age=${sixMonthsInSeconds}`;
+	doc.cookie = `consent=${value}; max-age=${sixMonthsInSeconds}`;
 }
 
 function loadGoogleAnalytics4 () {
@@ -71,7 +71,7 @@ function loadGoogleAnalytics4 () {
 
 
 	// Google tag (gtag.js)
-	document.head.insertAdjacentHTML("beforeend", `<script async src="https://www.googletagmanager.com/gtag/js?id=G-B8B6TJH9GG"></script>`);
+	doc.head.insertAdjacentHTML("beforeend", `<script async src="https://www.googletagmanager.com/gtag/js?id=G-B8B6TJH9GG"></script>`);
 
 	window.dataLayer = window.dataLayer || [];
 	function gtag(){dataLayer.push(arguments);}
@@ -80,11 +80,11 @@ function loadGoogleAnalytics4 () {
 
 
 	// Google Tag Manager (noscript)
-	document.body.insertAdjacentHTML('afterbegin', `<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5LL8BFL" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>`);
+	doc.body.insertAdjacentHTML('afterbegin', `<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5LL8BFL" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>`);
 }
 
 
-document.addEventListener('DOMContentLoaded', function() {
+doc.addEventListener('DOMContentLoaded', function() {
 	
 	if (navigator.cookieEnabled) {
 
