@@ -281,14 +281,20 @@ fetchJSON('projects.json').then(data => {
 
 	let amt = 4;
 	generateProjects(amt, "start");
-	if (projects.length > amt) {
-		dqs(".projects__container")
-			.insertAdjacentHTML("beforeend", 
-								`<button class="projects__btn-load-more" onClick="generateProjects(4, 'load more')">Load More</button>`);
-	}
 });
 
 const projectsItems = dqs(".projects__items");
+
+const btnLoadMore = {
+	cssClass: "projects__btn-load-more",
+	clickEventFunction: function () { generateProjects(4, 'load more') },
+	
+	create: function () {
+		dqs(".projects__container").insertAdjacentHTML("beforeend", `<button class="${this.cssClass}">Load More</button>`);
+		this.elem = dqs(`.${this.cssClass}`);
+		this.elem.addEventListener("click", this.clickEventFunction);
+	},
+}
 
 // mode: "start", "load more".
 function generateProjects(amt, mode) {
@@ -310,7 +316,7 @@ function generateProjects(amt, mode) {
 		} else {
 			startIndex = projects.length - difference;
 			amt = projects.length;
-			dqs(".projects__container").removeChild(dqs(".projects__btn-load-more"));
+			btnLoadMore.elem.remove();
 		}
 	}
 
@@ -359,6 +365,8 @@ function generateProjects(amt, mode) {
 
 		newObserver.observe(newLazyImg);
 	}
+
+	if (mode == "start" && projects.length > amt) btnLoadMore.create();
 }
 
 
