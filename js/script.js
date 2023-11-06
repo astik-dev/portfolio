@@ -363,13 +363,9 @@ function generateProjects(amt, mode) {
 
 
 
-let skills;
-fetchJSON('skills.json').then(data => {
-	skills = data;
-	generateSkills();
-});
+fetchJSON('skills.json').then(data => generateSkills(data));
 
-function generateSkills() {
+function generateSkills(skills) {
 	const skillsItems = dqs(".skills__items");
 
 	removeEmptyItems(".skills__item_empty", skillsItems);
@@ -399,15 +395,9 @@ function generateSkills() {
 
 
 
-let reviews;
-fetchJSON('reviews.json').then(data => {
+fetchJSON('reviews.json').then(data => generateReviews(data));
 
-	reviews = data;
-
-	generateReviews();
-});
-
-function generateReviews() {
+function generateReviews(reviews) {
 	reviews.sort(function (a, b) {
 		return -(a.text.length - b.text.length);
 	});
@@ -491,13 +481,10 @@ function generateReviews() {
 
 
 
-let contacts;
-fetchJSON('contacts.json').then(data => {
-	contacts = data;
-	generateContacts();
-});
 
-function generateContacts() {
+fetchJSON('contacts.json').then(data => generateContacts(data));
+
+function generateContacts(contacts) {
 	const contactsItems = dqs(".contacts__items");
 
 	removeEmptyItems(".contacts__item_empty", contactsItems);
