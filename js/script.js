@@ -404,6 +404,10 @@ fetchJSON('reviews.json').then(data => {
 
 	reviews = data;
 
+	generateReviews();
+});
+
+function generateReviews() {
 	reviews.sort(function (a, b) {
 		return -(a.text.length - b.text.length);
 	});
@@ -483,7 +487,7 @@ fetchJSON('reviews.json').then(data => {
 			},
 		},
 	});
-});
+}
 
 
 
