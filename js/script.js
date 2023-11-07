@@ -278,16 +278,12 @@ const fetchJSON = url => fetch(url).then(response => response.json());
 let projects;
 fetchJSON('projects.json').then(data => {
 	projects = data;
-
-	let amt = 4;
-	generateProjects(amt, "start");
+	generateProjects("start");
 });
-
-const projectsItems = dqs(".projects__items");
 
 const btnLoadMore = {
 	cssClass: "projects__btn-load-more",
-	clickEventFunction: function () { generateProjects(4, 'load more') },
+	clickEventFunction: function () { generateProjects('load more') },
 	
 	create: function () {
 		dqs(".projects__container").insertAdjacentHTML("beforeend", `<button class="${this.cssClass}">Load More</button>`);
@@ -297,8 +293,11 @@ const btnLoadMore = {
 }
 
 // mode: "start", "load more".
-function generateProjects(amt, mode) {
+function generateProjects(mode) {
 
+	const projectsItems = dqs(".projects__items");
+	
+	let generationSize = 4;
 	let startIndex;
 
 	if (mode == "start") {
@@ -310,17 +309,17 @@ function generateProjects(amt, mode) {
 
 		let difference = projects.length - loadedProjects;
 
-		if (difference > amt) {
+		if (difference > generationSize) {
 			startIndex = projects.length - difference;
-			amt += startIndex;
+			generationSize += startIndex;
 		} else {
 			startIndex = projects.length - difference;
-			amt = projects.length;
+			generationSize = projects.length;
 			btnLoadMore.elem.remove();
 		}
 	}
 
-	for (let i = startIndex; i < amt; i++) {
+	for (let i = startIndex; i < generationSize; i++) {
 
 		let img800 = "img/projects/" + projects[i].folder + "/800";
 		let title = projects[i].title;
@@ -366,7 +365,7 @@ function generateProjects(amt, mode) {
 		newObserver.observe(newLazyImg);
 	}
 
-	if (mode == "start" && projects.length > amt) btnLoadMore.create();
+	if (mode == "start" && projects.length > generationSize) btnLoadMore.create();
 }
 
 
