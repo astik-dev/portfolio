@@ -470,71 +470,32 @@ function gtmEvent(object) {
 
 
 
-// Smooth scroll
-const headerMenuLinks = dqsa('.header__menu a[href*="#"]');
+function smoothScroll(elemSelector) {
+    const startY = window.pageYOffset;
+    const stopY = dqs(elemSelector).offsetTop - dqs(".header").offsetHeight;
+    const distance = stopY > startY ? stopY - startY : startY - stopY;
+ 	
+    if (window.innerWidth < 575.5) openCloseBurgerMenu();
 
-for (let headerMenuLink of headerMenuLinks) {
-  headerMenuLink.addEventListener('click', function (e) {
-    e.preventDefault();
-    
-    const blockID = headerMenuLink.getAttribute('href').substr(1);
-    
-   	smoothScroll(blockID);
-  })
-}
-
-function currentYPosition() {
-    // Firefox, Chrome, Opera, Safari
-    if (self.pageYOffset) return self.pageYOffset;
-    // Internet Explorer 6 - standards mode
-    if (doc.documentElement && doc.documentElement.scrollTop)
-        return doc.documentElement.scrollTop;
-    // Internet Explorer 6, 7 and 8
-    if (doc.body.scrollTop) return doc.body.scrollTop;
-    return 0;
-}
-
-function elmYPosition(eID) {
-    var elm = doc.getElementById(eID);
-    var y = elm.offsetTop;
-    var node = elm;
-    while (node.offsetParent && node.offsetParent != doc.body) {
-        node = node.offsetParent;
-        y += node.offsetTop;
-    } return y;
-}
-
-function getHeaderHeight() {
-	if (window.innerWidth < 575.5) {
-		openCloseBurgerMenu();
-		return 70;
-	} else {
-		return 80;
-	}
-}
-
-function smoothScroll(eID) {
-    var startY = currentYPosition();
-    var stopY = elmYPosition(eID) - getHeaderHeight();
-    var distance = stopY > startY ? stopY - startY : startY - stopY;
  	if (distance < 100) {
-        scrollTo(0, stopY); return;
+        scrollTo(0, stopY);
+        return;
     }
-    var speed = Math.round(distance / 100);
-    if (speed >= 20) speed = 20;
-    var step = Math.round(distance / 25);
-    var leapY = stopY > startY ? startY + step : startY - step;
-    var timer = 0;
-    if (stopY > startY) {
-        for ( var i=startY; i<stopY; i+=step ) {
-            setTimeout("window.scrollTo(0, "+leapY+")", timer * speed);
-            leapY += step; if (leapY > stopY) leapY = stopY; timer++;
-        } return;
-    }
-    for ( var i=startY; i>stopY; i-=step ) {
-        setTimeout("window.scrollTo(0, "+leapY+")", timer * speed);
-        leapY -= step; if (leapY < stopY) leapY = stopY; timer++;
-    }
+    
+    let speed = Math.min(Math.round(distance / 100), 20);
+    
+    const step = Math.round(distance / 25);
+    let leapY = stopY > startY ? startY + step : startY - step;
+    let timer = 0;
+    
+    const scrollDirection = stopY > startY ? 1 : -1; // 1 = scroll down, -1 = scroll up
+	
+	for (let i = startY; scrollDirection === 1 ? i < stopY : i > stopY; i += scrollDirection * step) {
+	    setTimeout((y) => {window.scrollTo(0, y)}, timer * speed, leapY);
+	    leapY += scrollDirection * step;
+	    if (scrollDirection === 1 ? leapY > stopY : leapY < stopY) leapY = stopY;
+	    timer++;
+	}
 }
 
 
@@ -572,6 +533,7 @@ fetchJSON('contacts.json').then(data => generateContacts(data));
 
 
 
+// Event Listeners
 doc.addEventListener("click", (event) => {
 
 	// Header burger
@@ -583,4 +545,11 @@ doc.addEventListener("click", (event) => {
 	if (event.target.classList.contains("project-popup")) {
 		openCloseProjectPopup();
 	}
+});
+
+dqsa('.header__menu a[href*="#"]').forEach(headerMenuLink => {
+	headerMenuLink.addEventListener('click', e => {
+	    e.preventDefault();  
+	   	smoothScroll(headerMenuLink.getAttribute('href'));
+	});
 });
