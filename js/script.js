@@ -224,45 +224,6 @@ function overflowScrollPadding(addRemove) {
 
 
 
-doc.addEventListener("click", (event) => {
-
-	// Header burger
-	findParent (event.target, "header__burger", 3);
-
-	// Project popup
-	findParent (event.target, "projects__item", 3);	
-	findParent (event.target, "project-popup__close", 3);
-	if (event.target.classList.contains("project-popup")) {
-		openCloseProjectPopup();
-	}
-});
-
-
-
-const swiperProjectPopup = new Swiper('.project-popup__image-swiper', {
-	// Navigation arrows
-	navigation: {
-	    nextEl: '.project-popup__image-swiper-nav_right',
-	    prevEl: '.project-popup__image-swiper-nav_left',
-	},
-
-	pagination: {
-	    el: '.project-popup__swiper-pagination',
-	    type: 'fraction',
-	},
-
-  	simulateTouch: false,
-	allowTouchMove: false,
-
-	on: {
-		slideChange: function () {
-			gtmEvent({'event': 'project_slideChange'});
-		},
-	},
-});
-
-
-
 function removeEmptyItems(className, itemsContainer) {
 	if (itemsContainer.querySelector(className)) {
 		itemsContainer.querySelectorAll(className).forEach(emptyItem => {
@@ -272,14 +233,6 @@ function removeEmptyItems(className, itemsContainer) {
 }
 
 
-const fetchJSON = url => fetch(url).then(response => response.json());
-
-
-let projects;
-fetchJSON('projects.json').then(data => {
-	projects = data;
-	generateProjects("start");
-});
 
 const btnLoadMore = {
 	cssClass: "projects__btn-load-more",
@@ -292,11 +245,14 @@ const btnLoadMore = {
 	},
 }
 
+
+
+let projects;
 // mode: "start", "load more".
 function generateProjects(mode) {
 
 	const projectsItems = dqs(".projects__items");
-	
+
 	let generationSize = 4;
 	let startIndex;
 
@@ -368,10 +324,6 @@ function generateProjects(mode) {
 	if (mode == "start" && projects.length > generationSize) btnLoadMore.create();
 }
 
-
-
-fetchJSON('skills.json').then(data => generateSkills(data));
-
 function generateSkills(skills) {
 	const skillsItems = dqs(".skills__items");
 
@@ -399,10 +351,6 @@ function generateSkills(skills) {
 		skillsItems.insertAdjacentHTML("beforeend", currentSkill);
 	});
 }
-
-
-
-fetchJSON('reviews.json').then(data => generateReviews(data));
 
 function generateReviews(reviews) {
 	reviews.sort(function (a, b) {
@@ -485,11 +433,6 @@ function generateReviews(reviews) {
 		},
 	});
 }
-
-
-
-
-fetchJSON('contacts.json').then(data => generateContacts(data));
 
 function generateContacts(contacts) {
 	const contactsItems = dqs(".contacts__items");
@@ -593,3 +536,51 @@ function smoothScroll(eID) {
         leapY -= step; if (leapY < stopY) leapY = stopY; timer++;
     }
 }
+
+
+
+const swiperProjectPopup = new Swiper('.project-popup__image-swiper', {
+	// Navigation arrows
+	navigation: {
+	    nextEl: '.project-popup__image-swiper-nav_right',
+	    prevEl: '.project-popup__image-swiper-nav_left',
+	},
+
+	pagination: {
+	    el: '.project-popup__swiper-pagination',
+	    type: 'fraction',
+	},
+
+  	simulateTouch: false,
+	allowTouchMove: false,
+
+	on: {
+		slideChange: function () {
+			gtmEvent({'event': 'project_slideChange'});
+		},
+	},
+});
+
+
+
+const fetchJSON = url => fetch(url).then(response => response.json());
+
+fetchJSON('projects.json').then(data => {projects = data; generateProjects("start")});
+fetchJSON('skills.json').then(data => generateSkills(data));
+fetchJSON('reviews.json').then(data => generateReviews(data));
+fetchJSON('contacts.json').then(data => generateContacts(data));
+
+
+
+doc.addEventListener("click", (event) => {
+
+	// Header burger
+	findParent (event.target, "header__burger", 3);
+
+	// Project popup
+	findParent (event.target, "projects__item", 3);	
+	findParent (event.target, "project-popup__close", 3);
+	if (event.target.classList.contains("project-popup")) {
+		openCloseProjectPopup();
+	}
+});
