@@ -3,26 +3,6 @@ let openClosePermissionProjectPopup = true;
 
 
 
-function findParent (eventTarget, className, NumberOfParents) {
-	if (eventTarget === doc) {
-		return false;
-	} else if (eventTarget.classList.contains(className)) {
-		checkClassName(className, eventTarget);
-	} else if (NumberOfParents != 0) {
-		findParent (eventTarget.parentNode, className, NumberOfParents-1);
-	}
-}
-
-function checkClassName (className, eventTarget) {
-	if (className == "header__burger") {
-		openCloseBurgerMenu();
-	} else if (className == "projects__item" || className ==  "project-popup__close") {
-		if (!eventTarget.classList.contains("projects__item_empty")) {
-			openCloseProjectPopup(eventTarget);
-		}
-	}
-}
-
 function openCloseBurgerMenu () {
 	const headerContainer = dqs(".header__container");
 	if (burgerMenuBtnStatus == "close") {
@@ -37,6 +17,8 @@ function openCloseBurgerMenu () {
 
 
 function openCloseProjectPopup(eventTarget) {
+	if (eventTarget && eventTarget.classList.contains("projects__item_empty")) return;
+
 	if (openClosePermissionProjectPopup == true) {
 		openClosePermissionProjectPopup = false;
 
@@ -533,23 +515,23 @@ fetchJSON('contacts.json').then(data => generateContacts(data));
 
 
 
-// Event Listeners
-doc.addEventListener("click", (event) => {
+doc.addEventListener("click", e => {
 
-	// Header burger
-	findParent (event.target, "header__burger", 3);
+	const burger = e.target.closest(".header__burger"),
+		  projectItem = e.target.closest(".projects__item"),
+		  closeProjectPopup = e.target.closest(".project-popup__close");
 
-	// Project popup
-	findParent (event.target, "projects__item", 3);	
-	findParent (event.target, "project-popup__close", 3);
-	if (event.target.classList.contains("project-popup")) {
+	if (burger)
+		openCloseBurgerMenu();
+
+	else if (projectItem || closeProjectPopup)
+		openCloseProjectPopup(projectItem || closeProjectPopup);
+
+	else if (e.target.classList.contains("project-popup")) // click outside the popup
 		openCloseProjectPopup();
-	}
-});
 
-dqsa('.header__menu a[href*="#"]').forEach(headerMenuLink => {
-	headerMenuLink.addEventListener('click', e => {
-	    e.preventDefault();  
-	   	smoothScroll(headerMenuLink.getAttribute('href'));
-	});
+	else if (e.target.matches('.header__menu a[href*="#"]')) {
+		e.preventDefault();
+		smoothScroll(e.target.getAttribute('href'));
+	}
 });
