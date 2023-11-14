@@ -206,6 +206,41 @@ function overflowScrollPadding(addRemove) {
 
 
 
+const getFileExtension = filePath => filePath.split('.').pop();
+
+const imageCreator = {
+
+	imgFolder: "img",
+	px1: `img/1x1.png`,
+
+	fullPath: function (path) {return this.imgFolder + "/" + path},
+
+	newWebpPic: function (webpPath, fallbackPath, alt, lazy) {
+		const types = {
+			jpg: "jpeg",
+		}
+
+		const src = lazy ? "data-src" : "srcset";
+		
+		const fallbackExt = getFileExtension(fallbackPath);
+		const fallbackType = types[fallbackExt] || fallbackExt;
+		
+		return `<picture>
+					<source type="image/webp" ${src}="${this.fullPath(webpPath)}">
+					<source type="image/${fallbackType}" ${src}="${this.fullPath(fallbackPath)}">
+					${this.newImg(fallbackPath, alt, lazy)}
+				</picture>`;
+	},
+
+	newImg: function (path, alt, lazy) {
+		const fullPath = this.fullPath(path);
+		const src = lazy ? `"${this.px1}" data-src="${fullPath}"` : `"${fullPath}"`;
+		return `<img src=${src} alt="${alt}">`;
+	}
+}
+
+
+
 function removeEmptyItems(className, itemsContainer) {
 	if (itemsContainer.querySelector(className)) {
 		itemsContainer.querySelectorAll(className).forEach(emptyItem => {
@@ -259,17 +294,15 @@ function generateProjects(mode) {
 
 	for (let i = startIndex; i < generationSize; i++) {
 
-		let img800 = "img/projects/" + projects[i].folder + "/800";
-		let title = projects[i].title;
+		const img800 = "projects/" + projects[i].folder + "/800";
+		const webp = img800 + ".webp", fallback = img800 + ".jpg", alt = projects[i].title;
+		
+		const webpPicElem = imageCreator.newWebpPic(webp, fallback, alt, "lazy");
 
 		let projectItem = `<div class="projects__item">
-								<picture>
-									<source type="image/webp" data-src="${img800}.webp">
-									<source type="image/jpeg" data-src="${img800}.jpg">
-									<img src="img/1x1.png" data-src="${img800}.jpg" alt="${title}">
-								</picture>
+								${webpPicElem}
 								<div class="projects__item-title">
-									<h5>${title}</h5>
+									<h5>${projects[i].title}</h5>
 								</div>
 							</div>`
 
@@ -313,17 +346,11 @@ function generateSkills(skills) {
 
 	skills.forEach((skill) => {
 
-		let imgElem;
+		const fallback = `skills/${skill.img}`, alt = skill.name;
 
-		if (skill.imgWEBP) {
-			imgElem = `<picture>
-						   <source type="image/webp" srcset="img/skills/${skill.imgWEBP}">
-						   <source type="image/png" srcset="img/skills/${skill.img}">
-						   <img src="img/skills/${skill.img}" alt="${skill.name}">
-					   </picture>`;
-		} else {
-			imgElem = `<img src="img/skills/${skill.img}" alt="${skill.name}">`;
-		}
+		const imgElem = skill.imgWEBP ?
+			imageCreator.newWebpPic(`skills/${skill.imgWEBP}`, fallback, alt) :
+			imageCreator.newImg(fallback, alt);
 
 		let currentSkill = `<div class="skills__item">
 								${imgElem}
@@ -347,16 +374,11 @@ function generateReviews(reviews) {
 
 	reviews.forEach((review) => {
 
-		let reviewAvatar;
-		if (review.avatar == "") {
-			reviewAvatar = `<img src="img/reviews/user-avatar.svg" alt="Avatar">`;
-		} else {
-			reviewAvatar = `<picture>
-								<source type="image/webp" srcset="img/reviews/avatar/${review.avatar}.webp">
-								<source type="image/jpeg" srcset="img/reviews/avatar/${review.avatar}.jpg">
-								<img src="img/reviews/avatar/${review.avatar}.jpg" alt="Avatar">
-							</picture>`;
-		}
+		const alt = `Avatar`;
+
+		const reviewAvatar = review.avatar == "" ?
+			imageCreator.newImg(`reviews/user-avatar.svg`, alt) :
+			imageCreator.newWebpPic(`reviews/avatar/${review.avatar}.webp`, `reviews/avatar/${review.avatar}.jpg`, alt);
 
 		gradeColor = "#2CB67D";
 		if (Number(review.grade) < 5) {gradeColor = "#fa1111"}
@@ -423,16 +445,11 @@ function generateContacts(contacts) {
 
 	contacts.forEach((contact) => {
 
-		let imgElem;
-		if (contact.imgWEBP) {
-			imgElem = `<picture>
-						   <source type="image/webp" srcset="img/contacts/${contact.imgWEBP}">
-						   <source type="image/png" srcset="img/contacts/${contact.img}">
-						   <img src="img/contacts/${contact.img}" alt="${contact.title}">
-					   </picture>`;
-		} else {
-			imgElem = `<img src="img/contacts/${contact.img}" alt="${contact.title}">`;
-		}
+		const fallback = `contacts/${contact.img}`, alt = contact.title;
+
+		const imgElem = contact.imgWEBP ?
+			imageCreator.newWebpPic(`contacts/${contact.imgWEBP}`, fallback, alt) :
+			imageCreator.newImg(fallback, alt);
 
 		let currentContact = `<a href="${contact.link}" target="_blank" title="${contact.title}" class="contacts__item">
 								  ${imgElem}
