@@ -21,7 +21,7 @@ function openCloseProjectPopup(eventTarget) {
 
 		if (!dqs(".open-project-popup") && eventTarget !== undefined) {
 
-			overflowScrollPadding("add");
+			setScrollWidthCssVar();
 
 
 			// Toggle scroll event for all ".swiper-slide" elements (Google Tag Manager)
@@ -163,8 +163,6 @@ function openCloseProjectPopup(eventTarget) {
 
 			lazyImages.forEach(image => lazyImagesObserver.observe(image));
 		} else {
-			overflowScrollPadding("remove");
-
 			let lazyImages = dqsa(".img-lazy-loading[data-src]");
 
 			setTimeout(() => {
@@ -185,20 +183,11 @@ function openCloseProjectPopup(eventTarget) {
 	}
 }
 
-function getScrollSize() {
-	let scrollWidth = window.innerWidth - doc.documentElement.clientWidth;
-	return scrollWidth;
-}
-function overflowScrollPadding(addRemove) {
-	if (addRemove == "remove") {
-		dqs("body").removeAttribute("style");
-		dqs(".header").removeAttribute("style");
-	} else if (addRemove == "add") {
-		let scrl = getScrollSize();
 
-		dqs("body").style.paddingRight = `${scrl}px`;
-		dqs(".header").style.paddingRight = `${scrl}px`;
-	}
+
+function setScrollWidthCssVar() {
+	const scrollWidth = window.innerWidth - doc.documentElement.clientWidth;
+	doc.documentElement.style.setProperty('--scroll-width', `${scrollWidth}px`);
 }
 
 

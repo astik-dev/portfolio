@@ -981,6 +981,8 @@ h5 {
 
 
 .open-project-popup {
+	padding-right: var(--scroll-width, 0);
+
 	overflow-y: hidden;
 
 	.project-popup {
@@ -988,8 +990,13 @@ h5 {
 		visibility: visible;
 
 		&__container {
+			margin-right: var(--scroll-width, 0);
+			
 			transform: scale(1);
 		}
+	}
+	.header {
+		padding-right: var(--scroll-width, 0);
 	}
 }
 

@@ -1041,6 +1041,7 @@ h5 {
 	}
 }
 .open-project-popup {
+	padding-right: var(--scroll-width, 0);
 	overflow-y: hidden;
 }
 .open-project-popup .project-popup {
@@ -1048,8 +1049,12 @@ h5 {
 	visibility: visible;
 }
 .open-project-popup .project-popup__container {
+	margin-right: var(--scroll-width, 0);
 	-webkit-transform: scale(1);
 	        transform: scale(1);
+}
+.open-project-popup .header {
+	padding-right: var(--scroll-width, 0);
 }
 
 .skills__container {
