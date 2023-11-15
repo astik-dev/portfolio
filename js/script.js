@@ -1,18 +1,15 @@
-let burgerMenuBtnStatus = "close";
 let openClosePermissionProjectPopup = true;
 
 
 
-function openCloseBurgerMenu () {
-	const headerContainer = dqs(".header__container");
-	if (burgerMenuBtnStatus == "close") {
-		burgerMenuBtnStatus = "open";
-		headerContainer.classList.add("header__container_open-burger");
-		gtmEvent({'event': 'open_burgerMenu'});
-	} else {
-		burgerMenuBtnStatus = "close";
-		headerContainer.classList.remove("header__container_open-burger");
-	}
+function toggleBurgerMenu() {
+	const
+		headerCont = dqs(".header__container"),
+		openCssClass = "header__container_open-burger";
+
+	if (!headerCont.classList.contains(openCssClass)) gtmEvent({'event': 'open_burgerMenu'});
+
+	headerCont.classList.toggle(openCssClass);
 }
 
 
@@ -474,7 +471,7 @@ function smoothScroll(elemSelector) {
     const stopY = dqs(elemSelector).offsetTop - dqs(".header").offsetHeight;
     const distance = stopY > startY ? stopY - startY : startY - stopY;
  	
-    if (window.innerWidth < 575.5) openCloseBurgerMenu();
+    if (window.innerWidth < 575.5) toggleBurgerMenu();
 
  	if (distance < 100) {
         scrollTo(0, stopY);
@@ -539,7 +536,7 @@ doc.addEventListener("click", e => {
 		  closeProjectPopup = e.target.closest(".project-popup__close");
 
 	if (burger)
-		openCloseBurgerMenu();
+		toggleBurgerMenu();
 
 	else if (projectItem || closeProjectPopup)
 		openCloseProjectPopup(projectItem || closeProjectPopup);
