@@ -509,12 +509,20 @@ const swiperProjectPopup = new Swiper('.project-popup__image-swiper', {
 
 
 
-const fetchJSON = url => fetch(url).then(response => response.json());
+const spreadsheets = {
+	id: "1K842-NO5cQoYdsCjDdWzTbxwYfTmaysR4V8oSBI0qMo",
+	
+	get link() {return `https://opensheet.elk.sh/${this.id}/`},
+		
+	fetchJSON: function(sheet) {
+		return fetch(this.link + sheet).then(response => response.json());
+	},
+}
 
-fetchJSON('projects.json').then(data => {projects = data; generateProjects("start")});
-fetchJSON('skills.json').then(data => generateSkills(data));
-fetchJSON('reviews.json').then(data => generateReviews(data));
-fetchJSON('contacts.json').then(data => generateContacts(data));
+spreadsheets.fetchJSON("projects").then(data => {projects = data; generateProjects("start")});
+spreadsheets.fetchJSON("skills").then(data => generateSkills(data));
+spreadsheets.fetchJSON("reviews").then(data => generateReviews(data));
+spreadsheets.fetchJSON("contacts").then(data => generateContacts(data));
 
 
 
