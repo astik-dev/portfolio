@@ -2,6 +2,45 @@ let openClosePermissionProjectPopup = true;
 
 
 
+const getFileExtension = filePath => filePath.split('.').pop();
+
+const imageCreator = {
+
+	imgBasePath: {
+		local: "img/",
+		external: "https://f003.backblazeb2.com/file/astik-portfolio/",
+	},
+
+	px1: `img/1x1.png`,
+
+	fullPath: function (source, path) {return this.imgBasePath[source] + path},
+
+	newWebpPic: function (source, webpPath, fallbackPath, alt, lazy) {
+		const types = {
+			jpg: "jpeg",
+		}
+
+		const src = lazy ? "data-src" : "srcset";
+		
+		const fallbackExt = getFileExtension(fallbackPath);
+		const fallbackType = types[fallbackExt] || fallbackExt;
+		
+		return `<picture>
+					<source type="image/webp" ${src}="${this.fullPath(source, webpPath)}">
+					<source type="image/${fallbackType}" ${src}="${this.fullPath(source, fallbackPath)}">
+					${this.newImg(source, fallbackPath, alt, lazy)}
+				</picture>`;
+	},
+
+	newImg: function (source, path, alt, lazy) {
+		const fullPath = this.fullPath(source, path);
+		const src = lazy ? `"${this.px1}" data-src="${fullPath}"` : `"${fullPath}"`;
+		return `<img src=${src} alt="${alt}">`;
+	}
+}
+
+
+
 function toggleBurgerMenu() {
 	const
 		headerCont = dqs(".header__container"),
@@ -108,7 +147,8 @@ function openCloseProjectPopup(eventTarget) {
 			function generateUrl(screenshots, folder1, folder2) {
 				let urls = [];
 				for (let i = 1; i <= screenshots; i++) {
-					urls.push(`img/projects/${folder1}/${folder2}/${i}.png`);
+					const url = imageCreator.fullPath("external", `projects/${folder1}/${folder2}/${i}.png`);
+					urls.push(url);
 				}
 				return urls;
 			}
@@ -117,19 +157,15 @@ function openCloseProjectPopup(eventTarget) {
 
 			// Generate screenshots slides
 			function generateSlides(screenshots) {
-				let slides;
+				let slides = ``;
 				for (let i = 1; i <= screenshots; i++) {
 					slide = `<div class="project-popup__image-slide swiper-slide">
 								<a href="${imgFullSize[i-1]}" target="_blank">
-									<img src="img/1x1.png" data-src="${imgFullSize[i-1]}" style="height: 1px; width: 1px;" alt="Project image" class="img-lazy-loading">
+									<img src="${imageCreator.px1}" data-src="${imgFullSize[i-1]}" style="height: 1px; width: 1px;" alt="Project image" class="img-lazy-loading">
 								</a>
 							</div>`;
 
-					if (slides) {
-						slides = slides + slide;
-					} else {
-						slides = slide;
-					}
+					slides += slide;
 				}
 				return slides;
 			}
@@ -169,7 +205,7 @@ function openCloseProjectPopup(eventTarget) {
 				lazyImages.forEach(image => {
 					image.style.width = "0px";
 					image.style.height = "0px";
-					image.src = "img/1x1.png";
+					image.src = imageCreator.px1;
 				});
 			}, 100);
 			
@@ -188,41 +224,6 @@ function openCloseProjectPopup(eventTarget) {
 function setScrollWidthCssVar() {
 	const scrollWidth = window.innerWidth - doc.documentElement.clientWidth;
 	doc.documentElement.style.setProperty('--scroll-width', `${scrollWidth}px`);
-}
-
-
-
-const getFileExtension = filePath => filePath.split('.').pop();
-
-const imageCreator = {
-
-	imgFolder: "img",
-	px1: `img/1x1.png`,
-
-	fullPath: function (path) {return this.imgFolder + "/" + path},
-
-	newWebpPic: function (webpPath, fallbackPath, alt, lazy) {
-		const types = {
-			jpg: "jpeg",
-		}
-
-		const src = lazy ? "data-src" : "srcset";
-		
-		const fallbackExt = getFileExtension(fallbackPath);
-		const fallbackType = types[fallbackExt] || fallbackExt;
-		
-		return `<picture>
-					<source type="image/webp" ${src}="${this.fullPath(webpPath)}">
-					<source type="image/${fallbackType}" ${src}="${this.fullPath(fallbackPath)}">
-					${this.newImg(fallbackPath, alt, lazy)}
-				</picture>`;
-	},
-
-	newImg: function (path, alt, lazy) {
-		const fullPath = this.fullPath(path);
-		const src = lazy ? `"${this.px1}" data-src="${fullPath}"` : `"${fullPath}"`;
-		return `<img src=${src} alt="${alt}">`;
-	}
 }
 
 
@@ -283,7 +284,7 @@ function generateProjects(mode) {
 		const img800 = "projects/" + projects[i].folder + "/800";
 		const webp = img800 + ".webp", fallback = img800 + ".jpg", alt = projects[i].title;
 		
-		const webpPicElem = imageCreator.newWebpPic(webp, fallback, alt, "lazy");
+		const webpPicElem = imageCreator.newWebpPic("external", webp, fallback, alt, "lazy");
 
 		let projectItem = `<div class="projects__item">
 								${webpPicElem}
@@ -335,8 +336,8 @@ function generateSkills(skills) {
 		const fallback = `skills/${skill.img}`, alt = skill.name;
 
 		const imgElem = skill.imgWEBP ?
-			imageCreator.newWebpPic(`skills/${skill.imgWEBP}`, fallback, alt) :
-			imageCreator.newImg(fallback, alt);
+			imageCreator.newWebpPic("external", `skills/${skill.imgWEBP}`, fallback, alt) :
+			imageCreator.newImg("external", fallback, alt);
 
 		let currentSkill = `<div class="skills__item">
 								${imgElem}
@@ -363,8 +364,8 @@ function generateReviews(reviews) {
 		const alt = `Avatar`;
 
 		const reviewAvatar = review.avatar == "" ?
-			imageCreator.newImg(`reviews/user-avatar.svg`, alt) :
-			imageCreator.newWebpPic(`reviews/avatar/${review.avatar}.webp`, `reviews/avatar/${review.avatar}.jpg`, alt);
+			imageCreator.newImg("local", `reviews/user-avatar.svg`, alt) :
+			imageCreator.newWebpPic("external", `reviews/${review.avatar}.webp`, `reviews/${review.avatar}.jpg`, alt);
 
 		gradeColor = "#2CB67D";
 		if (Number(review.grade) < 5) {gradeColor = "#fa1111"}
@@ -434,8 +435,8 @@ function generateContacts(contacts) {
 		const fallback = `contacts/${contact.img}`, alt = contact.title;
 
 		const imgElem = contact.imgWEBP ?
-			imageCreator.newWebpPic(`contacts/${contact.imgWEBP}`, fallback, alt) :
-			imageCreator.newImg(fallback, alt);
+			imageCreator.newWebpPic("external", `contacts/${contact.imgWEBP}`, fallback, alt) :
+			imageCreator.newImg("external", fallback, alt);
 
 		let currentContact = `<a href="${contact.link}" target="_blank" title="${contact.title}" class="contacts__item">
 								  ${imgElem}
