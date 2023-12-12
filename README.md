@@ -6,6 +6,7 @@ Link: https://astik.dev/
 
 ### Functional:
 1. Loading data from Google Spreadsheets (JSON).
+1. Loading content images from Backblaze storage.
 1. SwiperJS sliders.
 1. Lazy loading images to speed up page loading.
 1. Hovering the mouse over interactive elements adds animated effects.
