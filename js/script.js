@@ -288,12 +288,12 @@ function generateProjects(mode) {
 		
 		const webpPicElem = imageCreator.newWebpPic("external", webp, fallback, alt, "lazy");
 
-		let projectItem = `<div class="projects__item">
+		let projectItem = `<article class="projects__item">
 								${webpPicElem}
 								<div class="projects__item-title">
 									<h5>${projects[i].title}</h5>
 								</div>
-							</div>`
+							</article>`
 
 		projectsItems.insertAdjacentHTML("beforeend", projectItem);
 
