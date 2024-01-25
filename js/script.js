@@ -341,10 +341,10 @@ function generateSkills(skills) {
 			imageCreator.newWebpPic("external", `skills/${skill.imgWEBP}`, fallback, alt) :
 			imageCreator.newImg("external", fallback, alt);
 
-		let currentSkill = `<div class="skills__item">
+		let currentSkill = `<article class="skills__item">
 								${imgElem}
 								<h4>${skill.name}</h4>
-							</div>`;
+							</article>`;
 
 		skillsItems.insertAdjacentHTML("beforeend", currentSkill);
 	});
