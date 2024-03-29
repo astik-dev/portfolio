@@ -949,10 +949,28 @@ h5 {
 			}
 		}
 		&__image {
-			padding: 0 30px;
+			padding: 0;
 		}
 		&__image-swiper {
-			height: 170px;
+			height: 200px;
+		}
+		&__image-swiper-nav {
+			z-index: 2;
+
+			background: #293548;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+
+			&_left {
+				left: 3px;
+			}
+			&_right {
+				right: 3px;
+			}
+
+			&:disabled {
+				opacity: 0;
+				visibility: hidden;
+			}
 		}
 		&__btns {
 			padding: 15px 20px 0 20px;

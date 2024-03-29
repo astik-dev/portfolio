@@ -1011,10 +1011,26 @@ h5 {
 		padding: 0 20px;
 	}
 	.project-popup__image {
-		padding: 0 30px;
+		padding: 0;
 	}
 	.project-popup__image-swiper {
-		height: 170px;
+		height: 200px;
+	}
+	.project-popup__image-swiper-nav {
+		z-index: 2;
+		background: #293548;
+		-webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+		        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+	}
+	.project-popup__image-swiper-nav_left {
+		left: 3px;
+	}
+	.project-popup__image-swiper-nav_right {
+		right: 3px;
+	}
+	.project-popup__image-swiper-nav:disabled {
+		opacity: 0;
+		visibility: hidden;
 	}
 	.project-popup__btns {
 		padding: 15px 20px 0 20px;
