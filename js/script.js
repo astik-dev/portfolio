@@ -175,11 +175,21 @@ function openCloseProjectPopup(eventTarget) {
 			swiperProjectPopup.slideTo(0, 1, false);
 			toggleScrollEvent("add");
 
+			function showScrollAnimation(image) {
+				if (image.scrollHeight > dqs(".project-popup__image").clientHeight) {
+					setTimeout(() => {
+						dqs(".project-popup__image-scroll").classList.add("project-popup__image-scroll_animation");
+					}, 600);
+				}
+			}
+
 			setTimeout(() => {
 				// Load first two (if available) images
-				dqsa(".project-popup__image-slide:nth-child(-n+2) img").forEach(slideImg => {
+				dqsa(".project-popup__image-slide:nth-child(-n+2) img").forEach((slideImg, index) => {
 					slideImg.src = slideImg.dataset.src;
 					slideImg.removeAttribute("style");
+					if (index == 0)
+						slideImg.addEventListener("load", () => showScrollAnimation(slideImg));
 				});
 			}, 300);
 		}

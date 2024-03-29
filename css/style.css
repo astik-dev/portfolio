@@ -886,6 +886,54 @@ h5 {
 	cursor: auto;
 	opacity: 0.3;
 }
+.project-popup__image-scroll {
+	position: absolute;
+	z-index: 3;
+	left: 50%;
+	width: 70px;
+	opacity: 0;
+	-webkit-transform: translate(-50%, -50%);
+	        transform: translate(-50%, -50%);
+	-webkit-filter: drop-shadow(0 0 5px #000);
+	        filter: drop-shadow(0 0 5px #000);
+	pointer-events: none;
+}
+@-webkit-keyframes image-scroll {
+	0% {
+		top: calc(100% - 35px);
+		opacity: 0;
+	}
+	20% {
+		opacity: 1;
+	}
+	80% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+		top: 35px;
+	}
+}
+@keyframes image-scroll {
+	0% {
+		top: calc(100% - 35px);
+		opacity: 0;
+	}
+	20% {
+		opacity: 1;
+	}
+	80% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+		top: 35px;
+	}
+}
+.project-popup__image-scroll_animation {
+	-webkit-animation: image-scroll 1.8s ease-in-out;
+	        animation: image-scroll 1.8s ease-in-out;
+}
 .project-popup__btns {
 	padding: 20px 20px 0 20px;
 	display: -webkit-box;

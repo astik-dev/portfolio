@@ -843,6 +843,42 @@ h5 {
 			opacity: 0.3;
 		}
 	}
+	&__image-scroll {
+		$icon-width: 70px;
+
+		position: absolute;
+		z-index: 3;
+		left: 50%;
+
+		width: $icon-width;
+
+		opacity: 0;
+		transform: translate(-50%, -50%);
+		filter: drop-shadow(0 0 5px #000);
+
+		pointer-events: none;
+
+		@keyframes image-scroll {
+			0% {
+				top: calc(100% - ($icon-width / 2));
+				opacity: 0;
+			}
+			20% {
+				opacity: 1;
+			}
+			80% {
+				opacity: 1;
+			}
+			100% {
+				opacity: 0;
+				top: calc($icon-width / 2);
+			}
+		}
+
+		&_animation {
+			animation: image-scroll 1.8s ease-in-out;
+		}
+	}
 
 	&__btns {
 		padding: 20px 20px 0 20px;
