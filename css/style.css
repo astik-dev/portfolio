@@ -244,20 +244,21 @@ h5 {
 	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex;
-	-webkit-box-orient: horizontal;
+	-webkit-box-orient: vertical;
 	-webkit-box-direction: normal;
-	    -ms-flex-direction: row;
-	        flex-direction: row;
+	    -ms-flex-direction: column;
+	        flex-direction: column;
 	gap: 0px;
 	-webkit-box-align: center;
 	    -ms-flex-align: center;
 	        align-items: center;
-	-webkit-box-pack: center;
-	    -ms-flex-pack: center;
-	        justify-content: center;
+	-webkit-box-pack: justify;
+	    -ms-flex-pack: justify;
+	        justify-content: space-between;
 	display: none;
 	width: 60px;
 	height: 60px;
+	padding: 20px 15px;
 	border-radius: 50%;
 	background: rgba(0, 0, 0, 0.2);
 	-webkit-backdrop-filter: blur(5px);
@@ -267,14 +268,14 @@ h5 {
 	-webkit-transition: all 0.2s ease-out;
 	transition: all 0.2s ease-out;
 }
-.header__burger svg:nth-child(1) {
+.header__burger span {
+	display: inline-block;
 	width: 30px;
-	height: 20px;
-}
-.header__burger svg:nth-child(2) {
-	display: none;
-	width: 20px;
-	height: 20px;
+	height: 3px;
+	background: #fff;
+	border-radius: 5px;
+	-webkit-transition: all 0.4s ease-out;
+	transition: all 0.4s ease-out;
 }
 
 @media (hover: hover) {
@@ -348,11 +349,18 @@ h5 {
 		-webkit-box-shadow: none;
 		        box-shadow: none;
 	}
-	.header__container_open-burger .header__burger svg:nth-child(1) {
-		display: none;
+	.header__container_open-burger .header__burger span:nth-child(1) {
+		-webkit-transform: translate(0, 8.5px) rotate(45deg) scaleY(1.2);
+		        transform: translate(0, 8.5px) rotate(45deg) scaleY(1.2);
 	}
-	.header__container_open-burger .header__burger svg:nth-child(2) {
-		display: inline-block;
+	.header__container_open-burger .header__burger span:nth-child(2) {
+		opacity: 0;
+		-webkit-transform: scaleX(0);
+		        transform: scaleX(0);
+	}
+	.header__container_open-burger .header__burger span:nth-child(3) {
+		-webkit-transform: translate(0, -8.5px) rotate(-45deg) scaleY(1.2);
+		        transform: translate(0, -8.5px) rotate(-45deg) scaleY(1.2);
 	}
 	.header__burger {
 		display: -webkit-box;

@@ -120,10 +120,12 @@ h5 {
 	&__burger {
 		position: relative;
 
-		@include flex(flex, row, 0px, center, center);
+		@include flex(flex, column, 0px, center, space-between);
 		display: none;
 		width: 60px;
 		height: 60px;
+
+		padding: 20px 15px;
 
 		border-radius: 50%;
 		background: rgba(#000, 0.2);
@@ -132,15 +134,16 @@ h5 {
 
 		transition: all 0.2s ease-out;
 
-		svg:nth-child(1) {
+		span {
+			display: inline-block;
+			
 			width: 30px;
-			height: 20px;
-		}
-		svg:nth-child(2) {
-			display: none;
+			height: 3px;
 
-			width: 20px;
-			height: 20px;
+			background: #fff;
+			border-radius: 5px;
+
+			transition: all 0.4s ease-out;
 		}
 	}
 }
@@ -223,11 +226,18 @@ h5 {
 					background: transparent;
 					box-shadow: none;
 
-					svg:nth-child(1) {
-						display: none;
-					}
-					svg:nth-child(2) {
-						display: inline-block;
+					span {
+						
+						&:nth-child(1) {
+							transform: translate(0, 8.5px) rotate(45deg) scaleY(1.2);
+						}
+						&:nth-child(2) {
+							opacity: 0;
+							transform: scaleX(0);
+						}
+						&:nth-child(3) {
+							transform: translate(0, -8.5px) rotate(-45deg) scaleY(1.2);
+						}
 					}
 				}
 			}
