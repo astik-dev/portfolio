@@ -120,27 +120,15 @@ function openCloseProjectPopup(eventTarget) {
 
 
 			// Set buttons
-			const projectPopupBtnR = dqs(".project-popup__btn:nth-child(1)");
-			const projectPopupBtnD = dqs(".project-popup__btn:nth-child(2)");
-
-			if (pRepository != "") {
-				projectPopupBtnR.href = pRepository;
-				projectPopupBtnR.classList.remove("project-popup__btn_disabled");
-			} else {
-				disableBtn(projectPopupBtnR);
-			}
-
-			if (pDemo != "") {
-				projectPopupBtnD.href = pDemo;
-				projectPopupBtnD.classList.remove("project-popup__btn_disabled");
-			} else {
-				disableBtn(projectPopupBtnD);
-			}
-
-			function disableBtn(btn) {
-				btn.removeAttribute("href");
-				btn.classList.add("project-popup__btn_disabled");
-			}
+			[pRepository, pDemo].forEach((link, index) => {
+				const btn = dqs(`.project-popup__btn:nth-child(${index + 1})`);
+				const isLinkEmpty = link == "";
+				
+				btn.classList.toggle("project-popup__btn_disabled", isLinkEmpty);
+				
+				if (isLinkEmpty) btn.removeAttribute("href");
+				else btn.href = link;
+			});
 
 			dqs(".project-popup__btns").classList.toggle(
 				"project-popup__btns_disabled",
