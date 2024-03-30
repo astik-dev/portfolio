@@ -205,10 +205,6 @@ h5 {
 	position: fixed;
 	z-index: 100;
 	width: 100%;
-	background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.5)), color-stop(100%, rgba(0, 0, 0, 0)), to(rgba(0, 0, 0, 0)));
-	background: linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0) 100%, rgba(0, 0, 0, 0) 100%);
-	-webkit-backdrop-filter: blur(5px);
-	        backdrop-filter: blur(5px);
 }
 .header__container {
 	position: relative;
@@ -260,9 +256,16 @@ h5 {
 	    -ms-flex-pack: center;
 	        justify-content: center;
 	display: none;
-	width: 30px;
-	height: 30px;
-	background: transparent;
+	width: 60px;
+	height: 60px;
+	border-radius: 50%;
+	background: rgba(0, 0, 0, 0.2);
+	-webkit-backdrop-filter: blur(5px);
+	        backdrop-filter: blur(5px);
+	-webkit-box-shadow: 0 0 3px 3px rgba(0, 0, 0, 0.1);
+	        box-shadow: 0 0 3px 3px rgba(0, 0, 0, 0.1);
+	-webkit-transition: all 0.2s ease-out;
+	transition: all 0.2s ease-out;
 }
 .header__burger svg:nth-child(1) {
 	width: 30px;
@@ -277,6 +280,14 @@ h5 {
 @media (hover: hover) {
 	.header__menu ul li a:hover {
 		background: #2C66C3;
+	}
+}
+@media (min-width: 575.6px) {
+	.header {
+		background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.5)), color-stop(100%, rgba(0, 0, 0, 0)), to(rgba(0, 0, 0, 0)));
+		background: linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0) 100%, rgba(0, 0, 0, 0) 100%);
+		-webkit-backdrop-filter: blur(5px);
+		        backdrop-filter: blur(5px);
 	}
 }
 @media (max-width: 575.5px) {
@@ -323,7 +334,7 @@ h5 {
 		-webkit-box-pack: end;
 		    -ms-flex-pack: end;
 		        justify-content: flex-end;
-		padding: 20px;
+		padding: 5px;
 	}
 	.header__container_open-burger .header__menu {
 		top: 0;
@@ -331,6 +342,11 @@ h5 {
 		border-radius: 0;
 		visibility: visible;
 		opacity: 1;
+	}
+	.header__container_open-burger .header__burger {
+		background: transparent;
+		-webkit-box-shadow: none;
+		        box-shadow: none;
 	}
 	.header__container_open-burger .header__burger svg:nth-child(1) {
 		display: none;

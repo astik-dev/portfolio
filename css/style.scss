@@ -86,10 +86,7 @@ h5 {
 	position: fixed;
 	z-index: 100;
 
-	width: 100%;
-
-	background: linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0) 100%, rgba(0, 0, 0, 0) 100%);
-	backdrop-filter: blur(5px);	
+	width: 100%;	
 
 	&__container {
 		position: relative;
@@ -125,10 +122,15 @@ h5 {
 
 		@include flex(flex, row, 0px, center, center);
 		display: none;
-		width: 30px;
-		height: 30px;
+		width: 60px;
+		height: 60px;
 
-		background: transparent;
+		border-radius: 50%;
+		background: rgba(#000, 0.2);
+		backdrop-filter: blur(5px);
+		box-shadow: 0 0 3px 3px rgba(#000, 0.1);
+
+		transition: all 0.2s ease-out;
 
 		svg:nth-child(1) {
 			width: 30px;
@@ -156,6 +158,12 @@ h5 {
 		}
 	}
 }
+@media (min-width: 575.6px) {
+	.header {
+		background: linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0) 100%, rgba(0, 0, 0, 0) 100%);
+		backdrop-filter: blur(5px);
+	}
+}
 @media (max-width: 575.5px) {
 	.header {
 		&__menu {
@@ -163,7 +171,6 @@ h5 {
 			top: -500px;
 			left: 105vw;
 
-			//display: none;
 			width: 100%;
 			padding: 80px 0;
 
@@ -198,7 +205,7 @@ h5 {
 
 		&__container {
 			@include flex(flex, row, 0px, center, flex-end);
-			padding: 20px;
+			padding: 5px;
 
 			&_open-burger {
 
@@ -213,6 +220,9 @@ h5 {
 				}
 
 				.header__burger {
+					background: transparent;
+					box-shadow: none;
+
 					svg:nth-child(1) {
 						display: none;
 					}
