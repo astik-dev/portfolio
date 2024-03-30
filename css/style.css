@@ -953,6 +953,9 @@ h5 {
 	-ms-flex-wrap: wrap;
 	    flex-wrap: wrap;
 }
+.project-popup__btns_disabled {
+	display: none;
+}
 .project-popup__btn {
 	display: -webkit-box;
 	display: -ms-flexbox;

@@ -142,6 +142,11 @@ function openCloseProjectPopup(eventTarget) {
 				btn.classList.add("project-popup__btn_disabled");
 			}
 
+			dqs(".project-popup__btns").classList.toggle(
+				"project-popup__btns_disabled",
+				pRepository == "" && pDemo == ""
+			);
+
 
 			// Creating links to all screenshots
 			function generateUrl(screenshots, folder1, folder2) {
