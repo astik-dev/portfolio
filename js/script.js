@@ -8,7 +8,7 @@ const imageCreator = {
 
 	imgBasePath: {
 		local: "img/",
-		external: "https://f003.backblazeb2.com/file/astik-portfolio/",
+		external: "https://raw.githubusercontent.com/astik-dev/portfolio/content/images/",
 	},
 
 	px1: `img/1x1.png`,
