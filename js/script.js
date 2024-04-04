@@ -136,28 +136,22 @@ function openCloseProjectPopup(eventTarget) {
 			);
 
 
-			// Creating links to all screenshots
-			function generateUrl(screenshots, folder1, folder2) {
-				let urls = [];
-				for (let i = 1; i <= screenshots; i++) {
-					const url = imageCreator.fullPath("external", `projects/${folder1}/${folder2}/${i}.png`);
-					urls.push(url);
-				}
-				return urls;
-			}
-			let imgFullSize = generateUrl(pScreenshots, pFolder, "full-size");
-
-
 			// Generate screenshots slides
 			function generateSlides(screenshots) {
 				let slides = ``;
 				for (let i = 1; i <= screenshots; i++) {
-					slide = `<div class="project-popup__image-slide swiper-slide">
-								<a href="${imgFullSize[i-1]}" target="_blank">
-									<img src="${imageCreator.px1}" data-src="${imgFullSize[i-1]}" style="height: 1px; width: 1px;" alt="Project image" class="img-lazy-loading">
-								</a>
-							</div>`;
-
+					const slideImgPath = `projects/${pFolder}/full-size/${i}`;
+					const slide = `<div class="project-popup__image-slide swiper-slide">
+										<a href="${imageCreator.fullPath("external", slideImgPath)}.jpeg" target="_blank">
+											${imageCreator.newWebpPic(
+												"external",
+												slideImgPath+".webp",
+												slideImgPath+".jpeg",
+												`Project image ${i}`,
+												"lazy"
+											)}
+										</a>
+									</div>`;
 					slides += slide;
 				}
 				return slides;
@@ -178,11 +172,18 @@ function openCloseProjectPopup(eventTarget) {
 
 			setTimeout(() => {
 				// Load first two (if available) images
-				dqsa(".project-popup__image-slide:nth-child(-n+2) img").forEach((slideImg, index) => {
-					slideImg.src = slideImg.dataset.src;
-					slideImg.removeAttribute("style");
+				dqsa(".project-popup__image-slide:nth-child(-n+2) picture").forEach((slidePic, index) => {
+					
+					const picSourceWEBP = slidePic.querySelector("source:nth-child(1)");
+					const picSourceJPEG = slidePic.querySelector("source:nth-child(2)");
+					const picImg = slidePic.querySelector("img");
+
+					picSourceWEBP.srcset = picSourceWEBP.dataset.src;
+					picSourceJPEG.srcset = picSourceJPEG.dataset.src;
+					picImg.src = picImg.dataset.src;
+
 					if (index == 0)
-						slideImg.addEventListener("load", () => showScrollAnimation(slideImg));
+						picImg.addEventListener("load", () => showScrollAnimation(picImg));
 				});
 			}, 300);
 		}
@@ -215,10 +216,18 @@ const swiperProjectPopup = new Swiper('.project-popup__image-swiper', {
 			gtmEvent({'event': 'project_slideChange'});
 
 			// Loading next-next image
-			const nextNextImg = dqs(".project-popup__image-slide.swiper-slide-next + .project-popup__image-slide img");
-			if (nextNextImg && nextNextImg.src != imageCreator.px1) {
-				nextNextImg.src = nextNextImg.dataset.src;
-				nextNextImg.removeAttribute("style");
+			const nextNextPic = dqs(".project-popup__image-slide.swiper-slide-next + .project-popup__image-slide picture");
+			if (nextNextPic) {
+				setTimeout(() => {
+					const picSourceWEBP = nextNextPic.querySelector("source:nth-child(1)");
+					const picSourceJPEG = nextNextPic.querySelector("source:nth-child(2)");
+					const picImg = nextNextPic.querySelector("img");
+					if (picImg.src != imageCreator.px1) {
+						picSourceWEBP.srcset = picSourceWEBP.dataset.src;
+						picSourceJPEG.srcset = picSourceJPEG.dataset.src;
+						picImg.src = picImg.dataset.src;
+					}
+				}, 300); // 300 - Default duration of transition between slides (in ms)
 			}
 		},
 	},
@@ -287,7 +296,7 @@ function generateProjects(mode) {
 	for (let i = startIndex; i < generationSize; i++) {
 
 		const img800 = "projects/" + projects[i].folder + "/800";
-		const webp = img800 + ".webp", fallback = img800 + ".jpg", alt = projects[i].title;
+		const webp = img800 + ".webp", fallback = img800 + ".jpeg", alt = projects[i].title;
 		
 		const webpPicElem = imageCreator.newWebpPic("external", webp, fallback, alt, "lazy");
 
@@ -370,7 +379,7 @@ function generateReviews(reviews) {
 
 		const reviewAvatar = review.avatar == "" ?
 			imageCreator.newImg("local", `reviews/user-avatar.svg`, alt) :
-			imageCreator.newWebpPic("external", `reviews/${review.avatar}.webp`, `reviews/${review.avatar}.jpg`, alt);
+			imageCreator.newWebpPic("external", `reviews/${review.avatar}.webp`, `reviews/${review.avatar}.jpeg`, alt);
 
 		gradeColor = "#2CB67D";
 		if (Number(review.grade) < 5) {gradeColor = "#fa1111"}
