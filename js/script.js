@@ -52,6 +52,15 @@ function toggleBurgerMenu() {
 }
 
 
+function loadPictureSources (picture) {
+	picture.querySelectorAll("source").forEach(source => {
+		source.srcset = source.dataset.src;
+	});
+	const pictureImg = picture.querySelector("img");
+	pictureImg.src = pictureImg.dataset.src;
+}
+
+
 function openCloseProjectPopup(eventTarget) {
 	if (eventTarget && eventTarget.classList.contains("projects__item_empty")) return;
 
@@ -173,17 +182,11 @@ function openCloseProjectPopup(eventTarget) {
 			setTimeout(() => {
 				// Load first two (if available) images
 				dqsa(".project-popup__image-slide:nth-child(-n+2) picture").forEach((slidePic, index) => {
-					
-					const picSourceWEBP = slidePic.querySelector("source:nth-child(1)");
-					const picSourceJPEG = slidePic.querySelector("source:nth-child(2)");
-					const picImg = slidePic.querySelector("img");
-
-					picSourceWEBP.srcset = picSourceWEBP.dataset.src;
-					picSourceJPEG.srcset = picSourceJPEG.dataset.src;
-					picImg.src = picImg.dataset.src;
-
-					if (index == 0)
+					loadPictureSources(slidePic);
+					if (index == 0) {
+						const picImg = slidePic.querySelector("img");
 						picImg.addEventListener("load", () => showScrollAnimation(picImg));
+					}
 				});
 			}, 300);
 		}
@@ -219,14 +222,8 @@ const swiperProjectPopup = new Swiper('.project-popup__image-swiper', {
 			const nextNextPic = dqs(".project-popup__image-slide.swiper-slide-next + .project-popup__image-slide picture");
 			if (nextNextPic) {
 				setTimeout(() => {
-					const picSourceWEBP = nextNextPic.querySelector("source:nth-child(1)");
-					const picSourceJPEG = nextNextPic.querySelector("source:nth-child(2)");
 					const picImg = nextNextPic.querySelector("img");
-					if (picImg.src != imageCreator.px1) {
-						picSourceWEBP.srcset = picSourceWEBP.dataset.src;
-						picSourceJPEG.srcset = picSourceJPEG.dataset.src;
-						picImg.src = picImg.dataset.src;
-					}
+					if (picImg.src != imageCreator.px1) loadPictureSources(nextNextPic);
 				}, 300); // 300 - Default duration of transition between slides (in ms)
 			}
 		},
@@ -315,18 +312,9 @@ function generateProjects(mode) {
 		let newLazyImg = projectsItems.querySelector(".projects__item:last-child picture");
 
 		const newObserver = new IntersectionObserver(
-			(entries, observer) => {
+			(entries) => {
 				entries.forEach((entry) => {
-					if (entry.isIntersecting) {
-
-						let sourceWEBP = entry.target.querySelector("source:nth-child(1)");
-						let sourceJPEG = entry.target.querySelector("source:nth-child(2)");
-						let img = entry.target.querySelector("img");
-
-						sourceWEBP.srcset = sourceWEBP.dataset.src;
-						sourceJPEG.srcset = sourceJPEG.dataset.src;
-						img.src = img.dataset.src;
-					}
+					if (entry.isIntersecting) loadPictureSources(entry.target);
 				});
 			},
 			{
