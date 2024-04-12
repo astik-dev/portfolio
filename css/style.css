@@ -804,7 +804,7 @@ h5 {
 	        justify-content: center;
 	width: 100%;
 	height: 100%;
-	padding: 0 20px;
+	padding: 20px;
 	background: rgba(0, 0, 0, 0.5);
 	-webkit-transition: all 0.3s ease;
 	transition: all 0.3s ease;
@@ -813,6 +813,13 @@ h5 {
 }
 .project-popup__container {
 	position: relative;
+	display: -ms-grid;
+	display: grid;
+	-ms-grid-columns: 100%;
+	grid-template-columns: 100%;
+	-ms-grid-rows: auto auto 1fr auto;
+	grid-template-rows: auto auto 1fr auto;
+	max-height: 100%;
 	width: 100%;
 	max-width: 800px;
 	padding: 20px 50px;
@@ -823,16 +830,29 @@ h5 {
 	-webkit-transition: all 0.3s ease;
 	transition: all 0.3s ease;
 }
+.project-popup__container > *:nth-child(1) {
+	-ms-grid-row: 1;
+	-ms-grid-column: 1;
+}
+.project-popup__container > *:nth-child(2) {
+	-ms-grid-row: 2;
+	-ms-grid-column: 1;
+}
+.project-popup__container > *:nth-child(3) {
+	-ms-grid-row: 3;
+	-ms-grid-column: 1;
+}
+.project-popup__container > *:nth-child(4) {
+	-ms-grid-row: 4;
+	-ms-grid-column: 1;
+}
 .project-popup__container h3 {
 	margin: 10px 0 5px 0;
 	text-align: center;
 }
 .project-popup__container p {
-	height: 95px;
-	-webkit-line-clamp: 5;
-	display: -webkit-box;
-	-webkit-box-orient: vertical;
-	overflow: hidden;
+	height: 100%;
+	overflow-y: auto;
 }
 .project-popup__image {
 	position: relative;

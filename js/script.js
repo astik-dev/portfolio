@@ -127,6 +127,8 @@ function openCloseProjectPopup(eventTarget) {
 			projectPopupTitle.textContent = pTitle;
 			projectPopupText.textContent = pDescription;
 
+			projectPopupText.scrollTop = 0;
+
 
 			// Set buttons
 			[pRepository, pDemo].forEach((link, index) => {
