@@ -1,0 +1,40 @@
+@use "../abstracts/mixins" as *;
+
+
+body {
+	color: #FFF;
+	font-family: 'Roboto', sans-serif;
+	@include font(16px, 19px);
+}
+
+h1 {
+	@include font(80px, 94px);
+	font-style: italic;
+	font-weight: 500;
+}
+
+h2 {
+	@include font(40px, 47px);
+}
+
+h3 {
+	@include font(32px, 38px);
+}
+
+h4 {
+	@include font(20px, 23px);
+	font-weight: 500;
+}
+
+h5 {
+	@include font(20px, 23px);
+}
+
+@media (max-width: 575.5px) {
+	h1 {
+		@include font(55px, 64px);
+	}
+	h3 {
+		@include font(20px, 23px);
+	}
+}
