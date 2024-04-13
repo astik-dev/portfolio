@@ -29,6 +29,7 @@
     "gulp-version-number": "latest",
     "gulp-zip": "latest",
     "sass": "latest",
+    "vinyl-named": "^1.1.0",
     "webpack": "latest",
     "webpack-stream": "latest"
   }

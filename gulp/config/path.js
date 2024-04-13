@@ -15,7 +15,7 @@ export const path = {
 		CNAME: `${buildFolder}/`,
 	},
 	src: {
-		js: `${srcFolder}/js/script.js`,
+		js: `${srcFolder}/js/*.js`,
 		jsVendors: `${srcFolder}/js/vendors/**/*.js`,
 		images: `${srcFolder}/img/**/*.*`,
 		css: `${srcFolder}/css/**/*.css`,
