@@ -88,34 +88,8 @@ h6 {
   font-weight: 400;
 }
 
-.footer {
-  text-align: center;
-}
-
-.footer__container {
-  max-width: 790px;
-  width: 100%;
-  margin: 0 auto;
-  padding: 35px 20px 0 20px;
-  padding-bottom: 60px;
-}
-
-.footer p {
-  font-weight: 300;
-  opacity: 0.5;
-}
-
-.footer a {
-  display: inline-block;
-  margin-top: 10px;
-  font-size: 14px;
-  line-height: 16px;
-  color: #fff;
-  font-weight: 300;
-  text-decoration: underline;
-  opacity: 0.5;
-  -webkit-transition: all 0.3s ease;
-  transition: all 0.3s ease;
+body {
+  background: #111827;
 }
 
 body {
@@ -123,7 +97,6 @@ body {
   font-family: "Roboto", sans-serif;
   font-size: 16px;
   line-height: 19px;
-  background: #111827;
 }
 
 h1 {
@@ -152,6 +125,36 @@ h4 {
 h5 {
   font-size: 20px;
   line-height: 23px;
+}
+
+.footer {
+  text-align: center;
+}
+
+.footer__container {
+  max-width: 790px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 35px 20px 0 20px;
+  padding-bottom: 60px;
+}
+
+.footer p {
+  font-weight: 300;
+  opacity: 0.5;
+}
+
+.footer a {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 14px;
+  line-height: 16px;
+  color: #fff;
+  font-weight: 300;
+  text-decoration: underline;
+  opacity: 0.5;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .header {
@@ -1341,10 +1344,6 @@ h5 {
 }
 
 @media (max-width: 575.5px) {
-  .footer__container {
-    padding-top: 25px;
-  }
-
   h1 {
     font-size: 55px;
     line-height: 64px;
@@ -1353,6 +1352,10 @@ h5 {
   h3 {
     font-size: 20px;
     line-height: 23px;
+  }
+
+  .footer__container {
+    padding-top: 25px;
   }
 
   .header__menu {
