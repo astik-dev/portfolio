@@ -20,7 +20,7 @@ export const path = {
 		images: `${srcFolder}/img/**/*.*`,
 		css: `${srcFolder}/css/**/*.css`,
 		scss: `${srcFolder}/scss/style.scss`,
-		html: `${srcFolder}/html/*.html`,
+		html: `${srcFolder}/pages/**/*.html`,
 		CNAME: `${srcFolder}/CNAME`,
 	},
 	watch: {
@@ -28,7 +28,7 @@ export const path = {
 		jsVendors: `${srcFolder}/js/vendors/**/*.js`,
 		css: `${srcFolder}/css/**/*.css`,
 		scss: `${srcFolder}/scss/**/*.scss`,
-		html: `${srcFolder}/html/**/*.html`,
+		html: `${srcFolder}/pages/**/*.html`,
 		images: `${srcFolder}/img/**/*.*`,
 	},
 	buildFolder: buildFolder,
