@@ -27,8 +27,14 @@ export const path = {
 		js: `${srcFolder}/js/**/*.js`,
 		jsVendors: `${srcFolder}/js/vendors/**/*.js`,
 		css: `${srcFolder}/css/**/*.css`,
-		scss: `${srcFolder}/scss/**/*.scss`,
-		html: `${srcFolder}/pages/**/*.html`,
+		scss: [
+			`${srcFolder}/scss/**/*.scss`,
+			`${srcFolder}/components/**/*.scss`,
+		],
+		html: [
+			`${srcFolder}/pages/**/*.html`,
+			`${srcFolder}/components/**/*.html`,
+		],
 		images: `${srcFolder}/img/**/*.*`,
 	},
 	buildFolder: buildFolder,

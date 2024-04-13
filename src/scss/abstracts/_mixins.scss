@@ -1,0 +1,28 @@
+@mixin font ($fs, $lh) {
+	font-size: $fs;
+	line-height: $lh;
+}
+
+@mixin flex ($f, $fd, $g, $ai, $jc) {
+	display: $f;
+	flex-direction: $fd;
+	gap: $g;
+	align-items: $ai;
+	justify-content: $jc;
+}
+
+@mixin grid ($g, $gtc, $gap, $ai, $jc) {
+	display: $g;
+	grid-template-columns: $gtc;
+	gap: $gap;
+	align-items: $ai;
+	justify-content: $jc;
+}
+
+@mixin container ($mw, $p) {
+	        // $mw + (padding left, right)
+	max-width: $mw + 40px;
+	width: 100%;
+	margin: 0 auto;
+	padding: $p 20px 0 20px;
+}

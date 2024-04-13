@@ -1,43 +1,9 @@
-// Reset CSS
-@import "reset.scss";
+@use "base/reset";
 
+@use "abstracts/variables" as *;
+@use "abstracts/mixins" as *;
 
-
-$anim: all 0.3s ease;
-
-$section-gap: 100px;
-$section-gap-min: 70px;
-
-
-
-@mixin font ($fs, $lh) {
-	font-size: $fs;
-	line-height: $lh;
-}
-
-@mixin flex ($f, $fd, $g, $ai, $jc) {
-	display: $f;
-	flex-direction: $fd;
-	gap: $g;
-	align-items: $ai;
-	justify-content: $jc;
-}
-
-@mixin grid ($g, $gtc, $gap, $ai, $jc) {
-	display: $g;
-	grid-template-columns: $gtc;
-	gap: $gap;
-	align-items: $ai;
-	justify-content: $jc;
-}
-
-@mixin container ($mw, $p) {
-	        // $mw + (padding left, right)
-	max-width: $mw + 40px;
-	width: 100%;
-	margin: 0 auto;
-	padding: $p 20px 0 20px;
-}
+@use "../components/footer/footer";
 
 
 
@@ -1451,55 +1417,6 @@ h5 {
 			button:nth-child(2):hover {
 				background: #15171a;
 			}
-		}
-	}
-}
-
-
-
-.footer {
-	text-align: center;
-
-	&__container {
-		@include container(750px, 35px);
-		padding-bottom: 60px;
-	}
-
-	p {
-		font-weight: 300;
-		
-		opacity: 0.5;
-	}
-
-	a {
-		display: inline-block;
-		margin-top: 10px;
-
-		@include font(14px, 16px);
-		color: #fff;
-		font-weight: 300;
-		text-decoration: underline;
-
-		opacity: 0.5;
-
-		transition: $anim;
-	}
-}
-
-@media (hover: hover) {
-	.footer {
-
-		a:hover {
-			opacity: 0.8;
-		}
-	}
-}
-
-@media (max-width: 575.5px) {
-	.footer {
-
-		&__container {
-			padding-top: 25px;
 		}
 	}
 }
