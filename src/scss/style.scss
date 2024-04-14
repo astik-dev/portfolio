@@ -12,6 +12,7 @@
 @use "../components/projects/projects";
 @use "../components/skills/skills";
 @use "../components/reviews/reviews";
+@use "../components/contacts/contacts";
 @use "../components/footer/footer";
 
 
@@ -58,65 +59,6 @@
 			background: #2C66C3;
 			box-shadow: 0px 0px 14px rgba(44, 102, 195, 0.5);
 			border-radius: 50px;
-		}
-	}
-}
-
-
-
-.contacts {
-
-	&__container {
-		@include container(750px, $section-gap);
-	}
-	&__items {
-		@include flex(flex, row, 20px, flex-start, center);
-		flex-wrap: wrap;	
-	}
-	&__item {
-		@include flex(flex, row, 0, center, center);
-		width: 60px;
-		height: 60px;
-
-		background: #1E293B;
-		border-radius: 50px;
-
-		transition: $anim;
-
-		img {
-			width: 25px;
-			height: 25px;
-		}
-	}
-}
-
-@media (hover: hover) {
-	.contacts {
-
-		&__item:hover {
-			background: #2C66C3;
-		}
-	}
-}
-
-@media (max-width: 575.5px) {
-	.contacts {
-
-		&__container {
-			padding-top: $section-gap-min;
-		}
-
-		&__items {
-			gap: 10px;
-		}
-		&__item {
-			width: 50px;
-			height: 50px;
-
-			img {
-				width: 22px;
-				height: 22px;
-			}
 		}
 	}
 }
