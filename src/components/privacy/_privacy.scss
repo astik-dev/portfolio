@@ -1,0 +1,47 @@
+@use "../../scss/abstracts/mixins" as *;
+
+
+.privacy {
+
+	&__container {
+		@include container(750px, 0);
+	}
+
+	&__text {
+
+		p.privacy__text-date {
+			margin: 0 0 15px 0;
+
+			font-style: italic;
+
+			opacity: 0.7;
+		}
+
+		h4 {
+			margin-top: 25px;
+		}
+
+		p, ul li {
+			margin-top: 8px;
+
+			font-weight: 300;
+		}
+
+		p {
+			text-align: justify;
+		}
+
+		ul {
+			
+			li:before {
+				content: "· ";
+			}
+		}
+
+		a {
+			color: #2C66C3;
+			text-decoration: underline;
+			font-weight: 400;
+		}
+	}
+}
