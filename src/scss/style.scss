@@ -2,8 +2,8 @@
 @use "base/base";
 @use "base/typography";
 
-@use "abstracts/variables" as *;
-@use "abstracts/mixins" as *;
+@use "layouts/main";
+@use "layouts/title-content";
 
 @use "../components/swiper-nav/swiper-nav";
 @use "../components/project-popup/project-popup";
@@ -16,51 +16,3 @@
 @use "../components/footer/footer";
 @use "../components/cookies-popup/cookies-popup";
 @use "../components/privacy/privacy";
-
-
-
-.main {
-	padding: 80px 0 0 0;
-
-	&_pt60 {
-		padding: 60px 0 0 0;
-	}
-}
-
-@media (max-width: 575.5px) {
-	.main {
-		padding: 70px 0 0 0;
-
-		&_pt60 {
-			padding: 40px 0 0 0;
-		}
-	}
-}
-
-
-
-.title-content {
-	@include flex(flex, column, 20px, center, center);
-
-	& > h2 {
-		position: relative;
-
-		padding: 0 0 15px 0;
-
-		&:after {
-			content: "";
-
-			position: absolute;
-			bottom: 0;
-			left: calc(50% - 62px);
-
-			display: inline-block;
-			width: 124px;
-			height: 10px;
-
-			background: #2C66C3;
-			box-shadow: 0px 0px 14px rgba(44, 102, 195, 0.5);
-			border-radius: 50px;
-		}
-	}
-}

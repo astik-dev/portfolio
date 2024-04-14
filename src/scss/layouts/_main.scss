@@ -1,0 +1,17 @@
+.main {
+	padding: 80px 0 0 0;
+
+	&_pt60 {
+		padding: 60px 0 0 0;
+	}
+}
+
+@media (max-width: 575.5px) {
+	.main {
+		padding: 70px 0 0 0;
+
+		&_pt60 {
+			padding: 40px 0 0 0;
+		}
+	}
+}
