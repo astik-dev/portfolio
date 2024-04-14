@@ -1,0 +1,61 @@
+@use "../../scss/abstracts/variables" as *;
+@use "../../scss/abstracts/mixins" as *;
+
+
+.projects {
+
+	&__container {
+		@include container(820px, $section-gap);
+	}
+
+	&__items {
+		@include flex(flex, row, 20px, flex-start, flex-start);
+		flex-wrap: wrap;
+	}
+
+	&__btn-load-more {
+		padding: 15px 50px;
+
+		@include font(20px, 20px);
+		color: #fff;
+
+		background: #1E293B;
+		border-radius: 50px;
+
+		transition: $anim;
+	}
+}
+
+@media (hover: hover) {
+	.projects {
+        
+		&__btn-load-more:hover {
+			background: #2C66C3;
+		}
+	}
+}
+
+@media (max-width: 767.5px) {
+	.projects {
+		
+        &__items {
+			gap: 15px;
+		}
+	}
+}
+
+@media (max-width: 575.5px) {
+	.projects {
+
+		&__container {
+			padding-top: $section-gap-min;
+		}
+        
+		&__items {
+			flex-direction: column;
+			flex-wrap: nowrap;
+			align-items: center;
+			width: 100%;
+		}
+	}
+}
