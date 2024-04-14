@@ -5,6 +5,7 @@
 @use "abstracts/variables" as *;
 @use "abstracts/mixins" as *;
 
+@use "../components/swiper-nav/swiper-nav";
 @use "../components/project-popup/project-popup";
 @use "../components/footer/footer";
 
@@ -581,74 +582,6 @@
 
 
 
-.project-popup__image-swiper-nav,
-.reviews__swiper-nav {
-	position: absolute;
-	top: calc(50% - 15px);
-
-	width: 30px;
-	height: 30px;
-
-	border-radius: 30px;
-	background: transparent;
-
-	cursor: pointer;
-
-	transition: $anim;
-
-	&:before,
-	&:after {
-		content: "";
-
-		position: absolute;
-		left: 7px;
-
-		width: 13px;
-		height: 3px;
-
-		background: #D4D7DA;
-		border-radius: 3px;
-	}
-
-	&:before {
-		top: 9.5px;
-
-		transform: rotate(-45deg);
-	}
-
-	&:after {
-		bottom: 9.5px;
-		
-		transform: rotate(45deg);
-	}
-
-	&_left {
-		left: 0;
-	}
-	&_right {
-		right: 0;
-
-		transform: rotate(180deg);
-	}
-
-	&:disabled {
-		background: transparent !important;
-
-		cursor: auto;
-
-		opacity: 0.3;
-	}
-}
-
-@media (hover: hover) {
-	.project-popup__image-swiper-nav:hover,
-	.reviews__swiper-nav:hover {
-		background: #293548;
-	}
-}
-
-
-
 .skills {
 	&__container {
 		@include container(750px, $section-gap);
@@ -807,7 +740,7 @@
 		&__swiper {
 			padding: 0 20px;
 		}
-		&__swiper-nav {
+		.swiper-nav {
 			display: none;
 		}
 	}

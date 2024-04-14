@@ -87,63 +87,6 @@
 
 		background: #000;
 	}
-	&__image-swiper-nav {
-		position: absolute;
-		top: calc(50% - 15px);
-
-		width: 30px;
-		height: 30px;
-
-		border-radius: 30px;
-		background: transparent;
-
-		cursor: pointer;
-
-		transition: $anim;
-
-		&:before,
-		&:after {
-			content: "";
-
-			position: absolute;
-			left: 7px;
-
-			width: 13px;
-			height: 3px;
-
-			background: #D4D7DA;
-			border-radius: 3px;
-		}
-
-		&:before {
-			top: 9.5px;
-
-			transform: rotate(-45deg);
-		}
-
-		&:after {
-			bottom: 9.5px;
-			
-			transform: rotate(45deg);
-		}
-
-		&_left {
-			left: 0;
-		}
-		&_right {
-			right: 0;
-
-			transform: rotate(180deg);
-		}
-
-		&:disabled {
-			background: transparent !important;
-
-			cursor: auto;
-
-			opacity: 0.3;
-		}
-	}
 	&__image-scroll {
 		$icon-width: 70px;
 
@@ -295,7 +238,7 @@
 		&__image-swiper {
 			height: 200px;
 		}
-		&__image-swiper-nav {
+		.swiper-nav {
 			z-index: 2;
 
 			background: #293548;

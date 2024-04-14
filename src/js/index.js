@@ -330,8 +330,8 @@ function openCloseProjectPopup(eventTarget) {
 const swiperProjectPopup = new Swiper('.project-popup__image-swiper', {
 	// Navigation arrows
 	navigation: {
-	    nextEl: '.project-popup__image-swiper-nav_right',
-	    prevEl: '.project-popup__image-swiper-nav_left',
+	    nextEl: '.project-popup__image .swiper-nav_right',
+	    prevEl: '.project-popup__image .swiper-nav_left',
 	},
 
 	pagination: {
@@ -530,8 +530,8 @@ function generateReviews(reviews) {
 		},
 
 		navigation: {
-			nextEl: '.reviews__swiper-nav_right',
-			prevEl: '.reviews__swiper-nav_left',
+			nextEl: '.reviews .swiper-nav_right',
+			prevEl: '.reviews .swiper-nav_left',
 		},
 
 		autoHeight: true,

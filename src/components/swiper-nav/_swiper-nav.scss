@@ -1,0 +1,67 @@
+@use "../../scss/abstracts/variables" as *;
+
+
+.swiper-nav {
+	position: absolute;
+	top: calc(50% - 15px);
+
+	width: 30px;
+	height: 30px;
+
+	border-radius: 30px;
+	background: transparent;
+
+	cursor: pointer;
+
+	transition: $anim;
+
+	@media (hover: hover) {
+		&:hover {
+			background: #293548;
+		}
+	}
+
+
+	&:before,
+	&:after {
+		content: "";
+
+		position: absolute;
+		left: 7px;
+
+		width: 13px;
+		height: 3px;
+
+		background: #D4D7DA;
+		border-radius: 3px;
+	}
+
+	&:before {
+		top: 9.5px;
+
+		transform: rotate(-45deg);
+	}
+
+	&:after {
+		bottom: 9.5px;
+		
+		transform: rotate(45deg);
+	}
+
+	&_left {
+		left: 0;
+	}
+	&_right {
+		right: 0;
+
+		transform: rotate(180deg);
+	}
+
+	&:disabled {
+		background: transparent !important;
+
+		cursor: auto;
+
+		opacity: 0.3;
+	}
+}
