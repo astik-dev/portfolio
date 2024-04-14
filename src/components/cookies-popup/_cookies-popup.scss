@@ -1,0 +1,93 @@
+@use "../../scss/abstracts/variables" as *;
+@use "../../scss/abstracts/mixins" as *;
+
+
+.cookies-popup {
+	position: fixed;
+	z-index: 1000;
+	bottom: 20px;
+	left: 50%;
+
+	padding: 15px;
+	max-width: 650px;
+	width: calc(100% - 40px);
+
+	background: #293548;
+	border-radius: 12px;
+	box-shadow: 0px 0px 15px 5px rgba(0, 0, 0, 0.5);
+
+	transform: translate(-50%, 0);
+
+	transition: $anim;
+
+	&__text {
+		margin-bottom: 12px;
+
+		p:first-child {
+			margin-bottom: 8px;
+
+			font-weight: 500;
+			@include font(17px, 20px);
+		}
+
+		p {
+			font-weight: 300;
+
+			a {
+				font-weight: 400;
+				color: #fff;
+				text-decoration: underline;
+			}
+		}
+		p:nth-child(3) {
+			margin-top: 8px;
+		}
+	}	
+
+	&__btns {
+		@include flex(flex, row, 30px, center, flex-end);
+
+		button {
+			@include font(17px, 20px);
+			color: #fff;
+		}
+
+		button:nth-child(1) {
+			text-decoration: underline;
+			text-decoration-color: transparent;
+
+			background: transparent;
+
+			transition: all 0.15s ease;
+		}
+
+		button:nth-child(2) {
+			min-width: 120px;
+			padding: 10px 20px;
+
+			background: #161B22;
+			border-radius: 50px;
+
+			transition: $anim;
+		}
+	}
+
+	&_close {
+		transform: translate(-50%, 80%) scale(0);
+	}
+}
+
+@media (hover: hover) {
+	.cookies-popup {
+
+		&__btns {
+
+			button:nth-child(1):hover {
+				text-decoration-color: #fff;
+			}
+			button:nth-child(2):hover {
+				background: #15171a;
+			}
+		}
+	}
+}
