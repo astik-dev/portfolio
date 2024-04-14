@@ -8,6 +8,7 @@
 @use "../components/header/header";
 @use "../components/home/home";
 @use "../components/projects/projects";
+@use "../components/skills/skills";
 @use "../components/swiper-nav/swiper-nav";
 @use "../components/project-popup/project-popup";
 @use "../components/footer/footer";
@@ -56,50 +57,6 @@
 			background: #2C66C3;
 			box-shadow: 0px 0px 14px rgba(44, 102, 195, 0.5);
 			border-radius: 50px;
-		}
-	}
-}
-
-
-
-.skills {
-	&__container {
-		@include container(750px, $section-gap);
-	}
-
-	&__items {
-		@include flex(flex, row, 10px, flex-start, center);
-		flex-wrap: wrap;
-		width: inherit;
-	}
-
-	&__item {
-		@include flex(flex, row, 10px, center, flex-start);
-		width: calc(33.333% - 7.5px);
-		padding: 10px;
-
-		border: 3px solid #293548;
-		border-radius: 8px;
-
-		img {
-			width: 40px;
-			height: 40px;
-		}
-	}
-}
-
-@media (max-width: 652px) {
-	.skills {
-		&__item {
-			width: auto;
-		}
-	}
-}
-
-@media (max-width: 575.5px) {
-	.skills {
-		&__container {
-			padding-top: $section-gap-min;
 		}
 	}
 }
