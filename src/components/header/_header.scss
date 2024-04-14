@@ -1,0 +1,170 @@
+@use "../../scss/abstracts/variables" as *;
+@use "../../scss/abstracts/mixins" as *;
+
+
+.header {
+	position: fixed;
+	z-index: 100;
+
+	width: 100%;	
+
+	&__container {
+		position: relative;
+
+		width: 100%;
+		max-width: 1366px;
+		margin: 0 auto;
+		padding: 24px 20px;
+	}
+
+	&__menu {
+		ul {
+			@include flex(flex, row, 10px, center, flex-end);
+
+			li {
+
+				a {
+					display: inline-block;
+					padding: 4.5px 16px;
+
+					@include font(20px, 23px);
+					color: #fff;
+
+					border-radius: 50px;
+					transition: $anim;
+				}
+			}
+		}
+	}
+
+	&__burger {
+		position: relative;
+
+		@include flex(flex, column, 0px, center, space-between);
+		display: none;
+		width: 60px;
+		height: 60px;
+
+		padding: 20px 15px;
+
+		border-radius: 50%;
+		background: rgba(#000, 0.2);
+		backdrop-filter: blur(5px);
+		box-shadow: 0 0 3px 3px rgba(#000, 0.1);
+
+		transition: all 0.2s ease-out;
+
+		span {
+			display: inline-block;
+			
+			width: 30px;
+			height: 3px;
+
+			background: #fff;
+			border-radius: 5px;
+
+			transition: all 0.4s ease-out;
+		}
+	}
+}
+
+@media (hover: hover) {
+	.header {
+		&__menu {
+			ul {
+				li {
+					a:hover {
+						background: #2C66C3;
+					}
+				}
+			}
+		}
+	}
+}
+@media (min-width: 575.6px) {
+	.header {
+		background: linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0) 100%, rgba(0, 0, 0, 0) 100%);
+		backdrop-filter: blur(5px);
+	}
+}
+@media (max-width: 575.5px) {
+	.header {
+		&__menu {
+			position: absolute;
+			top: -500px;
+			left: 105vw;
+
+			width: 100%;
+			padding: 80px 0;
+
+			background: #1E293B;
+			transition: opacity 0.4s ease-out, 
+						visibility 0.4s ease-out,
+						left 0.4s ease-out,
+						top 0.4s ease-out,
+						border-radius 0.5s linear;
+			border-radius: 0 0 0 100%;
+
+			overflow: hidden;
+			opacity: 0;
+			visibility: hidden;
+
+			ul {
+				flex-direction: column;
+				gap: 40px;
+
+				li {
+					a {
+						padding: 0;
+
+						@include font(40px, 47px);
+
+						border-radius: 0;
+						background: transparent !important;
+					}
+				}
+			}
+		}
+
+		&__container {
+			@include flex(flex, row, 0px, center, flex-end);
+			padding: 5px;
+
+			&_open-burger {
+
+				.header__menu {
+					top: 0;
+					left: 0;
+
+					border-radius: 0;
+
+					visibility: visible;
+					opacity: 1;
+				}
+
+				.header__burger {
+					background: transparent;
+					box-shadow: none;
+
+					span {
+						
+						&:nth-child(1) {
+							transform: translate(0, 8.5px) rotate(45deg) scaleY(1.2);
+						}
+						&:nth-child(2) {
+							opacity: 0;
+							transform: scaleX(0);
+						}
+						&:nth-child(3) {
+							transform: translate(0, -8.5px) rotate(-45deg) scaleY(1.2);
+						}
+					}
+				}
+			}
+		}
+
+		&__burger {
+			display: flex;
+		}
+	}
+}
