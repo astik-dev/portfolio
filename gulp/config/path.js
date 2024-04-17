@@ -34,6 +34,7 @@ export const path = {
 		html: [
 			`${srcFolder}/pages/**/*.html`,
 			`${srcFolder}/components/**/*.html`,
+			`${srcFolder}/head/**/*.html`,
 		],
 		images: `${srcFolder}/img/**/*.*`,
 	},
