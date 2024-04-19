@@ -32,7 +32,15 @@ const imageCreator = {
 		const fullPath = this.fullPath(source, path);
 		const src = lazy ? `"${this.px1}" data-src="${fullPath}"` : `"${fullPath}"`;
 		return `<img src=${src} alt="${alt}">`;
-	}
+	},
+
+    loadPictureSources: function (picture) {
+        picture.querySelectorAll("source").forEach(source => {
+            source.srcset = source.dataset.src;
+        });
+        const pictureImg = picture.querySelector("img");
+        pictureImg.src = pictureImg.dataset.src;
+    },
 }
 
 export default imageCreator;

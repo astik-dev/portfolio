@@ -18,14 +18,6 @@ function toggleBurgerMenu() {
 }
 
 
-function loadPictureSources (picture) {
-	picture.querySelectorAll("source").forEach(source => {
-		source.srcset = source.dataset.src;
-	});
-	const pictureImg = picture.querySelector("img");
-	pictureImg.src = pictureImg.dataset.src;
-}
-
 
 function openCloseProjectPopup(eventTarget) {
 	if (eventTarget && eventTarget.classList.contains("projects__item_empty")) return;
@@ -150,7 +142,7 @@ function openCloseProjectPopup(eventTarget) {
 			setTimeout(() => {
 				// Load first two (if available) images
 				dqsa(".project-popup__image-slide:nth-child(-n+2) picture").forEach((slidePic, index) => {
-					loadPictureSources(slidePic);
+					imageCreator.loadPictureSources(slidePic);
 					if (index == 0) {
 						const picImg = slidePic.querySelector("img");
 						picImg.addEventListener("load", () => showScrollAnimation(picImg));
@@ -191,7 +183,9 @@ const swiperProjectPopup = new Swiper('.project-popup__image-swiper', {
 			if (nextNextPic) {
 				setTimeout(() => {
 					const picImg = nextNextPic.querySelector("img");
-					if (picImg.src != imageCreator.px1) loadPictureSources(nextNextPic);
+					if (picImg.src != imageCreator.px1) {
+						imageCreator.loadPictureSources(nextNextPic);
+					}
 				}, 300); // 300 - Default duration of transition between slides (in ms)
 			}
 		},
@@ -282,7 +276,9 @@ function generateProjects(mode) {
 		const newObserver = new IntersectionObserver(
 			(entries) => {
 				entries.forEach((entry) => {
-					if (entry.isIntersecting) loadPictureSources(entry.target);
+					if (entry.isIntersecting) {
+						imageCreator.loadPictureSources(entry.target);
+					}
 				});
 			},
 			{
