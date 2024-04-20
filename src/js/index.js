@@ -1,6 +1,7 @@
 import { doc, dqs, dqsa } from "./modules/utils.js";
 import imageCreator from "./modules/imageCreator.js";
 import spreadsheets from "./modules/spreadsheets.js";
+import { gtmEvent } from "./modules/googleAnalytics4.js";
 
 
 
@@ -413,13 +414,6 @@ function generateContacts(contacts) {
 	});
 }
 
-
-
-function gtmEvent(object) {
-	if (typeof dataLayer !== "undefined" && Array.isArray(dataLayer)) {
-		dataLayer.push(object);
-	}
-}
 
 
 

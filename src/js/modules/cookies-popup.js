@@ -1,6 +1,6 @@
 import { dqs, dqsa } from "./utils.js";
 import { setCookie } from "./cookies.js";
-import { loadGoogleAnalytics4 } from "./loadGoogleAnalytics4.js";
+import { loadGoogleAnalytics4 } from "./googleAnalytics4.js";
 
 
 const cookiesPopupHTML = `

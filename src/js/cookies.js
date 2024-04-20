@@ -2,7 +2,7 @@ import { doc, dqs } from "./modules/utils.js";
 
 import { getCookie } from "./modules/cookies.js";
 import { addCookiesPopup } from "./modules/cookies-popup.js";
-import { loadGoogleAnalytics4 } from "./modules/loadGoogleAnalytics4.js";
+import { loadGoogleAnalytics4 } from "./modules/googleAnalytics4.js";
 
 
 doc.addEventListener('DOMContentLoaded', function() {
