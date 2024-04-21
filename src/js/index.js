@@ -2,22 +2,11 @@ import { doc, dqs, dqsa } from "./modules/utils.js";
 import imageCreator from "./modules/imageCreator.js";
 import spreadsheets from "./modules/spreadsheets.js";
 import { gtmEvent } from "./modules/googleAnalytics4.js";
+import { toggleBurgerMenu } from "./modules/burgerMenu.js";
 
 
 
 let openClosePermissionProjectPopup = true;
-
-
-
-function toggleBurgerMenu() {
-	const
-		headerCont = dqs(".header__container"),
-		openCssClass = "header__container_open-burger";
-
-	if (!headerCont.classList.contains(openCssClass)) gtmEvent({'event': 'open_burgerMenu'});
-
-	headerCont.classList.toggle(openCssClass);
-}
 
 
 
