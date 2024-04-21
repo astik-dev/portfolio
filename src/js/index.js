@@ -205,7 +205,7 @@ function removeEmptyItems(className, itemsContainer) {
 
 const btnLoadMore = {
 	cssClass: "projects__btn-load-more",
-	clickEventFunction: function () { generateProjects('load more') },
+	clickEventFunction: function () { loadProjects('load more') },
 	
 	create: function () {
 		dqs(".projects__container").insertAdjacentHTML("beforeend", `<button class="${this.cssClass}">Load More</button>`);
@@ -218,7 +218,7 @@ const btnLoadMore = {
 
 let projects;
 // mode: "start", "load more".
-function generateProjects(mode) {
+function loadProjects(mode) {
 
 	const projectsItems = dqs(".projects__items");
 
@@ -284,7 +284,7 @@ function generateProjects(mode) {
 	if (mode == "start" && projects.length > generationSize) btnLoadMore.create();
 }
 
-function generateSkills(skills) {
+function loadSkills(skills) {
 	const skillsItems = dqs(".skills__items");
 
 	removeEmptyItems(".skills__item_empty", skillsItems);
@@ -306,7 +306,7 @@ function generateSkills(skills) {
 	});
 }
 
-function generateReviews(reviews) {
+function loadReviews(reviews) {
 	reviews.sort(function (a, b) {
 		return -(a.text.length - b.text.length);
 	});
@@ -383,7 +383,7 @@ function generateReviews(reviews) {
 	});
 }
 
-function generateContacts(contacts) {
+function loadContacts(contacts) {
 	const contactsItems = dqs(".contacts__items");
 
 	removeEmptyItems(".contacts__item_empty", contactsItems);
@@ -406,10 +406,10 @@ function generateContacts(contacts) {
 
 
 
-spreadsheets.fetchJSON("projects").then(data => {projects = data; generateProjects("start")});
-spreadsheets.fetchJSON("skills").then(data => generateSkills(data));
-spreadsheets.fetchJSON("reviews").then(data => generateReviews(data));
-spreadsheets.fetchJSON("contacts").then(data => generateContacts(data));
+spreadsheets.fetchJSON("projects").then(data => {projects = data; loadProjects("start")});
+spreadsheets.fetchJSON("skills").then(data => loadSkills(data));
+spreadsheets.fetchJSON("reviews").then(data => loadReviews(data));
+spreadsheets.fetchJSON("contacts").then(data => loadContacts(data));
 
 
 
