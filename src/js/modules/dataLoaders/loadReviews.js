@@ -9,11 +9,16 @@ const colors = {
     orange: "#fab43c",
     green: "#2CB67D",
 }
+const avatarAlt = `Avatar`;
 
 
-function reviewSlideHTML (avatar, {name, grade, text, date, link, linkText}) {
+function reviewsSlideHTML ({avatar, name, grade, text, date, link, linkText}) {
     
-    grade = +grade; // to number
+	const avatarElem = avatar == ""
+		? imageCreator.newImg("local", `reviews/user-avatar.svg`, avatarAlt)
+		: imageCreator.newWebpPic("external", `reviews/${avatar}.webp`, `reviews/${avatar}.jpeg`, avatarAlt);
+	
+	grade = +grade; // to number
 
     const gradeColor =
         grade < 5 ? colors.red :
@@ -23,7 +28,7 @@ function reviewSlideHTML (avatar, {name, grade, text, date, link, linkText}) {
     return `
         <div class="reviews__slide swiper-slide">
             <div class="reviews__slide-top">
-                ${avatar}
+                ${avatarElem}
                 <h5>${name}</h5>
                 <h4 class="reviews__slide-grade">
                     <span style="color: ${gradeColor};">${grade}/10</span>
@@ -48,15 +53,9 @@ export function loadReviews(reviews) {
 	removeEmptyItems(".reviews__slide_empty", reviewsSwiperWrapper);
 
 	reviews.forEach((review) => {
-
-		const alt = `Avatar`;
-		const avatar = review.avatar == ""
-            ? imageCreator.newImg("local", `reviews/user-avatar.svg`, alt)
-			: imageCreator.newWebpPic("external", `reviews/${review.avatar}.webp`, `reviews/${review.avatar}.jpeg`, alt);
-
 		reviewsSwiperWrapper.insertAdjacentHTML(
             "beforeend",
-            reviewSlideHTML(avatar, review)
+            reviewsSlideHTML(review)
         );
 	});
 
