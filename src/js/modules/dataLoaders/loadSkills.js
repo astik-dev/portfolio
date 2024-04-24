@@ -3,25 +3,32 @@ import { removeEmptyItems } from "./removeEmptyItems.js";
 import imageCreator from "../imageCreator.js";
 
 
+function skillsItemHTML ({name, img, imgWEBP}) {
+	
+	const fallback = `skills/${img}`;
+
+	const imgElem = imgWEBP
+		? imageCreator.newWebpPic("external", `skills/${imgWEBP}`, fallback, name)
+		: imageCreator.newImg("external", fallback, name);
+
+	return `
+		<article class="skills__item">
+			${imgElem}
+			<h4>${name}</h4>
+		</article>
+	`;
+}
+
 export function loadSkills(skills) {
+	
 	const skillsItems = dqs(".skills__items");
 
 	removeEmptyItems(".skills__item_empty", skillsItems);
 
 	skills.forEach((skill) => {
-
-		const fallback = `skills/${skill.img}`;
-        const alt = skill.name;
-
-		const imgElem = skill.imgWEBP ?
-			imageCreator.newWebpPic("external", `skills/${skill.imgWEBP}`, fallback, alt) :
-			imageCreator.newImg("external", fallback, alt);
-
-		let currentSkill = `<article class="skills__item">
-								${imgElem}
-								<h4>${skill.name}</h4>
-							</article>`;
-
-		skillsItems.insertAdjacentHTML("beforeend", currentSkill);
+		skillsItems.insertAdjacentHTML(
+			"beforeend",
+			skillsItemHTML(skill)
+		);
 	});
 }
