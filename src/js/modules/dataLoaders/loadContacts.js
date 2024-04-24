@@ -3,23 +3,31 @@ import { removeEmptyItems } from "./removeEmptyItems.js";
 import imageCreator from "../imageCreator.js";
 
 
+function contactsItemHTML({link, title, img, imgWEBP}) {
+
+    const fallback = `contacts/${img}`;
+
+	const imgElem = imgWEBP
+        ? imageCreator.newWebpPic("external", `contacts/${imgWEBP}`, fallback, title)
+        : imageCreator.newImg("external", fallback, title);
+
+    return `
+        <a href="${link}" target="_blank" title="${title}" class="contacts__item">
+            ${imgElem}
+        </a>
+    `;
+}
+
 export function loadContacts(contacts) {
-	const contactsItems = dqs(".contacts__items");
+	
+    const contactsItems = dqs(".contacts__items");
 
 	removeEmptyItems(".contacts__item_empty", contactsItems);
 
 	contacts.forEach((contact) => {
-
-		const fallback = `contacts/${contact.img}`, alt = contact.title;
-
-		const imgElem = contact.imgWEBP ?
-			imageCreator.newWebpPic("external", `contacts/${contact.imgWEBP}`, fallback, alt) :
-			imageCreator.newImg("external", fallback, alt);
-
-		let currentContact = `<a href="${contact.link}" target="_blank" title="${contact.title}" class="contacts__item">
-								  ${imgElem}
-							  </a>`
-
-		contactsItems.insertAdjacentHTML("beforeend", currentContact);
+		contactsItems.insertAdjacentHTML(
+            "beforeend",
+            contactsItemHTML(contact)
+        );
 	});
 }
