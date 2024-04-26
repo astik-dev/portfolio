@@ -1,6 +1,7 @@
 import { dqs } from "../utils.js";
 import { removeEmptyItems } from "./removeEmptyItems.js";
 import imageCreator from "../imageCreator.js";
+import { getProjects } from "../data/projects.js";
 
 
 const projectsPerLoad = 4;
@@ -9,15 +10,13 @@ let loadedProjectsCount = 0;
 
 const btnLoadMore = {
 	cssClass: "projects__btn-load-more",
-	create: function (projects) {
+	create: function () {
 		dqs(".projects__container").insertAdjacentHTML(
 			"beforeend",
 			`<button class="${this.cssClass}">Load More</button>`
 		);
 		this.elem = dqs(`.${this.cssClass}`);
-		this.elem.addEventListener("click", () => {
-			loadProjects(projects);
-		});
+		this.elem.addEventListener("click", loadProjects);
 	},
 }
 
@@ -55,7 +54,9 @@ function addLazyLoadingToPicture(pictureSelector) {
 	observer.observe(dqs(pictureSelector));
 }
 
-export function loadProjects(projects) {
+export function loadProjects() {
+
+	const projects = getProjects();
 
 	const projectsItemsElem = dqs(".projects__items");
 
@@ -77,7 +78,7 @@ export function loadProjects(projects) {
 	}
 
 	if (loadFromIndex == 0 && projects.length > loadToIndex) {
-		btnLoadMore.create(projects);
+		btnLoadMore.create();
 	} else if (btnLoadMore.elem && unloadedProjectsCount <= projectsPerLoad) {
 		btnLoadMore.elem.remove();
 	}

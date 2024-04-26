@@ -1,6 +1,7 @@
 import { doc, dqs, dqsa } from "./utils.js";
 import imageCreator from "./imageCreator.js";
 import { gtmEvent } from "./googleAnalytics4.js";
+import { getProjects } from "./data/projects.js";
 
 
 let openClosePermissionProjectPopup = true;
@@ -11,7 +12,10 @@ function setScrollWidthCssVar() {
 	doc.documentElement.style.setProperty('--scroll-width', `${scrollWidth}px`);
 }
 
-export function openCloseProjectPopup(projects, eventTarget) {
+export function openCloseProjectPopup(eventTarget) {
+
+	const projects = getProjects();
+
 	if (eventTarget && eventTarget.classList.contains("projects__item_empty")) return;
 
 	if (openClosePermissionProjectPopup == true) {
