@@ -13,7 +13,7 @@ import { loadProjects } from "./modules/dataLoaders/loadProjects.js";
 let projects;
 
 
-spreadsheets.fetchJSON("projects").then(data => {projects = data; loadProjects(projects, "start")});
+spreadsheets.fetchJSON("projects").then(data => {projects = data; loadProjects(projects)});
 spreadsheets.fetchJSON("skills").then(data => loadSkills(data));
 spreadsheets.fetchJSON("reviews").then(data => loadReviews(data));
 spreadsheets.fetchJSON("contacts").then(data => loadContacts(data));
