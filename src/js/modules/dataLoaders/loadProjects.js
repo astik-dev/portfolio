@@ -20,7 +20,7 @@ const btnLoadMore = {
 	},
 }
 
-function projectsItemHTML({folder, title}) {
+function projectsItemHTML({folder, title}, index) {
 	
 	const img800 = "projects/" + folder + "/800";
 	const webp = img800 + ".webp";
@@ -29,7 +29,7 @@ function projectsItemHTML({folder, title}) {
 	const webpPicElem = imageCreator.newWebpPic("external", webp, fallback, title, "lazy");
 	
 	return `
-		<article class="projects__item">
+		<article class="projects__item" data-project-index="${index}">
 			${webpPicElem}
 			<div class="projects__item-title">
 				<h5>${title}</h5>
@@ -72,7 +72,7 @@ export function loadProjects() {
 	for (let i = loadFromIndex; i < loadToIndex; i++) {
 		projectsItemsElem.insertAdjacentHTML(
 			"beforeend",
-			projectsItemHTML(projects[i])
+			projectsItemHTML(projects[i], i)
 		);
 		addLazyLoadingToPicture(".projects__item:last-child picture");
 	}

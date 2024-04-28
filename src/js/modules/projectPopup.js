@@ -4,156 +4,146 @@ import { gtmEvent } from "./googleAnalytics4.js";
 import { getProjects } from "./data/projects.js";
 
 
-let openClosePermissionProjectPopup = true;
+const projectPopupTransitionDuration = 300;
+let projectPopupInTransition = false;
 
+
+const projectPopup = {
+
+	setTitle(title) {
+		dqs(".project-popup__container h3").textContent = title;
+	},
+
+	setDescription(descriptionText) {
+		const descriptionElem = dqs(".project-popup__container p");
+		descriptionElem.textContent = descriptionText;	
+		descriptionElem.scrollTop = 0;
+	},
+
+	setLinkButtons(repositoryLink, demoLink) {
+		const linkButtons = [repositoryLink, demoLink];
+
+		linkButtons.forEach((link, index) => {
+			const btn = dqs(`.project-popup__btn:nth-child(${index + 1})`);
+			const isLinkEmpty = link == "";
+
+			btn.classList.toggle("project-popup__btn_disabled", isLinkEmpty);
+
+			if (isLinkEmpty) btn.removeAttribute("href");
+			else btn.href = link;
+		});
+
+		dqs(".project-popup__btns").classList.toggle(
+			"project-popup__btns_disabled",
+			linkButtons.every(link => link == "")
+		);
+	},
+}
 
 function setScrollWidthCssVar() {
 	const scrollWidth = window.innerWidth - doc.documentElement.clientWidth;
 	doc.documentElement.style.setProperty('--scroll-width', `${scrollWidth}px`);
 }
 
-export function openCloseProjectPopup(eventTarget) {
+function imageSlideHTML(imagePath) {
+	return `
+		<div class="project-popup__image-slide swiper-slide">
+			<a href="${imageCreator.fullPath("external", imagePath)}.jpeg" target="_blank">
+				${imageCreator.newWebpPic(
+					"external",
+					imagePath+".webp",
+					imagePath+".jpeg",
+					`Project image`,
+					"lazy"
+				)}
+			</a>
+		</div>
+	`;
+}
 
-	const projects = getProjects();
+function imageSlideScrollEvent(event) {
+	const link = event.target.querySelector("a").href;
+	const startIndex = link.indexOf("/projects/") + 10; // 10 = "/projects/" length
+	const trimmedLink = link.substring(startIndex);
+	gtmEvent({
+		'event': 'project_slideScroll',
+		'projectTrimmedLink': trimmedLink
+	});
+}
 
-	if (eventTarget && eventTarget.classList.contains("projects__item_empty")) return;
+function addScrollEventToImageSlides() {
+	const swiperSlideElems = dqsa(".project-popup__image-swiper-wrapper .swiper-slide");
+	if (swiperSlideElems.length < 1) return;
+	swiperSlideElems.forEach(slide => {
+		slide.addEventListener('scroll', imageSlideScrollEvent, { once: true });
+	});
+}
 
-	if (openClosePermissionProjectPopup == true) {
-		openClosePermissionProjectPopup = false;
-
-		if (!dqs(".open-project-popup") && eventTarget !== undefined) {
-
-			setScrollWidthCssVar();
-
-
-			// Toggle scroll event for all ".swiper-slide" elements (Google Tag Manager)
-			function toggleScrollEvent(action) {
-
-				let cssSelector = ".project-popup__image-swiper-wrapper .swiper-slide";
-
-				if (dqs(cssSelector)) {
-					if (action == "add") {
-						dqsa(cssSelector).forEach((slide) => {
-							slide.addEventListener('scroll', scrollEvent, { once: true });
-						});
-					} else if (action == "remove") {
-						dqsa(cssSelector).forEach((slide) => {
-							slide.removeEventListener('scroll', scrollEvent);
-						});
-					}
-				}		
-			}
-			function scrollEvent(event) {
-				let link = event.target.querySelector("a").href;
-				let startIndex = link.indexOf("/projects/") + 10; // 10 = "/projects/" length
-				let trimmedLink = link.substring(startIndex);
-				gtmEvent({'event': 'project_slideScroll', 'projectTrimmedLink': trimmedLink});
-			}
-
-
-			toggleScrollEvent("remove");
-
-
-			// Checking which project was clicked
-			const projectsItemAll = dqsa(".projects__item");
-			let projectsItemIndex;
-
-			projectsItemAll.forEach((item, index) => {
-				if (eventTarget == item) {
-					projectsItemIndex = index;
-				}
-			});
-
-
-			// Getting data from JSON
-			let pFolder = projects[projectsItemIndex].folder,
-				pTitle = projects[projectsItemIndex].title,
-				pDescription = projects[projectsItemIndex].description,
-				pRepository = projects[projectsItemIndex].repository,
-				pDemo = projects[projectsItemIndex].demo,
-				pScreenshots = projects[projectsItemIndex].screenshots;
-
-
-			// Set title & description
-			const projectPopupTitle = dqs(".project-popup__container h3");
-			const projectPopupText = dqs(".project-popup__container p");
-
-			projectPopupTitle.textContent = pTitle;
-			projectPopupText.textContent = pDescription;
-
-			projectPopupText.scrollTop = 0;
-
-
-			// Set buttons
-			[pRepository, pDemo].forEach((link, index) => {
-				const btn = dqs(`.project-popup__btn:nth-child(${index + 1})`);
-				const isLinkEmpty = link == "";
-				
-				btn.classList.toggle("project-popup__btn_disabled", isLinkEmpty);
-				
-				if (isLinkEmpty) btn.removeAttribute("href");
-				else btn.href = link;
-			});
-
-			dqs(".project-popup__btns").classList.toggle(
-				"project-popup__btns_disabled",
-				pRepository == "" && pDemo == ""
-			);
-
-
-			// Generate screenshots slides
-			function generateSlides(screenshots) {
-				let slides = ``;
-				for (let i = 1; i <= screenshots; i++) {
-					const slideImgPath = `projects/${pFolder}/full-size/${i}`;
-					const slide = `<div class="project-popup__image-slide swiper-slide">
-										<a href="${imageCreator.fullPath("external", slideImgPath)}.jpeg" target="_blank">
-											${imageCreator.newWebpPic(
-												"external",
-												slideImgPath+".webp",
-												slideImgPath+".jpeg",
-												`Project image ${i}`,
-												"lazy"
-											)}
-										</a>
-									</div>`;
-					slides += slide;
-				}
-				return slides;
-			}
-
-			dqs(".project-popup__image-swiper-wrapper")
-				.innerHTML = generateSlides(pScreenshots);
-			swiperProjectPopup.slideTo(0, 1, false);
-			toggleScrollEvent("add");
-
-			function showScrollAnimation(image) {
-				if (image.scrollHeight > dqs(".project-popup__image").clientHeight) {
-					setTimeout(() => {
-						dqs(".project-popup__image-scroll").classList.add("project-popup__image-scroll_animation");
-					}, 600);
-				}
-			}
-
-			setTimeout(() => {
-				// Load first two (if available) images
-				dqsa(".project-popup__image-slide:nth-child(-n+2) picture").forEach((slidePic, index) => {
-					imageCreator.loadPictureSources(slidePic);
-					if (index == 0) {
-						const picImg = slidePic.querySelector("img");
-						picImg.addEventListener("load", () => showScrollAnimation(picImg));
-					}
-				});
-			}, 300);
-		}
-
-		dqs("body").classList.toggle("open-project-popup");
-
+function showScrollAnimation(image) {
+	if (image.scrollHeight > dqs(".project-popup__image").clientHeight) {
 		setTimeout(() => {
-			openClosePermissionProjectPopup = true;
-		}, 300);
+			dqs(".project-popup__image-scroll").classList.add("project-popup__image-scroll_animation");
+		}, 600);
 	}
 }
+
+function withTransitionLock(actionFunction) {
+
+	if (projectPopupInTransition) return;
+	else projectPopupInTransition = true;
+
+	actionFunction();
+
+	setTimeout(() => {
+		projectPopupInTransition = false;
+	}, projectPopupTransitionDuration);
+}
+
+export function openProjectPopup(eventTarget) {
+	withTransitionLock(() => {
+
+		setScrollWidthCssVar();
+
+		const projects = getProjects();
+
+		const projectIndex = eventTarget.dataset.projectIndex;
+		const project = projects[projectIndex];
+
+		projectPopup.setTitle(project.title);
+		projectPopup.setDescription(project.description);
+		projectPopup.setLinkButtons(project.repository, project.demo);
+
+		// image slides
+		let imageSlideElems = ``;
+		const imagesFolderPath = `projects/${project.folder}/full-size/`;
+		for (let i = 1; i <= project.screenshots; i++) {
+			imageSlideElems += imageSlideHTML(imagesFolderPath + i);
+		}
+		dqs(".project-popup__image-swiper-wrapper").innerHTML = imageSlideElems;
+		swiperProjectPopup.slideTo(0, 1, false);
+		addScrollEventToImageSlides();
+
+		setTimeout(() => {
+			// Load first two (if available) images
+			dqsa(".project-popup__image-slide:nth-child(-n+2) picture").forEach((slidePic, index) => {
+				imageCreator.loadPictureSources(slidePic);
+				if (index == 0) {
+					const picImg = slidePic.querySelector("img");
+					picImg.addEventListener("load", () => showScrollAnimation(picImg));
+				}
+			});
+		}, projectPopupTransitionDuration);
+
+		dqs("body").classList.add("open-project-popup");
+	});
+}
+
+export function closeProjectPopup() {
+	withTransitionLock(() => {
+		dqs("body").classList.remove("open-project-popup");
+	});
+}
+
 
 const swiperProjectPopup = new Swiper('.project-popup__image-swiper', {
 	// Navigation arrows
