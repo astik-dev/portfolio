@@ -39,3 +39,7 @@ doc.addEventListener("click", e => {
 		smoothScroll(e.target.getAttribute('href'));
 	}
 });
+
+doc.addEventListener("keydown", event => {
+	if (event.key == "Escape") closeProjectPopup();
+});
