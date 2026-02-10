@@ -1,16 +1,15 @@
 # Portfolio
+My personal portfolio website for showcasing projects I have built.  
+Developed with HTML, SCSS, JavaScript, and Gulp.
 
-### Description:
-**My portfolio** is a collection of web development projects that showcase my skills in front-end technologies such as HTML, CSS, and JavaScript. Each project demonstrates a different aspect of my expertise, from responsive design and user interface development to web animations and interactive features. Check out my portfolio to see my work and get in touch if you have any questions or collaboration ideas.  
-Link: https://astik.dev/
+## Features
+1. Content data loaded from Google Spreadsheets
+2. Content assets served from a separate `content` branch
+3. SwiperJS sliders
+4. Lazy loading of images
+5. Google Analytics and Google Tag Manager integration
 
-### Functional:
-1. Loading data from Google Spreadsheets (JSON).
-1. Loading content images from `content` branch.
-1. SwiperJS sliders.
-1. Lazy loading images to speed up page loading.
-1. Hovering the mouse over interactive elements adds animated effects.
-1. Smooth scrolling.
-1. Hide menu and show hamburger menu for mobile screens.
-1. Google Analytics, Google Tag Manager.
-1. Responsiveness for different screen sizes.
+## Design
+Design by [Braian](https://www.figma.com/community/file/1202589711092010403/portafolio)  
+Licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)  
+Modifications: Yes
