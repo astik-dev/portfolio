@@ -25,7 +25,6 @@ import { scss } from "./gulp/tasks/scss.js";
 import { jsVendors } from "./gulp/tasks/jsVendors.js";
 import { js } from "./gulp/tasks/js.js";
 import { images } from "./gulp/tasks/images.js";
-import { zip } from "./gulp/tasks/zip.js";
 
 
 
@@ -43,9 +42,6 @@ function watcher() {
 const mainTasks = gulp.parallel(html, css, scss, jsVendors, js, images);
 
 const dev = gulp.series(reset, mainTasks, gulp.parallel(watcher, server));
-const deploy = gulp.series(reset, cname, mainTasks);
-const deployZip = gulp.series(reset, cname, mainTasks, zip);
-
-export { deploy, deployZip }
+export const deploy = gulp.series(reset, cname, mainTasks);
 
 gulp.task("default", dev);
