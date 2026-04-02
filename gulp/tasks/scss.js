@@ -15,9 +15,7 @@ export const scss = () => {
 				this.emit('end');
 			}
 		}))
-		.pipe(sass({
-			outputStyle: "expanded",
-		}))
+		.pipe(sass({ style: "expanded" }))
 		.pipe(groupCssMediaQueries())
 		.pipe(autoprefixer())
 		.pipe(
