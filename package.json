@@ -19,7 +19,6 @@
     "gulp-autoprefixer": "^10.0.0",
     "gulp-clean-css": "^4.3.0",
     "gulp-file-include": "^2.3.0",
-    "gulp-group-css-media-queries": "^1.2.2",
     "gulp-if": "^3.0.0",
     "gulp-newer": "^1.4.0",
     "gulp-plumber": "^1.2.1",
@@ -29,5 +28,8 @@
     "vinyl-named": "^1.1.0",
     "webpack": "^5.91.0",
     "webpack-stream": "^7.0.0"
+  },
+  "dependencies": {
+    "swiper": "^12.1.3"
   }
 }

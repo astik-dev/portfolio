@@ -1,3 +1,5 @@
+import Swiper from "swiper";
+import { EffectFlip, Navigation, Pagination } from "swiper/modules";
 import { dqs } from "../utils.js";
 import { removeEmptyItems } from "./removeEmptyItems.js";
 import imageCreator from "../imageCreator.js";
@@ -64,6 +66,8 @@ export function loadReviews(reviews) {
 
 function initSwiper () {
     new Swiper('.reviews__swiper', {
+
+		modules: [ Navigation, Pagination, EffectFlip ],
 
 		pagination: {
 			el: '.reviews__swiper-pagination',

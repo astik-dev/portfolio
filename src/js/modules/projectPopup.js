@@ -1,3 +1,5 @@
+import Swiper from "swiper";
+import { Navigation, Pagination } from "swiper/modules";
 import { doc, dqs, dqsa } from "./utils.js";
 import imageCreator from "./imageCreator.js";
 import { gtmEvent } from "./googleAnalytics4.js";
@@ -120,6 +122,7 @@ export function openProjectPopup(eventTarget) {
 			imageSlideElems += imageSlideHTML(imagesFolderPath + i);
 		}
 		dqs(".project-popup__image-swiper-wrapper").innerHTML = imageSlideElems;
+		swiperProjectPopup.update();
 		swiperProjectPopup.slideTo(0, 1, false);
 		addScrollEventToImageSlides();
 
@@ -146,6 +149,9 @@ export function closeProjectPopup() {
 
 
 const swiperProjectPopup = new Swiper('.project-popup__image-swiper', {
+
+	modules: [ Navigation, Pagination ],
+
 	// Navigation arrows
 	navigation: {
 	    nextEl: '.project-popup__image .swiper-nav_right',

@@ -8,7 +8,6 @@ const
 export const path = {
 	build: {
 		js: `${buildFolder}/js/`,
-		jsVendors: `${buildFolder}/js/vendors/`,
 		css: `${buildFolder}/css/`,
 		html: `${buildFolder}/`,
 		images: `${buildFolder}/img/`,
@@ -16,17 +15,13 @@ export const path = {
 	},
 	src: {
 		js: `${srcFolder}/js/*.js`,
-		jsVendors: `${srcFolder}/js/vendors/**/*.js`,
 		images: `${srcFolder}/img/**/*.*`,
-		css: `${srcFolder}/css/**/*.css`,
 		scss: `${srcFolder}/scss/style.scss`,
 		html: `${srcFolder}/pages/**/*.html`,
 		CNAME: `${srcFolder}/CNAME`,
 	},
 	watch: {
 		js: `${srcFolder}/js/**/*.js`,
-		jsVendors: `${srcFolder}/js/vendors/**/*.js`,
-		css: `${srcFolder}/css/**/*.css`,
 		scss: [
 			`${srcFolder}/scss/**/*.scss`,
 			`${srcFolder}/components/**/*.scss`,

@@ -1,3 +1,8 @@
+@use "../../../node_modules/swiper/swiper";
+@use "../../../node_modules/swiper/modules/navigation";
+@use "../../../node_modules/swiper/modules/pagination";
+@use "../../../node_modules/swiper/modules/effect-flip";
+
 @use "../../scss/abstracts/variables" as *;
 @use "../../scss/abstracts/mixins" as *;
 
