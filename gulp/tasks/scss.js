@@ -19,10 +19,7 @@ export const scss = () => {
 			outputStyle: "expanded",
 		}))
 		.pipe(groupCssMediaQueries())
-		.pipe(autoprefixer({
-			grid: true,
-			overrideBrowserslist: ["last 3 versions"],
-		}))
+		.pipe(autoprefixer())
 		.pipe(
 			app.plugins.if(app.isBuild,
 				app.gulp.dest(app.path.build.css) // non-minified CSS
