@@ -3,7 +3,7 @@ import gulpSass from "gulp-sass";
 import rename from "gulp-rename";
 import postcss from "gulp-postcss";
 import cssnano from "cssnano";
-import autoprefixer from "gulp-autoprefixer";
+import autoprefixer from "autoprefixer";
 
 const sass = gulpSass(dartSass);
 
@@ -16,20 +16,11 @@ export const scss = () => {
 			}
 		}))
 		.pipe(sass({ style: "expanded" }))
-		.pipe(autoprefixer())
-		.pipe(
-			app.plugins.if(app.isBuild,
-				app.gulp.dest(app.path.build.css) // non-minified CSS
-			)
-		)
-		.pipe(
-			app.plugins.if(app.isBuild,
-				postcss([ cssnano() ])
-			)
-		)
-		.pipe(rename({
-			extname: ".min.css",
-		}))
-		.pipe(app.gulp.dest(app.path.build.css))
+		.pipe(postcss([
+			autoprefixer(),
+			...(app.isBuild ? [ cssnano() ] : [])
+		]))
+		.pipe(rename({ extname: ".min.css" }))
+		.pipe(app.gulp.dest(app.path.build.css, { sourcemaps: app.isDev && "." }))
 		.pipe(app.plugins.browsersync.stream());
 }
