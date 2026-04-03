@@ -1,7 +1,8 @@
 import * as dartSass from "sass";
 import gulpSass from "gulp-sass";
 import rename from "gulp-rename";
-import cleanCss from "gulp-clean-css";
+import postcss from "gulp-postcss";
+import cssnano from "cssnano";
 import autoprefixer from "gulp-autoprefixer";
 
 const sass = gulpSass(dartSass);
@@ -23,7 +24,7 @@ export const scss = () => {
 		)
 		.pipe(
 			app.plugins.if(app.isBuild,
-				cleanCss()
+				postcss([ cssnano() ])
 			)
 		)
 		.pipe(rename({
