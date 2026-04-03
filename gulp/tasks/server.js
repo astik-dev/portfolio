@@ -5,5 +5,6 @@ export const server = () => {
 		},
 		notify: false,
 		open: false,
+		ghostMode: false,
 	});
 }
