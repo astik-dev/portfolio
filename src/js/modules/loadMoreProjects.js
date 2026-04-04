@@ -12,12 +12,14 @@ export function loadMoreProjects() {
 	const projectsItemsElem = dqs(".projects__items");
 	const loadedProjectsCount = getLoadedProjectsCount();
 
-	projects
-		.slice(loadedProjectsCount, loadedProjectsCount + PROJECTS_PER_LOAD)
-		.forEach((project, index) => {
-			projectsItemsElem.insertAdjacentHTML(
-				"beforeend",
-				renderProjectsItem(project, index)
-			);
-		});
+	for (
+		let index = loadedProjectsCount;
+		index < Math.min(loadedProjectsCount + PROJECTS_PER_LOAD, projects.length);
+		index++
+	) {
+		projectsItemsElem.insertAdjacentHTML(
+			"beforeend",
+			renderProjectsItem(projects[index], index)
+		);
+	}
 }
