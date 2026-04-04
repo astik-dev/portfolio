@@ -3,7 +3,7 @@ import { Navigation, Pagination } from "swiper/modules";
 import { doc, dqs, dqsa } from "./utils.js";
 import imageCreator from "./imageCreator.js";
 import { gtmEvent } from "./googleAnalytics4.js";
-import { getProjects } from "./data/projects.js";
+import projects from "../../../temp/projects.json";
 
 
 const projectPopupTransitionDuration = 300;
@@ -105,8 +105,6 @@ export function openProjectPopup(eventTarget) {
 	withTransitionLock(() => {
 
 		setScrollWidthCssVar();
-
-		const projects = getProjects();
 
 		const projectIndex = eventTarget.dataset.projectIndex;
 		const project = projects[projectIndex];

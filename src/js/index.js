@@ -1,34 +1,31 @@
 import { doc } from "./modules/utils.js";
-import spreadsheets from "./modules/spreadsheets.js";
 import { toggleBurgerMenu } from "./modules/burgerMenu.js";
 import { smoothScroll } from "./modules/smoothScroll.js";
 import { openProjectPopup, closeProjectPopup } from "./modules/projectPopup.js";
-import { setProjects } from "./modules/data/projects.js";
-
-import { loadSkills } from "./modules/dataLoaders/loadSkills.js";
-import { loadReviews } from "./modules/dataLoaders/loadReviews.js";
-import { loadContacts } from "./modules/dataLoaders/loadContacts.js";
-import { loadProjects } from "./modules/dataLoaders/loadProjects.js";
-
-
-spreadsheets.fetchJSON("projects").then(data => {setProjects(data); loadProjects()});
-spreadsheets.fetchJSON("skills").then(data => loadSkills(data));
-spreadsheets.fetchJSON("reviews").then(data => loadReviews(data));
-spreadsheets.fetchJSON("contacts").then(data => loadContacts(data));
+import { getLoadedProjectsCount, loadMoreProjects } from "./modules/loadMoreProjects.js";
+import projects from "../../temp/projects.json";
+import "./modules/initReviewsSwiper.js"; // Swiper
 
 
 doc.addEventListener("click", e => {
 
 	const burger = e.target.closest(".header__burger"),
 		  projectItem = e.target.closest(".projects__item"),
+		  loadMoreButton = e.target.closest(".projects__btn-load-more"),
 		  closeBtnProjectPopup = e.target.closest(".project-popup__close");
 
 	if (burger)
 		toggleBurgerMenu();
 
 	else if (projectItem) {
-		if (projectItem && projectItem.classList.contains("projects__item_empty")) return;
 		openProjectPopup(projectItem);
+	}
+
+	else if (loadMoreButton) {
+		loadMoreProjects();
+		if (getLoadedProjectsCount() === projects.length) {
+			loadMoreButton.remove();
+		}
 	}
 		
 	else if (e.target.classList.contains("project-popup") || closeBtnProjectPopup) // click outside the popup or close button

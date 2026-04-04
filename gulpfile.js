@@ -18,6 +18,7 @@ global.app = {
 // Tasks
 import { cname } from "./gulp/tasks/cname.js";
 import { reset } from "./gulp/tasks/reset.js";
+import { fetchData } from "./gulp/tasks/fetchData.js";
 import { html } from "./gulp/tasks/html.js";
 import { server } from "./gulp/tasks/server.js";
 import { scss } from "./gulp/tasks/scss.js";
@@ -35,7 +36,7 @@ function watcher() {
 
 
 
-const mainTasks = gulp.parallel(html, scss, js, images);
+const mainTasks = gulp.series(fetchData, gulp.parallel(html, scss, js, images));
 
 const dev = gulp.series(reset, mainTasks, gulp.parallel(watcher, server));
 export const deploy = gulp.series(reset, cname, mainTasks);

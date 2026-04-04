@@ -35,5 +35,6 @@ export const path = {
 	},
 	buildFolder: buildFolder,
 	srcFolder: srcFolder,
+	tempFolder: "./temp",
 	rootFolder: rootFolder,
 };
