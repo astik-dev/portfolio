@@ -15,7 +15,10 @@ export const scss = () => {
 				this.emit('end');
 			}
 		}))
-		.pipe(sass({ style: "expanded" }))
+		.pipe(sass({
+			style: "expanded",
+			importers: [ new dartSass.NodePackageImporter() ],
+		}))
 		.pipe(postcss([
 			autoprefixer(),
 			...(app.isBuild ? [ cssnano() ] : [])

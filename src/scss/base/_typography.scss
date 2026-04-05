@@ -1,9 +1,11 @@
+@use "pkg:@fontsource-variable/roboto/wght.css";
+@use "pkg:@fontsource-variable/roboto/wght-italic.css";
 @use "../abstracts/mixins" as *;
 
 
 body {
 	color: #FFF;
-	font-family: 'Roboto', sans-serif;
+	font-family: "Roboto Variable", sans-serif;
 	@include font(16px, 19px);
 }
 
