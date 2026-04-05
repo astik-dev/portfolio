@@ -1,4 +1,6 @@
 import fileInclude from "gulp-file-include";
+import { Transform } from "stream";
+import { minify } from "html-minifier-terser";
 import imageCreator from "../../src/js/modules/imageCreator.js";
 import { renderProjectsItem } from "../../src/js/modules/renderProjectsItem.js";
 import { store } from "../store.js";
@@ -81,6 +83,24 @@ export const html = () => {
 				contactItems: contacts.map(renderContactsItem).join(""),
 			}
 		}))
+		.pipe( // html-minifier-terser
+			app.plugins.if(app.isBuild, new Transform({
+				objectMode: true,
+				transform: async (file, _, cb) => {
+					if (file.isNull()) return cb(null, file);
+					try {
+						const minified = await minify(file.contents.toString(), {
+							collapseWhitespace: true,
+							removeComments: true,
+						});
+						file.contents = Buffer.from(minified);
+						cb(null, file);
+					} catch (err) {
+						cb(err);
+					}
+				}
+			}))
+		)
 		.pipe(app.gulp.dest(app.path.build.html))
 		.pipe(app.plugins.browsersync.stream());
 }
