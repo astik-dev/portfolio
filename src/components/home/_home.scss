@@ -64,9 +64,8 @@
 
 	&__right {
 
-		img {
-			height: 379px;
-			width: 300px;
+		svg {
+			display: block;
 		}
 	}
 }
@@ -135,7 +134,7 @@
 
 		&__right {
 
-			img {
+			svg {
 				height: 253px;
 				width: 200px;
 			}
