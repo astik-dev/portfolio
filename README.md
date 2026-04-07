@@ -7,7 +7,7 @@ Developed with HTML, SCSS, JavaScript, and Gulp.
 2. Content assets served from a separate `content` branch
 3. SwiperJS sliders
 4. Lazy loading of images
-5. Google Analytics and Google Tag Manager integration
+5. [Umami](https://github.com/umami-software/umami) analytics integration
 
 ## Design
 Design by [Braian](https://www.figma.com/community/file/1202589711092010403/portafolio)  

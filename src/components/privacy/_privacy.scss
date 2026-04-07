@@ -33,15 +33,26 @@
 
 		ul {
 			
+			li {
+				position: relative;
+
+				margin-left: 8px;
+			}
+
 			li:before {
-				content: "· ";
+				content: "·";
+
+				position: absolute;
+				top: 0;
+				right: calc(100% + 3px);
+				
+				font-weight: 700;
 			}
 		}
 
 		a {
-			color: #2C66C3;
+			color: inherit;
 			text-decoration: underline;
-			font-weight: 400;
 		}
 	}
 }

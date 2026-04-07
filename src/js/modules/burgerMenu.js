@@ -1,5 +1,5 @@
+import { track } from "./analytics.js";
 import { dqs } from "./utils.js";
-import { gtmEvent } from "./googleAnalytics4.js";
 
 
 export function toggleBurgerMenu() {
@@ -7,9 +7,11 @@ export function toggleBurgerMenu() {
 		headerCont = dqs(".header__container"),
 		openCssClass = "header__container_open-burger";
 
-	if (!headerCont.classList.contains(openCssClass)) {
-        gtmEvent({'event': 'open_burgerMenu'});
-    }
+	if (headerCont.classList.contains(openCssClass)) {
+		track("hamburger-menu-close");
+    } else {
+		track("hamburger-menu-open");
+	}
 
 	headerCont.classList.toggle(openCssClass);
 }

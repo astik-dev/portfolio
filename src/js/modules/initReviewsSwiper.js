@@ -1,6 +1,6 @@
 import Swiper from "swiper";
 import { EffectFlip, Navigation, Pagination } from "swiper/modules";
-import { gtmEvent } from "./googleAnalytics4.js";
+import { track } from "./analytics.js";
 
 
 new Swiper('.reviews__swiper', {
@@ -31,8 +31,6 @@ new Swiper('.reviews__swiper', {
 	speed: 450,
 
 	on: {
-		slideChange: function () {
-			gtmEvent({'event': 'reviews_slideChange'});
-		},
+		slideChange: () => track("reviews-swiper-slide-change"),
 	},
 });

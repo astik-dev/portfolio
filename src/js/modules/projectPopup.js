@@ -2,8 +2,8 @@ import Swiper from "swiper";
 import { Navigation, Pagination } from "swiper/modules";
 import { doc, dqs, dqsa } from "./utils.js";
 import imageCreator from "./imageCreator.js";
-import { gtmEvent } from "./googleAnalytics4.js";
 import projects from "../../../temp/projects.json";
+import { track } from "./analytics.js";
 
 
 const projectPopupTransitionDuration = 300;
@@ -65,11 +65,9 @@ function imageSlideHTML(imagePath) {
 
 function imageSlideScrollEvent(event) {
 	const link = event.target.querySelector("a").href;
-	const startIndex = link.indexOf("/projects/") + 10; // 10 = "/projects/" length
-	const trimmedLink = link.substring(startIndex);
-	gtmEvent({
-		'event': 'project_slideScroll',
-		'projectTrimmedLink': trimmedLink
+	const startIndex = link.indexOf("/projects/") + "/projects/".length;
+	track("project-popup-swiper-slide-scroll", {
+		img: link.substring(startIndex),
 	});
 }
 
@@ -165,8 +163,9 @@ const swiperProjectPopup = new Swiper('.project-popup__image-swiper', {
 	allowTouchMove: false,
 
 	on: {
-		slideChange: function () {
-			gtmEvent({'event': 'project_slideChange'});
+		slideChange: () => {
+
+			track("project-popup-swiper-slide-change");
 
 			// Loading next-next image
 			const nextNextPic = dqs(".project-popup__image-slide.swiper-slide-next + .project-popup__image-slide picture");
