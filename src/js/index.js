@@ -5,6 +5,7 @@ import { openProjectPopup, closeProjectPopup } from "./modules/projectPopup.js";
 import { getLoadedProjectsCount, loadMoreProjects } from "./modules/loadMoreProjects.js";
 import projects from "../../temp/projects.json";
 import "./modules/initReviewsSwiper.js"; // Swiper
+import { track } from "./modules/analytics.js";
 
 
 doc.addEventListener("click", e => {
@@ -33,7 +34,9 @@ doc.addEventListener("click", e => {
 
 	else if (e.target.matches('.header__menu a[href*="#"]')) {
 		e.preventDefault();
-		smoothScroll(e.target.getAttribute('href'));
+		const href = e.target.getAttribute('href');
+		smoothScroll(href);
+		track("header-nav-link-click", { href });
 	}
 });
 
