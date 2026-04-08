@@ -8,7 +8,12 @@
         </div>
     
         @@if (projectCount > 4) {
-            <button class="projects__btn-load-more">Load More</button>
+            <button
+                class="projects__btn-load-more"
+                data-umami-event="projects-load-more-click"
+            >
+                Load More
+            </button>
         }
 
     </div>
