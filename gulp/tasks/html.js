@@ -43,7 +43,15 @@ function renderReviewsSlide({ name, grade, text, date, link, linkText }) {
             <p>${text}</p>
             <div class="reviews__slide-bottom">
                 <span>${date}</span>
-                <a href="${link}" target="_blank" title="Go to source">${linkText}</a>
+                <a
+					href="${link}"
+					target="_blank"
+					title="Go to source"
+					data-umami-event="review-source-link-click"
+					data-umami-event-url="${link}"
+				>
+					${linkText}
+				</a>
             </div>
         </div>
     `;
