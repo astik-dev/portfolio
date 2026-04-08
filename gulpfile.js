@@ -25,6 +25,7 @@ import { fonts } from "./gulp/tasks/fonts.js";
 import { scss } from "./gulp/tasks/scss.js";
 import { js } from "./gulp/tasks/js.js";
 import { images } from "./gulp/tasks/images.js";
+import { umami } from "./gulp/tasks/umami.js";
 
 
 
@@ -38,7 +39,7 @@ function watcher() {
 
 
 const mainTasks =
-	gulp.series(fetchData, gulp.parallel(html, fonts, scss, js, images));
+	gulp.series(fetchData, gulp.parallel(html, fonts, scss, js, images, umami));
 
 const dev = gulp.series(reset, mainTasks, gulp.parallel(watcher, server));
 export const deploy = gulp.series(reset, cname, mainTasks);
