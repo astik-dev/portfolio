@@ -7,7 +7,7 @@ export function smoothScroll(elemSelector) {
     const stopY = dqs(elemSelector).offsetTop - dqs(".header").offsetHeight;
     const distance = stopY > startY ? stopY - startY : startY - stopY;
  	
-    if (window.innerWidth < 575.5) toggleBurgerMenu();
+    if (window.innerWidth < 575.5) toggleBurgerMenu(false);
 
  	if (distance < 100) {
         scrollTo(0, stopY);
