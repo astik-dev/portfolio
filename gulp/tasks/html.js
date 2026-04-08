@@ -58,7 +58,14 @@ function renderContactsItem({ link, title, img, imgWEBP }) {
 		: imageCreator.newImg("external", fallback, title);
 		
 	return `
-		<a href="${link}" target="_blank" title="${title}" class="contacts__item">
+		<a
+			class="contacts__item"
+			href="${link}"
+			target="_blank"
+			title="${title}"
+			data-umami-event="contacts-link-click"
+			data-umami-event-title="${title}"
+		>
 			${imgOrPicture}
 		</a>
 	`;
