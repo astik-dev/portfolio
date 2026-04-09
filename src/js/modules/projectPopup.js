@@ -50,15 +50,23 @@ function setScrollWidthCssVar() {
 	doc.documentElement.style.setProperty('--scroll-width', `${scrollWidth}px`);
 }
 
-function imageSlideHTML(imagePath) {
+function imageSlideHTML(projectFolder, index) {
+	const imagePathWithoutExt = `projects/${projectFolder}/full-size/${index}`;
 	return `
 		<div class="project-popup__image-slide swiper-slide">
-			<a href="${imageCreator.fullPath("external", imagePath)}.jpeg" target="_blank">
+			<a
+				href="${imageCreator.fullPath("external", imagePathWithoutExt)}.jpeg"
+				target="_blank"
+				data-umami-event="project-popup-screenshot-click"
+				data-umami-event-project="${projectFolder}"
+				data-umami-event-screenshot-index="${index}"
+				data-umami-event-screenshot="${projectFolder}_${index}"
+			>
 				${imageCreator.newWebpPic(
 					"external",
-					imagePath+".webp",
-					imagePath+".jpeg",
-					`Project image`,
+					imagePathWithoutExt + ".webp",
+					imagePathWithoutExt + ".jpeg",
+					`Project screenshot ${index}`,
 					"lazy"
 				)}
 			</a>
@@ -114,9 +122,8 @@ export function openProjectPopup(project) {
 
 		// image slides
 		let imageSlideElems = ``;
-		const imagesFolderPath = `projects/${project.folder}/full-size/`;
-		for (let i = 1; i <= project.screenshots; i++) {
-			imageSlideElems += imageSlideHTML(imagesFolderPath + i);
+		for (let index = 1; index <= project.screenshots; index++) {
+			imageSlideElems += imageSlideHTML(project.folder, index);
 		}
 		dqs(".project-popup__image-swiper-wrapper").innerHTML = imageSlideElems;
 		swiperProjectPopup.update();
