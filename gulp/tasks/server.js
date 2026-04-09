@@ -7,5 +7,6 @@ export const server = () => {
 		open: false,
 		ghostMode: false,
 		ui: false,
+		online: false,
 	});
 }
