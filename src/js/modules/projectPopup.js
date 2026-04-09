@@ -22,7 +22,7 @@ const projectPopup = {
 		descriptionElem.scrollTop = 0;
 	},
 
-	setLinkButtons(repositoryLink, demoLink) {
+	setLinkButtons(repositoryLink, demoLink, projectFolder) {
 		const linkButtons = [repositoryLink, demoLink];
 
 		linkButtons.forEach((link, index) => {
@@ -31,8 +31,12 @@ const projectPopup = {
 
 			btn.classList.toggle("project-popup__btn_disabled", isLinkEmpty);
 
-			if (isLinkEmpty) btn.removeAttribute("href");
-			else btn.href = link;
+			if (isLinkEmpty) {
+				btn.removeAttribute("href");
+			} else {
+				btn.href = link;
+				btn.dataset.umamiEventProject = projectFolder;
+			}
 		});
 
 		dqs(".project-popup__btns").classList.toggle(
@@ -109,7 +113,8 @@ export function openProjectPopup(eventTarget) {
 
 		projectPopup.setTitle(project.title);
 		projectPopup.setDescription(project.description);
-		projectPopup.setLinkButtons(project.repository, project.demo);
+		projectPopup
+			.setLinkButtons(project.repository, project.demo, project.folder);
 
 		// image slides
 		let imageSlideElems = ``;
