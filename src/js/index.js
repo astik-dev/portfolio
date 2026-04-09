@@ -4,7 +4,7 @@ import { smoothScroll } from "./modules/smoothScroll.js";
 import { openProjectPopup, closeProjectPopup } from "./modules/projectPopup.js";
 import { getLoadedProjectsCount, loadMoreProjects } from "./modules/loadMoreProjects.js";
 import projects from "../../temp/projects.json";
-import "./modules/initReviewsSwiper.js"; // Swiper
+import "./modules/initReviewsSwiper.js";
 import { track } from "./modules/analytics.js";
 
 
