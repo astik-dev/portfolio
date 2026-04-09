@@ -75,10 +75,15 @@ function imageSlideHTML(projectFolder, index) {
 }
 
 function imageSlideScrollEvent(event) {
-	const link = event.target.querySelector("a").href;
-	const startIndex = link.indexOf("/projects/") + "/projects/".length;
-	track("project-popup-swiper-slide-scroll", {
-		img: link.substring(startIndex),
+	const {
+		umamiEventProject,
+		umamiEventScreenshotIndex,
+		umamiEventScreenshot,
+	} = event.target.querySelector("a").dataset;
+	track("project-popup-screenshot-scroll", {
+		project: umamiEventProject,
+		"screenshot-index": umamiEventScreenshotIndex,
+		screenshot: umamiEventScreenshot,
 	});
 }
 
