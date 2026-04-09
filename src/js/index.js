@@ -19,7 +19,10 @@ doc.addEventListener("click", e => {
 		toggleBurgerMenu();
 
 	else if (projectItem) {
-		openProjectPopup(projectItem);
+		const projectIndex = projectItem.dataset.projectIndex;
+		const project = projects[projectIndex];
+		openProjectPopup(project);
+		track("project-click", { project: project.folder });
 	}
 
 	else if (loadMoreButton) {

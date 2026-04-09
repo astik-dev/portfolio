@@ -2,7 +2,6 @@ import Swiper from "swiper";
 import { Navigation, Pagination } from "swiper/modules";
 import { doc, dqs, dqsa } from "./utils.js";
 import imageCreator from "./imageCreator.js";
-import projects from "../../../temp/projects.json";
 import { track } from "./analytics.js";
 
 
@@ -103,13 +102,10 @@ function withTransitionLock(actionFunction) {
 	}, projectPopupTransitionDuration);
 }
 
-export function openProjectPopup(eventTarget) {
+export function openProjectPopup(project) {
 	withTransitionLock(() => {
 
 		setScrollWidthCssVar();
-
-		const projectIndex = eventTarget.dataset.projectIndex;
-		const project = projects[projectIndex];
 
 		projectPopup.setTitle(project.title);
 		projectPopup.setDescription(project.description);
