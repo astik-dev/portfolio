@@ -89,7 +89,6 @@ function imageSlideScrollEvent(event) {
 
 function addScrollEventToImageSlides() {
 	const swiperSlideElems = dqsa(".project-popup__image-swiper-wrapper .swiper-slide");
-	if (swiperSlideElems.length < 1) return;
 	swiperSlideElems.forEach(slide => {
 		slide.addEventListener('scroll', imageSlideScrollEvent, { once: true });
 	});
