@@ -192,3 +192,7 @@ const swiperProjectPopup = new Swiper('.project-popup__image-swiper', {
 		},
 	},
 });
+
+doc.addEventListener("keydown", event => {
+	if (event.key == "Escape") closeProjectPopup();
+});

@@ -43,10 +43,6 @@ doc.addEventListener("click", e => {
 	}
 });
 
-doc.addEventListener("keydown", event => {
-	if (event.key == "Escape") closeProjectPopup();
-});
-
 window.addEventListener("scroll", () => track("scroll"), { once: true });
 
 const intersectionObserver = new IntersectionObserver(entries => {
