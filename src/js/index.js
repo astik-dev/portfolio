@@ -53,13 +53,17 @@ const intersectionObserver = new IntersectionObserver(entries => {
 	entries.forEach(entry => {
 		if (entry.isIntersecting) {
 			const { classList } = entry.target;
-			if (classList.contains("projects__items")) track("projects-view");
-			else if (classList.contains("skills__items")) track("skills-view");
+			if (classList.contains("projects__item")) track("projects-view");
+			else if (classList.contains("skills__item")) track("skills-view");
 			else if (classList.contains("reviews__swiper")) track("reviews-view");
 			else if (classList.contains("contacts__items")) track("contacts-view");
 			intersectionObserver.unobserve(entry.target);
     	}
 	});
 }, { threshold: 1 });
-dqsa(".projects__items, .skills__items, .reviews__swiper, .contacts__items")
-	.forEach(el => intersectionObserver.observe(el));
+dqsa(
+	".projects__item:last-child, " +
+	".skills__item:last-child, " +
+	".reviews__swiper, " +
+	".contacts__items"
+).forEach(el => intersectionObserver.observe(el));
