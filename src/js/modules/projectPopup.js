@@ -149,10 +149,15 @@ export function openProjectPopup(project) {
 	});
 }
 
-export function closeProjectPopup() {
+/**
+ * @param {"button" | "backdrop" | "esc"} method 
+ * @returns {void}
+ */
+export function closeProjectPopup(method) {
 	withTransitionLock(() => {
 		dqs("body").classList.remove("open-project-popup");
 	});
+	track("project-popup-close", { method });
 }
 
 
@@ -194,5 +199,5 @@ const swiperProjectPopup = new Swiper('.project-popup__image-swiper', {
 });
 
 doc.addEventListener("keydown", event => {
-	if (event.key == "Escape") closeProjectPopup();
+	if (event.key == "Escape") closeProjectPopup("esc");
 });

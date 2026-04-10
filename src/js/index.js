@@ -32,8 +32,11 @@ doc.addEventListener("click", e => {
 		}
 	}
 		
-	else if (e.target.classList.contains("project-popup") || closeBtnProjectPopup) // click outside the popup or close button
-		closeProjectPopup();
+	else if (e.target.classList.contains("project-popup"))
+		closeProjectPopup("backdrop");
+
+	else if (closeBtnProjectPopup)
+		closeProjectPopup("button");
 
 	else if (e.target.matches('.header__menu a[href*="#"]')) {
 		e.preventDefault();
