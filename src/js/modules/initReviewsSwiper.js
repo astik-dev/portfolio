@@ -31,6 +31,16 @@ new Swiper('.reviews__swiper', {
 	speed: 450,
 
 	on: {
-		slideChange: () => track("reviews-swiper-slide-change"),
+		slideChange: swiper => {
+
+			const activeSlideEl = swiper.slides[swiper.activeIndex];
+			
+			track("reviews-swiper-slide-change", {
+				review: activeSlideEl.querySelector("a").getAttribute("href"),
+				"to-index": swiper.activeIndex + 1, // to 1-based index
+				direction:
+					swiper.previousIndex < swiper.activeIndex ? "next" : "prev",
+			});
+		},
 	},
 });
