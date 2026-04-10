@@ -130,8 +130,8 @@ export function openProjectPopup(project) {
 			imageSlideElems += imageSlideHTML(project.folder, index);
 		}
 		dqs(".project-popup__image-swiper-wrapper").innerHTML = imageSlideElems;
-		swiperProjectPopup.update();
-		swiperProjectPopup.slideTo(0, 1, false);
+		projectPopupSwiper.update();
+		projectPopupSwiper.slideTo(0, 1, false);
 		addScrollEventToImageSlides();
 
 		setTimeout(() => {
@@ -161,7 +161,7 @@ export function closeProjectPopup(method) {
 }
 
 
-const swiperProjectPopup = new Swiper('.project-popup__image-swiper', {
+const projectPopupSwiper = new Swiper('.project-popup__image-swiper', {
 
 	modules: [ Navigation, Pagination ],
 
