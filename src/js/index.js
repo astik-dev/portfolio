@@ -1,7 +1,11 @@
 import { doc, dqsa } from "./modules/utils.js";
 import { toggleBurgerMenu } from "./modules/burgerMenu.js";
 import { smoothScroll } from "./modules/smoothScroll.js";
-import { openProjectPopup, closeProjectPopup } from "./modules/projectPopup.js";
+import {
+	openProjectPopup,
+	closeProjectPopup,
+	handleSlideLinkClick as handleProjectPopupSlideLinkClick
+} from "./modules/projectPopup.js";
 import { getLoadedProjectsCount, loadMoreProjects } from "./modules/loadMoreProjects.js";
 import projects from "../../temp/projects.json";
 import "./modules/initReviewsSwiper.js";
@@ -13,6 +17,7 @@ doc.addEventListener("click", e => {
 	const burger = e.target.closest(".header__burger"),
 		  projectItem = e.target.closest(".projects__item"),
 		  loadMoreButton = e.target.closest(".projects__btn-load-more"),
+		  projectPopupSlideLink = e.target.closest(".project-popup__image-slide a"),
 		  closeBtnProjectPopup = e.target.closest(".project-popup__close");
 
 	if (burger)
@@ -30,6 +35,10 @@ doc.addEventListener("click", e => {
 		if (getLoadedProjectsCount() === projects.length) {
 			loadMoreButton.remove();
 		}
+	}
+
+	else if (projectPopupSlideLink) {
+		handleProjectPopupSlideLinkClick(projectPopupSlideLink);
 	}
 		
 	else if (e.target.classList.contains("project-popup"))

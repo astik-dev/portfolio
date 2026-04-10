@@ -57,10 +57,8 @@ function imageSlideHTML(projectFolder, index) {
 			<a
 				href="${imageCreator.fullPath("external", imagePathWithoutExt)}.jpeg"
 				target="_blank"
-				data-umami-event="project-popup-screenshot-click"
-				data-umami-event-project="${projectFolder}"
-				data-umami-event-screenshot-index="${index}"
-				data-umami-event-screenshot="${projectFolder}_${index}"
+				data-project="${projectFolder}"
+				data-screenshot-index="${index}"
 			>
 				${imageCreator.newWebpPic(
 					"external",
@@ -74,17 +72,28 @@ function imageSlideHTML(projectFolder, index) {
 	`;
 }
 
+/**
+ * @param {HTMLAnchorElement} slideLinkEl 
+ */
+export function handleSlideLinkClick(slideLinkEl) {
+	track("project-popup-screenshot-click", buildUmamiEventProps(slideLinkEl));
+}
+
+/**
+ * @param {HTMLAnchorElement} slideLinkEl 
+ */
+function buildUmamiEventProps(slideLinkEl) {
+	const { project, screenshotIndex } = slideLinkEl.dataset;
+	return {
+		project: project,
+		"screenshot-index": Number(screenshotIndex),
+		screenshot: project + "_" + screenshotIndex,
+	}
+}
+
 function imageSlideScrollEvent(event) {
-	const {
-		umamiEventProject,
-		umamiEventScreenshotIndex,
-		umamiEventScreenshot,
-	} = event.target.querySelector("a").dataset;
-	track("project-popup-screenshot-scroll", {
-		project: umamiEventProject,
-		"screenshot-index": umamiEventScreenshotIndex,
-		screenshot: umamiEventScreenshot,
-	});
+	const linkEl = event.target.querySelector("a");
+	track("project-popup-screenshot-scroll", buildUmamiEventProps(linkEl));
 }
 
 function addScrollEventToImageSlides() {
