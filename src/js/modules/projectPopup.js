@@ -139,6 +139,7 @@ export function openProjectPopup(project) {
 			imageSlideElems += imageSlideHTML(project.folder, index);
 		}
 		dqs(".project-popup__image-swiper-wrapper").innerHTML = imageSlideElems;
+		if (projectPopupSwiper.activeIndex !== 0) isProgrammaticSlideChange = true;
 		projectPopupSwiper.update();
 		projectPopupSwiper.slideTo(0, 1, false);
 		addScrollEventToImageSlides();
@@ -170,6 +171,7 @@ export function closeProjectPopup(method) {
 }
 
 
+let isProgrammaticSlideChange = false;
 const projectPopupSwiper = new Swiper('.project-popup__image-swiper', {
 
 	modules: [ Navigation, Pagination ],
@@ -189,9 +191,20 @@ const projectPopupSwiper = new Swiper('.project-popup__image-swiper', {
 	allowTouchMove: false,
 
 	on: {
-		slideChange: () => {
+		slideChange: swiper => {
 
-			track("project-popup-swiper-slide-change");
+			if (!isProgrammaticSlideChange) {
+				const linkEl = swiper.slides[swiper.activeIndex].querySelector("a");
+				const umamiEventProps = buildUmamiEventProps(linkEl);
+				track("project-popup-swiper-slide-change", {
+					project: umamiEventProps.project,
+					"to-index": umamiEventProps["screenshot-index"],
+					"to-screenshot": umamiEventProps.screenshot,
+					direction:
+						swiper.previousIndex < swiper.activeIndex ? "next" : "prev",
+				});
+			}
+			isProgrammaticSlideChange = false;
 
 			// Loading next-next image
 			const nextNextPic = dqs(".project-popup__image-slide.swiper-slide-next + .project-popup__image-slide picture");
