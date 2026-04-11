@@ -11,7 +11,7 @@ const imageCreator = {
 
 	fullPath: function (source, path) {return this.imgBasePath[source] + path},
 
-	newWebpPic: function (source, webpPath, fallbackPath, alt, lazy) {
+	newWebpPic: function (source, webpPath, fallbackPath, alt, lazy, fetchpriority) {
 		const types = {
 			jpg: "jpeg",
 		}
@@ -24,14 +24,20 @@ const imageCreator = {
 		return `<picture>
 					<source type="image/webp" ${src}="${this.fullPath(source, webpPath)}">
 					<source type="image/${fallbackType}" ${src}="${this.fullPath(source, fallbackPath)}">
-					${this.newImg(source, fallbackPath, alt, lazy)}
+					${this.newImg(source, fallbackPath, alt, lazy, fetchpriority)}
 				</picture>`;
 	},
 
-	newImg: function (source, path, alt, lazy) {
+	newImg: function (source, path, alt, lazy, fetchpriority) {
 		const fullPath = this.fullPath(source, path);
 		const src = lazy ? `"${this.px1}" data-src="${fullPath}"` : `"${fullPath}"`;
-		return `<img src=${src} alt="${alt}">`;
+		return `
+			<img
+				src=${src}
+				alt="${alt}"
+				${fetchpriority ? `fetchpriority="${fetchpriority}"` : ""}
+			>
+		`;
 	},
 
     loadPictureSources: function (picture) {
