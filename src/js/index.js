@@ -10,6 +10,7 @@ import { getLoadedProjectsCount, loadMoreProjects } from "./modules/loadMoreProj
 import projects from "../../temp/projects.json";
 import "./modules/initReviewsSwiper.js";
 import { track } from "./modules/analytics.js";
+import "./modules/trackDeviceInfo.js";
 
 
 doc.addEventListener("click", e => {
