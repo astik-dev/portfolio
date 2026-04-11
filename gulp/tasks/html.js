@@ -10,8 +10,8 @@ function renderSkillsItem({ name, img, imgWEBP }) {
 	const fallback = `skills/${img}`;
 
 	const imgOrPicture = imgWEBP
-		? imageCreator.newWebpPic("external", `skills/${imgWEBP}`, fallback, name)
-		: imageCreator.newImg("external", fallback, name);
+		? imageCreator.newWebpPic("external", `skills/${imgWEBP}`, fallback, name, "browser")
+		: imageCreator.newImg("external", fallback, name, "browser");
 
 	return `
 		<article class="skills__item">
@@ -33,7 +33,12 @@ function renderReviewsSlide({ name, grade, text, date, link, linkText }) {
     return `
         <div class="reviews__slide swiper-slide">
             <div class="reviews__slide-top">
-                ${imageCreator.newImg("local", `reviews/user-avatar.svg`, "Avatar")}
+                ${imageCreator.newImg(
+					"local",
+					`reviews/user-avatar.svg`,
+					"Avatar",
+					"browser"
+				)}
                 <h5>${name}</h5>
                 <h4 style="color: ${gradeColor};">
                     <span>${grade}/10</span>
@@ -59,11 +64,12 @@ function renderReviewsSlide({ name, grade, text, date, link, linkText }) {
 
 function renderContactsItem({ link, title, img, imgWEBP }) {
 
+	const webpPath = `contacts/${imgWEBP}`;
 	const fallback = `contacts/${img}`;
 
 	const imgOrPicture = imgWEBP
-		? imageCreator.newWebpPic("external", `contacts/${imgWEBP}`, fallback, title)
-		: imageCreator.newImg("external", fallback, title);
+		? imageCreator.newWebpPic("external", webpPath, fallback, title, "browser")
+		: imageCreator.newImg("external", fallback, title, "browser");
 		
 	return `
 		<a
