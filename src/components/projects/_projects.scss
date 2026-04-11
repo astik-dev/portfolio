@@ -40,27 +40,18 @@
 		}
 
 		&-title {
-			position: relative;
+			display: flex;
+			align-items: center;
+			gap: 11px;
 
-			padding: 14px 10px 8px 40px;
+			padding: 14px 10px 8px 11px;
 			background: #293548;
 
-			font-size: 0;
-			line-height: 0;
-
-			&:before {
-				content: "";
-
-				position: absolute;
-				bottom: 18px;
-				left: 11px;
-
-				display: inline-block;
+			svg {
 				width: 18px;
 				height: 12.5px;
 
-				background: url("../img/eye.svg") no-repeat;
-				background-size: 100% 100%;
+				margin-bottom: 5px;
 			}
 
 			h5 {
@@ -151,10 +142,10 @@
 			}
 
 			&-title {
-				padding: 8px 10px 4px 40px;
+				padding: 8px 10px 4px 11px;
 
-				&:before {
-					bottom: 13px;
+				svg {
+					margin-bottom: 3px;
 				}
 
 				h5 {
@@ -185,18 +176,6 @@
 			
 			img {
 				height: 185px;
-			}
-
-			&-title {
-				padding: 8px 10px 4px 40px;
-
-				&:before {
-					bottom: 13px;
-				}
-
-				h5 {
-					padding: 0 0 3px 0;
-				}
 			}
 		}
 	}
