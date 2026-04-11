@@ -7,7 +7,7 @@ const imageCreator = {
 		external: "https://raw.githubusercontent.com/astik-dev/portfolio/content/images/",
 	},
 
-	px1: `img/1x1.png`,
+	px1: "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=",
 
 	fullPath: function (source, path) {return this.imgBasePath[source] + path},
 

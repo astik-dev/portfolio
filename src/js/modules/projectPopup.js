@@ -211,7 +211,7 @@ const projectPopupSwiper = new Swiper('.project-popup__image-swiper', {
 			if (nextNextPic) {
 				setTimeout(() => {
 					const picImg = nextNextPic.querySelector("img");
-					if (picImg.src != imageCreator.px1) {
+					if (picImg.src === imageCreator.px1) {
 						imageCreator.loadPictureSources(nextNextPic);
 					}
 				}, 300); // 300 - Default duration of transition between slides (in ms)
