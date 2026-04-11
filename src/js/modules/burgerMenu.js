@@ -1,4 +1,4 @@
-import { track } from "./analytics.js";
+import { track } from "../analytics/umami.js";
 import { dqs } from "./utils.js";
 
 

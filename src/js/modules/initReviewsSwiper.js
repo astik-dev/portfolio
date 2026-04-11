@@ -1,6 +1,6 @@
 import Swiper from "swiper";
 import { EffectFlip, Navigation, Pagination } from "swiper/modules";
-import { track } from "./analytics.js";
+import { track } from "../analytics/umami.js";
 
 
 new Swiper('.reviews__swiper', {

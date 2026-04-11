@@ -1,4 +1,4 @@
-import { track } from "./analytics.js";
+import { track } from "./umami.js";
 
 const dpr = window.devicePixelRatio;
 const screenWidthPx = Math.round(screen.width * dpr);

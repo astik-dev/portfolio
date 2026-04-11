@@ -2,7 +2,7 @@ import Swiper from "swiper";
 import { Navigation, Pagination } from "swiper/modules";
 import { doc, dqs, dqsa } from "./utils.js";
 import imageCreator from "./imageCreator.js";
-import { track } from "./analytics.js";
+import { track } from "../analytics/umami.js";
 
 
 const projectPopupTransitionDuration = 300;
