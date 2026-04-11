@@ -11,12 +11,21 @@ const imageCreator = {
 
 	fullPath: function (source, path) {return this.imgBasePath[source] + path},
 
-	newWebpPic: function (source, webpPath, fallbackPath, alt, lazy, fetchpriority) {
+	/**
+	 * @param {"local" | "external"} source 
+	 * @param {string} webpPath 
+	 * @param {string} fallbackPath 
+	 * @param {string} alt 
+	 * @param {"browser" | "data-src"} [lazy] 
+	 * @param {HTMLImageElement["fetchPriority"]} [fetchpriority] 
+	 * @returns {string}
+	 */
+	newWebpPic(source, webpPath, fallbackPath, alt, lazy, fetchpriority) {
 		const types = {
 			jpg: "jpeg",
 		}
 
-		const src = lazy ? "data-src" : "srcset";
+		const src = lazy === "data-src" ? "data-src" : "srcset";
 		
 		const fallbackExt = getFileExtension(fallbackPath);
 		const fallbackType = types[fallbackExt] || fallbackExt;
@@ -28,14 +37,25 @@ const imageCreator = {
 				</picture>`;
 	},
 
-	newImg: function (source, path, alt, lazy, fetchpriority) {
+	/**
+	 * @param {"local" | "external"} source 
+	 * @param {string} path 
+	 * @param {string} alt 
+	 * @param {"browser" | "data-src"} [lazy] 
+	 * @param {HTMLImageElement["fetchPriority"]} [fetchpriority] 
+	 * @returns {string}
+	 */
+	newImg(source, path, alt, lazy, fetchpriority) {
 		const fullPath = this.fullPath(source, path);
-		const src = lazy ? `"${this.px1}" data-src="${fullPath}"` : `"${fullPath}"`;
+		const src = lazy === "data-src"
+			? `"${this.px1}" data-src="${fullPath}"`
+			: `"${fullPath}"`;
 		return `
 			<img
 				src=${src}
 				alt="${alt}"
 				${fetchpriority ? `fetchpriority="${fetchpriority}"` : ""}
+				${lazy === "browser" ? "loading='lazy'" : ""}
 			>
 		`;
 	},

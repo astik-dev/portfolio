@@ -6,8 +6,9 @@ export function renderProjectsItem({ folder, title }, index) {
 	const webp = img800 + ".webp";
 	const fallback = img800 + ".jpeg";
 		
-	const webpPicElem =
-		imageCreator.newWebpPic("external", webp, fallback, title, false, "high");
+	const webpPicElem = imageCreator.newWebpPic(
+		"external", webp, fallback, title, undefined, "high"
+	);
 	
 	return `
 		<article class="projects__item" data-project-index="${index}">

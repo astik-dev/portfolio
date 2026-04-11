@@ -65,7 +65,7 @@ function imageSlideHTML(projectFolder, index) {
 					imagePathWithoutExt + ".webp",
 					imagePathWithoutExt + ".jpeg",
 					`Project screenshot ${index}`,
-					"lazy"
+					"data-src"
 				)}
 			</a>
 		</div>
