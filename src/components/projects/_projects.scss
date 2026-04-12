@@ -29,13 +29,6 @@
 			aspect-ratio: 2 / 1;
 			width: 100%;
 
-			background: url("../img/loading.gif") no-repeat;
-			background-size: 100px;
-			background-position: center;
-
-			object-fit: cover;
-			object-position: top;
-
 			transition: $anim;
 		}
 
