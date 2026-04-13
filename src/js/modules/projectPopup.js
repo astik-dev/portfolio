@@ -56,6 +56,7 @@ function imageSlideHTML(projectFolder, index) {
 		<div class="project-popup__image-slide swiper-slide">
 			<div class="project-popup__image-slide-loader"></div>
 			<a
+				style="display: none"
 				href="${imageCreator.fullPath("external", imagePathWithoutExt)}.jpeg"
 				target="_blank"
 				data-project="${projectFolder}"
@@ -103,8 +104,14 @@ async function addSlidePictureLoadHandler(picture) {
 		console.error(error);
 	}
 	window.requestAnimationFrame(() => {
-		const slideEl = picture.closest(".project-popup__image-slide");
-		slideEl.classList.add("project-popup__image-slide_img-loaded");
+		picture.parentElement.style.display = "";
+		window.requestAnimationFrame(() => {
+			const slideEl = picture.closest(".project-popup__image-slide");
+			slideEl.classList.add("project-popup__image-slide_img-loaded");
+			const loaderEl =
+				slideEl.querySelector(".project-popup__image-slide-loader");
+			loaderEl.addEventListener("transitionend", loaderEl.remove);
+		});
 	});
 }
 

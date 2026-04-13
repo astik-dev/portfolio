@@ -66,8 +66,6 @@
 
 		background: #444444;
 
-		overflow-y: auto;
-
 		&-loader {
 			$size: 75px;
 
@@ -80,6 +78,8 @@
 
 			border-radius: 50%;
 			animation: rotate 1s linear infinite;
+
+			transition: opacity .2s;
 
 			&::before {
 				content: "";
@@ -107,7 +107,7 @@
 			}
 		}
 		&_img-loaded &-loader {
-			display: none;
+			opacity: 0;
 		}
 
 		a {
@@ -116,8 +116,15 @@
 			left: 0;
 
 			display: block;
-
+			height: 100%;
+			
+			overflow-y: auto;
 			cursor: zoom-in;
+
+			transition: opacity .2s;
+		}
+		&:not(&_img-loaded) a {
+			opacity: 0;
 		}
 
 		img {
