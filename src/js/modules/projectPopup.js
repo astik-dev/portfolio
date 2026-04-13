@@ -54,6 +54,7 @@ function imageSlideHTML(projectFolder, index) {
 	const imagePathWithoutExt = `projects/${projectFolder}/full-size/${index}`;
 	return `
 		<div class="project-popup__image-slide swiper-slide">
+			<div class="project-popup__image-slide-loader"></div>
 			<a
 				href="${imageCreator.fullPath("external", imagePathWithoutExt)}.jpeg"
 				target="_blank"
@@ -89,6 +90,22 @@ function buildUmamiEventProps(slideLinkEl) {
 		"screenshot-index": Number(screenshotIndex),
 		screenshot: project + "_" + screenshotIndex,
 	}
+}
+
+/**
+ * @param {HTMLPictureElement} picture 
+ * @returns {void}
+ */
+async function addSlidePictureLoadHandler(picture) {
+	try {
+		await picture.querySelector("img").decode();
+	} catch (error) {
+		console.error(error);
+	}
+	window.requestAnimationFrame(() => {
+		const slideEl = picture.closest(".project-popup__image-slide");
+		slideEl.classList.add("project-popup__image-slide_img-loaded");
+	});
 }
 
 function imageSlideScrollEvent(event) {
@@ -148,6 +165,7 @@ export function openProjectPopup(project) {
 			// Load first two (if available) images
 			dqsa(".project-popup__image-slide:nth-child(-n+2) picture").forEach((slidePic, index) => {
 				imageCreator.loadPictureSources(slidePic);
+				addSlidePictureLoadHandler(slidePic);
 				if (index == 0) {
 					const picImg = slidePic.querySelector("img");
 					picImg.addEventListener("load", () => showScrollAnimation(picImg));
@@ -213,6 +231,7 @@ const projectPopupSwiper = new Swiper('.project-popup__image-swiper', {
 					const picImg = nextNextPic.querySelector("img");
 					if (picImg.src === imageCreator.px1) {
 						imageCreator.loadPictureSources(nextNextPic);
+						addSlidePictureLoadHandler(nextNextPic);
 					}
 				}, 300); // 300 - Default duration of transition between slides (in ms)
 			}
