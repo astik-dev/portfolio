@@ -1,6 +1,6 @@
 import imageCreator from "./imageCreator.js";
 
-export function renderProjectsItem({ folder, title }, index) {
+export function renderProjectsItem({ folder, title }, index, isHidden) {
 	
 	const img800 = "projects/" + folder + "/800";
 	const webp = imageCreator.fullPath("external", img800 + ".webp");
@@ -11,7 +11,11 @@ export function renderProjectsItem({ folder, title }, index) {
 
 	return `
 		<article
-			class="projects__item shimmer"
+			class="
+				projects__item
+				${isHidden ? "projects__item_hidden" : ""}
+				shimmer
+			"
 			data-project-index="${index}"
 		>
 			<picture>

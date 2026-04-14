@@ -94,7 +94,11 @@ export const html = () => {
 		.pipe(fileInclude({
 			context: {
 				projectCount: projects.length,
-				projectItems: projects.slice(0, 4).map(renderProjectsItem).join(""),
+				projectItems:
+					projects
+						.slice(0, 4)
+						.map((p, i) => renderProjectsItem(p, i, false))
+						.join(""),
 				skillItems: skills.map(renderSkillsItem).join(""),
 				reviewSlides:
 					reviews

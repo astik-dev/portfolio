@@ -19,7 +19,15 @@ export function loadMoreProjects() {
 	) {
 		projectsItemsElem.insertAdjacentHTML(
 			"beforeend",
-			renderProjectsItem(projects[index], index)
+			renderProjectsItem(projects[index], index, true)
 		);
 	}
+	const addedElements = dqsa(".projects__item_hidden");
+	window.requestAnimationFrame(() => {
+		window.requestAnimationFrame(() => {
+			addedElements.forEach(el =>
+				el.classList.remove("projects__item_hidden")
+			);
+		});
+	});
 }
