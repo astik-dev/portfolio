@@ -7,14 +7,14 @@ export function renderProjectsItem({ folder, title }, index, isHidden) {
 	const jpeg = imageCreator.fullPath("external", img800 + ".jpeg");
 
 	const handleImageLoad =
-		"this.closest('.projects__item').classList.remove('shimmer')";
+		"this.closest('.projects__item').classList.remove('projects__item_shimmer')";
 
 	return `
 		<article
 			class="
 				projects__item
 				${isHidden ? "projects__item_hidden" : ""}
-				shimmer
+				projects__item_shimmer
 			"
 			data-project-index="${index}"
 		>

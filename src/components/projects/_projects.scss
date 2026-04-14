@@ -25,6 +25,18 @@
 		
 		transition: transform .25s;
 
+		&_shimmer {
+			background:
+				linear-gradient(90deg, #444444 25%, #5c5c5c 50%, #444444 75%);
+			background-size: 200% 100%;
+
+			animation: 1.5s shimmer linear infinite;
+
+			@keyframes shimmer {
+				to { background-position-x: -200%; }
+			}
+		}
+
 		&_hidden {
 			transform: translateY(-50%) scale(0);
 		}
@@ -38,7 +50,7 @@
 
 			transition: opacity .25s, transform .3s;
 		}
-		&.shimmer img {
+		&_shimmer img {
 			opacity: 0;
 		}
 
