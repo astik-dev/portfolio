@@ -132,11 +132,13 @@ function addScrollEventToImageSlides() {
 }
 
 function showScrollAnimation(image) {
-	if (image.scrollHeight > dqs(".project-popup__image").clientHeight) {
-		setTimeout(() => {
-			dqs(".project-popup__image-scroll").classList.add("project-popup__image-scroll_animation");
-		}, 500);
-	}
+	setTimeout(() => {
+		if (image.scrollHeight > dqs(".project-popup__image").clientHeight) {
+			dqs(".project-popup__image-scroll").classList.add(
+				"project-popup__image-scroll_animation"
+			);
+		}
+	}, 500);
 }
 
 function withTransitionLock(actionFunction) {
