@@ -98,21 +98,23 @@ function buildUmamiEventProps(slideLinkEl) {
  * @param {() => void} [onImageDisplay] 
  * @returns {void}
  */
-async function addSlidePictureLoadHandler(picture, onImageDisplay) {
-	try {
-		await picture.querySelector("img").decode();
-	} catch (error) {
-		console.error(error);
-	}
-	window.requestAnimationFrame(() => {
-		picture.parentElement.style.display = "";
+function addSlidePictureLoadHandler(picture, onImageDisplay) {
+	window.requestAnimationFrame(async () => {
+		try {
+			await picture.querySelector("img").decode();
+		} catch (error) {
+			console.error(error);
+		}
 		window.requestAnimationFrame(() => {
-			const slideEl = picture.closest(".project-popup__image-slide");
-			slideEl.classList.add("project-popup__image-slide_img-loaded");
-			const loaderEl =
-				slideEl.querySelector(".project-popup__image-slide-loader");
-			loaderEl.addEventListener("transitionend", loaderEl.remove);
-			onImageDisplay?.();
+			picture.parentElement.style.display = "";
+			window.requestAnimationFrame(() => {
+				const slideEl = picture.closest(".project-popup__image-slide");
+				slideEl.classList.add("project-popup__image-slide_img-loaded");
+				const loaderEl =
+					slideEl.querySelector(".project-popup__image-slide-loader");
+				loaderEl.addEventListener("transitionend", loaderEl.remove);
+				onImageDisplay?.();
+			});
 		});
 	});
 }
