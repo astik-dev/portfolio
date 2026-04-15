@@ -95,9 +95,10 @@ function buildUmamiEventProps(slideLinkEl) {
 
 /**
  * @param {HTMLPictureElement} picture 
+ * @param {() => void} [onImageDisplay] 
  * @returns {void}
  */
-async function addSlidePictureLoadHandler(picture) {
+async function addSlidePictureLoadHandler(picture, onImageDisplay) {
 	try {
 		await picture.querySelector("img").decode();
 	} catch (error) {
@@ -111,6 +112,7 @@ async function addSlidePictureLoadHandler(picture) {
 			const loaderEl =
 				slideEl.querySelector(".project-popup__image-slide-loader");
 			loaderEl.addEventListener("transitionend", loaderEl.remove);
+			onImageDisplay?.();
 		});
 	});
 }
@@ -131,7 +133,7 @@ function showScrollAnimation(image) {
 	if (image.scrollHeight > dqs(".project-popup__image").clientHeight) {
 		setTimeout(() => {
 			dqs(".project-popup__image-scroll").classList.add("project-popup__image-scroll_animation");
-		}, 600);
+		}, 500);
 	}
 }
 
@@ -172,11 +174,12 @@ export function openProjectPopup(project) {
 			// Load first two (if available) images
 			dqsa(".project-popup__image-slide:nth-child(-n+2) picture").forEach((slidePic, index) => {
 				imageCreator.loadPictureSources(slidePic);
-				addSlidePictureLoadHandler(slidePic);
-				if (index == 0) {
-					const picImg = slidePic.querySelector("img");
-					picImg.addEventListener("load", () => showScrollAnimation(picImg));
-				}
+				addSlidePictureLoadHandler(
+					slidePic,
+					index === 0
+						? () => showScrollAnimation(slidePic.querySelector("img"))
+						: undefined
+				);
 			});
 		}, projectPopupTransitionDuration);
 
