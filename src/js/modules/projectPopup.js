@@ -5,7 +5,7 @@ import imageCreator from "./imageCreator.js";
 import { track } from "../analytics/umami.js";
 
 
-const projectPopupTransitionDuration = 300;
+const POPUP_TRANSITION_DURATION = 300;
 let projectPopupInTransition = false;
 
 
@@ -150,7 +150,7 @@ function withTransitionLock(actionFunction) {
 
 	setTimeout(() => {
 		projectPopupInTransition = false;
-	}, projectPopupTransitionDuration);
+	}, POPUP_TRANSITION_DURATION);
 }
 
 export function openProjectPopup(project) {
@@ -185,7 +185,7 @@ export function openProjectPopup(project) {
 						: undefined
 				);
 			});
-		}, projectPopupTransitionDuration);
+		}, POPUP_TRANSITION_DURATION);
 
 		dqs("body").classList.add("open-project-popup");
 	});
