@@ -198,8 +198,8 @@ export function openProjectPopup(project) {
 export function closeProjectPopup(method) {
 	withTransitionLock(() => {
 		dqs("body").classList.remove("open-project-popup");
+		track("project-popup-close", { method });
 	});
-	track("project-popup-close", { method });
 }
 
 
