@@ -3,8 +3,12 @@ import { Navigation, Pagination } from "swiper/modules";
 import { doc, dqs, dqsa } from "./utils.js";
 import imageCreator from "./imageCreator.js";
 import { track } from "../analytics/umami.js";
+import { setQueryParam, deleteQueryParam, getQueryParam } from "./queryParams.js";
+import projects from "../../../temp/projects.json";
 
 
+const INITIAL_HISTORY_LENGTH = window.history.length;
+const PROJECT_PARAM = "project";
 const POPUP_TRANSITION_DURATION = 300;
 let projectPopupInTransition = false;
 
@@ -153,8 +157,12 @@ function withTransitionLock(actionFunction) {
 	}, POPUP_TRANSITION_DURATION);
 }
 
-export function openProjectPopup(project) {
+export function openProjectPopup(project, shouldPushState = true) {
 	withTransitionLock(() => {
+
+		if (shouldPushState) {
+			setQueryParam(PROJECT_PARAM, project.folder);
+		}
 
 		setScrollWidthCssVar();
 
@@ -192,12 +200,19 @@ export function openProjectPopup(project) {
 }
 
 /**
- * @param {"button" | "backdrop" | "esc"} method 
+ * @param {"button" | "backdrop" | "esc" | "back"} method 
  * @returns {void}
  */
 export function closeProjectPopup(method) {
 	withTransitionLock(() => {
 		dqs("body").classList.remove("open-project-popup");
+		if (method !== "back") {
+			if (INITIAL_HISTORY_LENGTH === window.history.length) {
+				deleteQueryParam(PROJECT_PARAM, { replace: true });
+			} else {
+				window.history.back();
+			}
+		}
 		track("project-popup-close", { method });
 	});
 }
@@ -256,3 +271,23 @@ const projectPopupSwiper = new Swiper('.project-popup__image-swiper', {
 doc.addEventListener("keydown", event => {
 	if (event.key == "Escape") closeProjectPopup("esc");
 });
+
+window.addEventListener("popstate", () => {
+	const projectParamValue = getQueryParam(PROJECT_PARAM);
+	if (projectParamValue) {
+		const project = projects.find(p => p.folder === projectParamValue);
+		openProjectPopup(project, false);
+	} else {
+		closeProjectPopup("back");
+	}
+});
+
+const INITIAL_PROJECT_PARAM_VALUE = getQueryParam(PROJECT_PARAM);
+if (INITIAL_PROJECT_PARAM_VALUE) {
+	const project = projects.find(p => p.folder === INITIAL_PROJECT_PARAM_VALUE);
+	if (project) {
+		openProjectPopup(project, false);
+	} else {
+		deleteQueryParam(PROJECT_PARAM, { replace: true });
+	}
+}
