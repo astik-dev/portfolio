@@ -273,7 +273,11 @@
 }
 @media (max-width: 575.5px) {
 	.project-popup {
+		padding: 8px;
+
 		&__container {
+			max-width: 465px;
+
 			padding: 30px 0 20px 0;
 
 			h3 {
