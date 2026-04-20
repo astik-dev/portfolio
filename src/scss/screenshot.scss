@@ -1,0 +1,22 @@
+* {
+	padding: 0;
+	margin: 0;
+}
+
+html,
+body {
+	height: 100%;
+}
+
+body {
+	background: #111827;
+
+	display: flex;
+	align-items: safe center;
+}
+
+picture,
+img {
+	display: block;
+	width: 100%;
+}

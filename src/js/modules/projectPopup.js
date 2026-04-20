@@ -61,7 +61,7 @@ function imageSlideHTML(projectFolder, index) {
 			<div class="project-popup__image-slide-loader"></div>
 			<a
 				style="display: none"
-				href="${imageCreator.fullPath("external", imagePathWithoutExt)}.jpeg"
+				href="screenshot.html?project=${projectFolder}&index=${index}"
 				target="_blank"
 				data-project="${projectFolder}"
 				data-screenshot-index="${index}"

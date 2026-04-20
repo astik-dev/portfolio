@@ -26,6 +26,7 @@ import { scss } from "./gulp/tasks/scss.js";
 import { js } from "./gulp/tasks/js.js";
 import { images } from "./gulp/tasks/images.js";
 import { umami } from "./gulp/tasks/umami.js";
+import { inline } from "./gulp/tasks/inline.js";
 
 
 
@@ -42,6 +43,6 @@ const mainTasks =
 	gulp.series(fetchData, gulp.parallel(html, fonts, scss, js, images, umami));
 
 const dev = gulp.series(reset, mainTasks, gulp.parallel(watcher, server));
-export const deploy = gulp.series(reset, cname, mainTasks);
+export const deploy = gulp.series(reset, cname, mainTasks, inline);
 
 gulp.task("default", dev);

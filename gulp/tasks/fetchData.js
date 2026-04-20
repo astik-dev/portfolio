@@ -21,6 +21,13 @@ export const fetchData = () => {
 					`${app.path.tempFolder}/projects.json`,
 					JSON.stringify(data)
 				);
+				const projectsById = Object.fromEntries(data.map(p =>
+					[ p.folder, { screenshotCount: +p.screenshots, title: p.title } ]
+				));
+				fs.writeFileSync(
+					`${app.path.tempFolder}/projectsById.json`,
+					JSON.stringify(projectsById)
+				);
 			}
 		})
 	);
