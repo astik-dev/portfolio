@@ -8,13 +8,15 @@
 		@include container(820px, $section-gap);
 	}
 
+	--items-gap: 20px;
+
 	&__items {
-		@include flex(flex, row, 20px, flex-start, flex-start);
+		@include flex(flex, row, var(--items-gap), flex-start, flex-start);
 		flex-wrap: wrap;
 	}
 
 	&__item {
-		width: calc(50% - 10px);
+		width: calc(50% - (var(--items-gap) / 2));
 
 		background: #444444;
 		border-radius: 15px;
@@ -146,9 +148,7 @@
 @media (max-width: 767.5px) {
 	.projects {
 		
-        &__items {
-			gap: 15px;
-		}
+		--items-gap: 15px;
 
 		&__item {
 
