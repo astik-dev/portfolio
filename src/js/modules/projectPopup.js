@@ -1,10 +1,10 @@
 import Swiper from "swiper";
 import { Navigation, Pagination } from "swiper/modules";
 import { doc, dqs, dqsa } from "./utils.js";
-import imageCreator from "./imageCreator.js";
 import { track } from "../analytics/umami.js";
 import { setQueryParam, deleteQueryParam, getQueryParam } from "./queryParams.js";
 import projects from "../../../temp/projects.json";
+import { renderResponsiveImage } from "./responsiveImage.js";
 
 
 const INITIAL_HISTORY_LENGTH = window.history.length;
@@ -55,23 +55,42 @@ function setScrollWidthCssVar() {
 }
 
 function imageSlideHTML(projectFolder, index) {
-	const imagePathWithoutExt = `projects/${projectFolder}/full-size/${index}`;
+
+	function buildImgUrl(size, ext) {
+		return (
+			"https://astik-dev.github.io/portfolio-images/projects/" +
+			`${projectFolder}/screenshots/${index}/${size}.${ext}`
+		);
+	}
+
+	const imgSizes = /** @type {const} */ (
+	 // [ 620, 620 * 1.25, 620 * 1.5, 620 * 1.75, 620 * 2, 1420, 1920 ]
+		[ 620, 775, 930, 1085, 1240, 1420, 1920 ]
+	);
+	
+	const fallbackImgSize = imgSizes[3];
+
+	const imgSizesAttrValue =
+		"(max-width: 575.5px) min(465px, calc(100vw - (8px * 2)))," +
+		"(max-width: 767.5px) calc(100vw - (20px * 2) - (20px * 2) - (40px * 2))," +
+		"min(620px, calc(100vw - (20px * 2) - (50px * 2) - (40px * 2)))";
+
 	return `
 		<div class="project-popup__image-slide swiper-slide">
 			<div class="project-popup__image-slide-loader"></div>
 			<a
-				style="display: none"
 				href="screenshot.html?project=${projectFolder}&index=${index}"
 				target="_blank"
 				data-project="${projectFolder}"
 				data-screenshot-index="${index}"
 			>
-				${imageCreator.newWebpPic(
-					"external",
-					imagePathWithoutExt + ".webp",
-					imagePathWithoutExt + ".jpeg",
-					`Project screenshot ${index}`,
-					"data-src"
+				${renderResponsiveImage(
+					buildImgUrl,
+					imgSizes,
+					fallbackImgSize,
+					imgSizesAttrValue,
+					`alt="Project screenshot ${index}"`,
+					index === 1 ? "fetchpriority='high'" : "loading='lazy'"
 				)}
 			</a>
 		</div>
@@ -103,14 +122,16 @@ function buildUmamiEventProps(slideLinkEl) {
  * @returns {void}
  */
 function addSlidePictureLoadHandler(picture, onImageDisplay) {
-	window.requestAnimationFrame(async () => {
+
+	const imgEl = picture.querySelector("img");
+
+	async function onLoad() {
 		try {
-			await picture.querySelector("img").decode();
+			await imgEl.decode();
 		} catch (error) {
 			console.error(error);
 		}
 		window.requestAnimationFrame(() => {
-			picture.parentElement.style.display = "";
 			window.requestAnimationFrame(() => {
 				const slideEl = picture.closest(".project-popup__image-slide");
 				slideEl.classList.add("project-popup__image-slide_img-loaded");
@@ -120,7 +141,13 @@ function addSlidePictureLoadHandler(picture, onImageDisplay) {
 				onImageDisplay?.();
 			});
 		});
-	});
+	}
+
+	if (imgEl.complete) {
+		onLoad();
+	} else {
+		imgEl.addEventListener("load", onLoad, { once: true });
+	}
 }
 
 function imageSlideScrollEvent(event) {
@@ -183,9 +210,7 @@ export function openProjectPopup(project, shouldPushState = true) {
 		addScrollEventToImageSlides();
 
 		setTimeout(() => {
-			// Load first two (if available) images
-			dqsa(".project-popup__image-slide:nth-child(-n+2) picture").forEach((slidePic, index) => {
-				imageCreator.loadPictureSources(slidePic);
+			dqsa(".project-popup__image-slide picture").forEach((slidePic, index) => {
 				addSlidePictureLoadHandler(
 					slidePic,
 					index === 0
@@ -239,7 +264,6 @@ const projectPopupSwiper = new Swiper('.project-popup__image-swiper', {
 
 	on: {
 		slideChange: swiper => {
-
 			if (!isProgrammaticSlideChange) {
 				const linkEl = swiper.slides[swiper.activeIndex].querySelector("a");
 				const umamiEventProps = buildUmamiEventProps(linkEl);
@@ -252,18 +276,6 @@ const projectPopupSwiper = new Swiper('.project-popup__image-swiper', {
 				});
 			}
 			isProgrammaticSlideChange = false;
-
-			// Loading next-next image
-			const nextNextPic = dqs(".project-popup__image-slide.swiper-slide-next + .project-popup__image-slide picture");
-			if (nextNextPic) {
-				setTimeout(() => {
-					const picImg = nextNextPic.querySelector("img");
-					if (picImg.src === imageCreator.px1) {
-						imageCreator.loadPictureSources(nextNextPic);
-						addSlidePictureLoadHandler(nextNextPic);
-					}
-				}, 300); // 300 - Default duration of transition between slides (in ms)
-			}
 		},
 	},
 });

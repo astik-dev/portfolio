@@ -1,33 +1,27 @@
-const IMG_SIZES = [ 400, 600, 800, 1000, 1200, 1400 ];
+import { renderResponsiveImage } from "./responsiveImage.js";
 
-const sizesAttrValue =
-	"(max-width: 575.5px) min(400px, calc(100vw - 40px))," +
-	"(max-width: 767.5px) calc((100vw - (20px + 20px + 15px)) / 2)," +
-	"(max-width: 860px) calc((100vw - (20px + 20px + 20px)) / 2)," +
-	"400px";
+const imgSizes = /** @type {const} */ ([ 400, 600, 800, 1000, 1200, 1400 ]);
 
-const handleImageLoad =
-	"this.closest('.projects__item').classList.remove('projects__item_shimmer')";
-
-function buildImgUrl(projectId, size, ext) {
-	if (!IMG_SIZES.includes(size)) {
-		throw new Error(
-			`Invalid size "${size}". Allowed sizes: ${IMG_SIZES.join(", ")}`
-		);
-	}
-	return (
-		"https://astik-dev.github.io/portfolio-images/projects/" +
-		`${projectId}/thumbnail/${size}.${ext}`
-	);
-}
-
-function buildImgSrcset(projectId, ext) {
-	return IMG_SIZES
-		.map(size => `${buildImgUrl(projectId, size, ext)} ${size}w`)
-		.join();
-};
+const fallbackImgSize = imgSizes[3];
 
 export function renderProjectsItem({ folder, title }, index, isHidden) {
+
+	function buildImgUrl(size, ext) {
+		return (
+			"https://astik-dev.github.io/portfolio-images/projects/" +
+			`${folder}/thumbnail/${size}.${ext}`
+		);
+	}
+
+	const imgSizesAttrValue =
+		"(max-width: 575.5px) min(400px, calc(100vw - 40px))," +
+		"(max-width: 767.5px) calc((100vw - (20px + 20px + 15px)) / 2)," +
+		"(max-width: 860px) calc((100vw - (20px + 20px + 20px)) / 2)," +
+		"400px";
+
+	const handleImgLoad =
+		"this.closest('.projects__item').classList.remove('projects__item_shimmer')";
+
 	return `
 		<article
 			class="
@@ -37,26 +31,15 @@ export function renderProjectsItem({ folder, title }, index, isHidden) {
 			"
 			data-project-index="${index}"
 		>
-			<picture>
-				<source
-					type="image/avif"
-					srcset="${buildImgSrcset(folder, "avif")}"
-					sizes="${sizesAttrValue}"
-				>
-				<source
-					type="image/webp"
-					srcset="${buildImgSrcset(folder, "webp")}"
-					sizes="${sizesAttrValue}"
-				>
-				<img
-					srcset="${buildImgSrcset(folder, "jpg")}"
-					sizes="${sizesAttrValue}"
-					src="${buildImgUrl(folder, 1000, "jpg")}"
-					alt="${title} thumbnail"
-					fetchpriority="high"
-					onload="${handleImageLoad}"
-				>
-			</picture>
+			${renderResponsiveImage(
+				buildImgUrl,
+				imgSizes,
+				fallbackImgSize,
+				imgSizesAttrValue,
+				`alt="${title} thumbnail"`,
+				"fetchpriority='high'",
+				`onload="${handleImgLoad}"`
+			)}
 			<div class="projects__item-title">
 				<svg><use href="#icon-eye" /></svg>
 				<h5>${title}</h5>

@@ -1,6 +1,5 @@
 import projectsById from "../../temp/projectsById.json";
 import { getQueryParam } from "./modules/queryParams.js";
-import imageCreator from "./modules/imageCreator.js";
 
 const projectId = getQueryParam("project");
 const screenshotIndex = +getQueryParam("index");
@@ -16,12 +15,19 @@ if (
 	window.location.replace("/");
 } else {
 	document.title = `${project.title} | Screenshot ${screenshotIndex} | ASTIK`;
-	
-	const imagePathWithoutExt = `projects/${projectId}/full-size/${screenshotIndex}`;
-	document.body.innerHTML = imageCreator.newWebpPic(
-		"external",
-		imagePathWithoutExt + ".webp",
-		imagePathWithoutExt + ".jpeg",
-		`${project.title} screenshot ${screenshotIndex}`
-	);
+
+	const imgUrlWithoutExt =
+		"https://astik-dev.github.io/portfolio-images/projects/" +
+		`${projectId}/screenshots/${screenshotIndex}/1920`
+
+	document.body.innerHTML = `
+		<picture>
+			<source type="image/avif" srcset="${imgUrlWithoutExt}.avif">
+			<source type="image/webp" srcset="${imgUrlWithoutExt}.webp">
+			<img
+				src="${imgUrlWithoutExt}.jpg"
+				alt="${project.title} screenshot ${screenshotIndex}"
+			>
+		</picture>
+	`;
 }
