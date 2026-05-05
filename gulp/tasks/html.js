@@ -21,7 +21,7 @@ function renderSkillsItem({ name, img, imgWEBP }) {
 	`;
 }
 
-function renderReviewsSlide({ name, grade, text, date, link, linkText }) {
+function renderReviewsSlide({ name, grade, text, date, link }) {
 	
 	grade = +grade;
 
@@ -55,7 +55,7 @@ function renderReviewsSlide({ name, grade, text, date, link, linkText }) {
 					data-umami-event="review-source-link-click"
 					data-umami-event-url="${link}"
 				>
-					${linkText}
+					${new URL(link).hostname}
 				</a>
             </div>
         </div>
