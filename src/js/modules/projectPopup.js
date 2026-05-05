@@ -9,8 +9,6 @@ import { renderResponsiveImage } from "./responsiveImage.js";
 
 const INITIAL_HISTORY_LENGTH = window.history.length;
 const PROJECT_PARAM = "project";
-const POPUP_TRANSITION_DURATION = 300;
-let projectPopupInTransition = false;
 
 
 const projectPopup = {
@@ -150,6 +148,17 @@ function addSlidePictureLoadHandler(picture, onImageDisplay) {
 	}
 }
 
+function addPictureLoadHandlerToAllSlides() {
+	dqsa(".project-popup__image-slide picture").forEach((slidePicture, index) => {
+		addSlidePictureLoadHandler(
+			slidePicture,
+			index === 0
+				? () => showScrollAnimation(slidePicture.querySelector("img"))
+				: undefined
+		);
+	});
+}
+
 function imageSlideScrollEvent(event) {
 	const linkEl = event.target.querySelector("a");
 	track("project-popup-screenshot-scroll", buildUmamiEventProps(linkEl));
@@ -172,56 +181,37 @@ function showScrollAnimation(image) {
 	}, 500);
 }
 
-function withTransitionLock(actionFunction) {
-
-	if (projectPopupInTransition) return;
-	else projectPopupInTransition = true;
-
-	actionFunction();
-
-	setTimeout(() => {
-		projectPopupInTransition = false;
-	}, POPUP_TRANSITION_DURATION);
-}
-
 export function openProjectPopup(project, shouldPushState = true) {
-	withTransitionLock(() => {
 
-		if (shouldPushState) {
-			setQueryParam(PROJECT_PARAM, project.folder);
-		}
+	if (shouldPushState) {
+		setQueryParam(PROJECT_PARAM, project.folder);
+	}
 
-		setScrollWidthCssVar();
+	setScrollWidthCssVar();
 
-		projectPopup.setTitle(project.title);
-		projectPopup.setDescription(project.description);
-		projectPopup
-			.setLinkButtons(project.repository, project.demo, project.folder);
+	projectPopup.setTitle(project.title);
+	projectPopup.setDescription(project.description);
+	projectPopup
+		.setLinkButtons(project.repository, project.demo, project.folder);
 
-		// image slides
-		let imageSlideElems = ``;
-		for (let index = 1; index <= project.screenshots; index++) {
-			imageSlideElems += imageSlideHTML(project.folder, index);
-		}
-		dqs(".project-popup__image-swiper-wrapper").innerHTML = imageSlideElems;
-		if (projectPopupSwiper.activeIndex !== 0) isProgrammaticSlideChange = true;
-		projectPopupSwiper.update();
-		projectPopupSwiper.slideTo(0, 1, false);
-		addScrollEventToImageSlides();
+	// image slides
+	let imageSlideElems = ``;
+	for (let index = 1; index <= project.screenshots; index++) {
+		imageSlideElems += imageSlideHTML(project.folder, index);
+	}
+	dqs(".project-popup__image-swiper-wrapper").innerHTML = imageSlideElems;
+	if (projectPopupSwiper.activeIndex !== 0) isProgrammaticSlideChange = true;
+	projectPopupSwiper.update();
+	projectPopupSwiper.slideTo(0, 1, false);
+	addScrollEventToImageSlides();
 
-		setTimeout(() => {
-			dqsa(".project-popup__image-slide picture").forEach((slidePic, index) => {
-				addSlidePictureLoadHandler(
-					slidePic,
-					index === 0
-						? () => showScrollAnimation(slidePic.querySelector("img"))
-						: undefined
-				);
-			});
-		}, POPUP_TRANSITION_DURATION);
+	dqs(".project-popup").addEventListener(
+		"transitionend",
+		addPictureLoadHandlerToAllSlides,
+		{ once: true }
+	);
 
-		dqs("body").classList.add("open-project-popup");
-	});
+	dqs("body").classList.add("open-project-popup");
 }
 
 /**
@@ -229,17 +219,17 @@ export function openProjectPopup(project, shouldPushState = true) {
  * @returns {void}
  */
 export function closeProjectPopup(method) {
-	withTransitionLock(() => {
-		dqs("body").classList.remove("open-project-popup");
-		if (method !== "back") {
-			if (INITIAL_HISTORY_LENGTH === window.history.length) {
-				deleteQueryParam(PROJECT_PARAM, { replace: true });
-			} else {
-				window.history.back();
-			}
+	dqs(".project-popup")
+		.removeEventListener("transitionend", addPictureLoadHandlerToAllSlides);
+	dqs("body").classList.remove("open-project-popup");
+	if (method !== "back") {
+		if (INITIAL_HISTORY_LENGTH === window.history.length) {
+			deleteQueryParam(PROJECT_PARAM, { replace: true });
+		} else {
+			window.history.back();
 		}
-		track("project-popup-close", { method });
-	});
+	}
+	track("project-popup-close", { method });
 }
 
 
