@@ -2,7 +2,7 @@
 @use "../../scss/abstracts/mixins" as *;
 
 
-.contacts {
+.contact {
 
 	&__container {
 		@include container(750px, $section-gap);
@@ -31,7 +31,7 @@
 }
 
 @media (hover: hover) {
-	.contacts {
+	.contact {
 
 		&__item:hover {
 			background: #2C66C3;
@@ -40,7 +40,7 @@
 }
 
 @media (max-width: 575.5px) {
-	.contacts {
+	.contact {
 
 		&__container {
 			padding-top: $section-gap-min;

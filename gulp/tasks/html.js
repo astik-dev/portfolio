@@ -68,11 +68,11 @@ function renderContactsItem({ link, title, img, imgWEBP }) {
 		
 	return `
 		<a
-			class="contacts__item"
+			class="contact__item"
 			href="${link}"
 			target="_blank"
 			title="${title}"
-			data-umami-event="contacts-link-click"
+			data-umami-event="contact-link-click"
 			data-umami-event-title="${title}"
 		>
 			${imgOrPicture}
@@ -82,7 +82,7 @@ function renderContactsItem({ link, title, img, imgWEBP }) {
 
 export const html = () => {
 
-	const { projects, skills, reviews, contacts } = store;
+	const { projects, skills, reviews, contactLinks } = store;
 
 	return app.gulp.src(app.path.src.html)
 		.pipe(app.plugins.plumber())
@@ -100,7 +100,7 @@ export const html = () => {
 						.toSorted((a, b) => -(a.text.length - b.text.length))
 						.map(renderReviewsSlide)
 						.join(""),
-				contactItems: contacts.map(renderContactsItem).join(""),
+				contactItems: contactLinks.map(renderContactsItem).join(""),
 			}
 		}))
 		.pipe( // html-minifier-terser

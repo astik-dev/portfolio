@@ -6,7 +6,7 @@ const API_BASE_URL =
 
 export const fetchData = () => {
 	return Promise.all(
-		["projects", "skills", "reviews", "contacts"].map(async sheetName => {
+		["projects", "skills", "reviews", "contactLinks"].map(async sheetName => {
 			
 			const response = await fetch(API_BASE_URL + sheetName);
 			if (!response.ok) {

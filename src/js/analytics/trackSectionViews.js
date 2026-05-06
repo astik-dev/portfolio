@@ -8,7 +8,7 @@ const intersectionObserver = new IntersectionObserver(entries => {
 			if (classList.contains("projects__item")) track("projects-view");
 			else if (classList.contains("skills__item")) track("skills-view");
 			else if (classList.contains("reviews__swiper")) track("reviews-view");
-			else if (classList.contains("contacts__items")) track("contacts-view");
+			else if (classList.contains("contact__items")) track("contact-view");
 			intersectionObserver.unobserve(entry.target);
     	}
 	});
@@ -18,5 +18,5 @@ dqsa(
 	".projects__item:last-child, " +
 	".skills__item:last-child, " +
 	".reviews__swiper, " +
-	".contacts__items"
+	".contact__items"
 ).forEach(el => intersectionObserver.observe(el));
