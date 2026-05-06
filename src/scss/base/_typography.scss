@@ -1,42 +1,49 @@
 @use "pkg:@fontsource-variable/roboto/wght.css";
 @use "pkg:@fontsource-variable/roboto/wght-italic.css";
-@use "../abstracts/mixins" as *;
 
 
 body {
 	color: #FFF;
 	font-family: "Roboto Variable", sans-serif;
-	@include font(16px, 19px);
+	font-size: 16px;
+	line-height: 19px;
 }
 
 h1 {
-	@include font(80px, 94px);
+	font-size: 80px;
+	line-height: 94px;
 	font-style: italic;
 	font-weight: 500;
 }
 
 h2 {
-	@include font(40px, 47px);
+	font-size: 40px;
+	line-height: 47px;
 }
 
 h3 {
-	@include font(32px, 38px);
+	font-size: 32px;
+	line-height: 38px;
 }
 
 h4 {
-	@include font(20px, 23px);
+	font-size: 20px;
+	line-height: 23px;
 	font-weight: 500;
 }
 
 h5 {
-	@include font(20px, 23px);
+	font-size: 20px;
+	line-height: 23px;
 }
 
 @media (max-width: 575.5px) {
 	h1 {
-		@include font(55px, 64px);
+		font-size: 55px;
+		line-height: 64px;
 	}
 	h3 {
-		@include font(20px, 23px);
+		font-size: 20px;
+		line-height: 23px;
 	}
 }

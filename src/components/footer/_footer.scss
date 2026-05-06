@@ -20,7 +20,8 @@
 		display: inline-block;
 		margin-top: 10px;
 
-		@include font(14px, 16px);
+		font-size: 14px;
+		line-height: 16px;
 		color: #fff;
 		font-weight: 300;
 		text-decoration: underline;

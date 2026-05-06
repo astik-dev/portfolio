@@ -31,7 +31,8 @@
 					display: inline-block;
 					padding: 4.5px 16px;
 
-					@include font(20px, 23px);
+					font-size: 20px;
+					line-height: 23px;
 					color: #fff;
 
 					border-radius: 50px;
@@ -125,7 +126,8 @@
 					a {
 						padding: 0;
 
-						@include font(40px, 47px);
+						font-size: 40px;
+						line-height: 47px;
 
 						border-radius: 0;
 						background: transparent !important;

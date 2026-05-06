@@ -127,7 +127,8 @@
 	&__btn-load-more {
 		padding: 15px 50px;
 
-		@include font(20px, 20px);
+		font-size: 20px;
+		line-height: 1;
 		color: #fff;
 
 		background: #1E293B;

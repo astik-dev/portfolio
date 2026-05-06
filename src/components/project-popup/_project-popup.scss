@@ -206,7 +206,8 @@
 		width: calc(50% - 10px);
 		height: 46px;
 
-		@include font(20px, 23px);
+		font-size: 20px;
+		line-height: 23px;
 		color: #FFF;
 
 		background: #161B22;

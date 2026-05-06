@@ -1,8 +1,3 @@
-@mixin font ($fs, $lh) {
-	font-size: $fs;
-	line-height: $lh;
-}
-
 @mixin container ($mw, $p) {
 	        // $mw + (padding left, right)
 	max-width: $mw + 40px;
