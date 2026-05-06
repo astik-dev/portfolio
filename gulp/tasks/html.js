@@ -30,6 +30,12 @@ function renderReviewsSlide({ name, grade, text, date, link }) {
         grade < 7 ? "#fab43c" : // orange
         "#2CB67D"; // green
     
+	const { hostname } = new URL(link);
+
+	if (hostname === "freelancehunt.com") {
+		link += "#freelancer-review";
+	}
+
     return `
         <div class="reviews__slide swiper-slide">
             <div class="reviews__slide-top">
@@ -50,7 +56,7 @@ function renderReviewsSlide({ name, grade, text, date, link }) {
 					data-umami-event="review-source-link-click"
 					data-umami-event-url="${link}"
 				>
-					${new URL(link).hostname}
+					${hostname}
 				</a>
             </div>
         </div>
