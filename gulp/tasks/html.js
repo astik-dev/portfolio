@@ -57,7 +57,7 @@ function renderReviewsSlide({ name, grade, text, date, link }) {
     `;
 }
 
-function renderContactsItem({ link, title, img, imgWEBP }) {
+function renderContactLink({ url, title, img, imgWEBP }) {
 
 	const webpPath = `contacts/${imgWEBP}`;
 	const fallback = `contacts/${img}`;
@@ -68,8 +68,8 @@ function renderContactsItem({ link, title, img, imgWEBP }) {
 		
 	return `
 		<a
-			class="contact__item"
-			href="${link}"
+			class="contact__link"
+			href="${url}"
 			target="_blank"
 			title="${title}"
 			data-umami-event="contact-link-click"
@@ -100,7 +100,7 @@ export const html = () => {
 						.toSorted((a, b) => -(a.text.length - b.text.length))
 						.map(renderReviewsSlide)
 						.join(""),
-				contactItems: contactLinks.map(renderContactsItem).join(""),
+				contactLinks: contactLinks.map(renderContactLink).join(""),
 			}
 		}))
 		.pipe( // html-minifier-terser

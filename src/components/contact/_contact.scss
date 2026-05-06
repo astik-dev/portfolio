@@ -8,12 +8,12 @@
 		@include container(750px, $section-gap);
 	}
 
-	&__items {
+	&__links {
 		@include flex(flex, row, 20px, flex-start, center);
 		flex-wrap: wrap;	
 	}
 
-	&__item {
+	&__link {
 		@include flex(flex, row, 0, center, center);
 		width: 60px;
 		height: 60px;
@@ -33,7 +33,7 @@
 @media (hover: hover) {
 	.contact {
 
-		&__item:hover {
+		&__link:hover {
 			background: #2C66C3;
 		}
 	}
@@ -46,11 +46,11 @@
 			padding-top: $section-gap-min;
 		}
 
-		&__items {
+		&__links {
 			gap: 10px;
 		}
 
-		&__item {
+		&__link {
 			width: 50px;
 			height: 50px;
 
