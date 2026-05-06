@@ -47,11 +47,6 @@ const projectPopup = {
 	},
 }
 
-function setScrollWidthCssVar() {
-	const scrollWidth = window.innerWidth - doc.documentElement.clientWidth;
-	doc.documentElement.style.setProperty('--scroll-width', `${scrollWidth}px`);
-}
-
 function imageSlideHTML(projectFolder, index) {
 
 	function buildImgUrl(size, ext) {
@@ -188,8 +183,6 @@ export function openProjectPopup(project, shouldPushState = true) {
 		setQueryParam(PROJECT_PARAM, project.folder);
 	}
 
-	setScrollWidthCssVar();
-
 	projectPopup.setTitle(project.title);
 	projectPopup.setDescription(project.description);
 	projectPopup
@@ -212,7 +205,8 @@ export function openProjectPopup(project, shouldPushState = true) {
 		{ once: true }
 	);
 
-	dqs("body").classList.add("open-project-popup");
+	document.body.style.overflowY = "hidden";
+	dqs(".project-popup").classList.add("project-popup_open");
 }
 
 /**
@@ -220,9 +214,13 @@ export function openProjectPopup(project, shouldPushState = true) {
  * @returns {void}
  */
 export function closeProjectPopup(method) {
+
 	dqs(".project-popup")
 		.removeEventListener("transitionend", addPictureLoadHandlerToAllSlides);
-	dqs("body").classList.remove("open-project-popup");
+
+	document.body.style.overflowY = "";
+	dqs(".project-popup").classList.remove("project-popup_open");
+
 	if (method !== "back") {
 		if (INITIAL_HISTORY_LENGTH === window.history.length) {
 			deleteQueryParam(PROJECT_PARAM, { replace: true });
@@ -230,6 +228,7 @@ export function closeProjectPopup(method) {
 			window.history.back();
 		}
 	}
+	
 	track("project-popup-close", { method });
 }
 
