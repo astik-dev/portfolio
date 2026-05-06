@@ -28,9 +28,13 @@
 		background: #293548;
 		border-radius: 15px;
 
-		&-top {
+		&-top {			
+			display: grid;
+			grid-template-columns: auto 1fr auto;
+			gap: 8px;
+			align-items: center;
+
 			padding: 0 25px;
-			@include grid(grid, auto 1fr auto, 8px, center, left);
 		
 			svg {
 				width: 23px;

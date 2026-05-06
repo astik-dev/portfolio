@@ -3,14 +3,6 @@
 	line-height: $lh;
 }
 
-@mixin grid ($g, $gtc, $gap, $ai, $jc) {
-	display: $g;
-	grid-template-columns: $gtc;
-	gap: $gap;
-	align-items: $ai;
-	justify-content: $jc;
-}
-
 @mixin container ($mw, $p) {
 	        // $mw + (padding left, right)
 	max-width: $mw + 40px;
