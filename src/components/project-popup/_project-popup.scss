@@ -144,7 +144,7 @@
 
 		background: #000;
 	}
-	&__image-scroll {
+	&__image-scroll-hint {
 		$icon-width: 70px;
 
 		position: absolute;
@@ -159,7 +159,7 @@
 
 		pointer-events: none;
 
-		@keyframes image-scroll {
+		@keyframes image-scroll-hint {
 			0% {
 				top: calc(100% - ($icon-width / 2));
 				opacity: 0;
@@ -177,7 +177,7 @@
 		}
 
 		&_animation {
-			animation: image-scroll 1.8s ease-in-out;
+			animation: image-scroll-hint 1.8s ease-in-out;
 		}
 	}
 
@@ -191,7 +191,7 @@
 		}
 	}
 	&__btn {
-		@include flex(flex, row, 0, center, center);
+		@include flex(flex, row, 10px, center, center);
 		width: calc(50% - 10px);
 		height: 46px;
 
@@ -203,23 +203,9 @@
 
 		transition: $anim;
 
-		&:before {
-			content: "";
-
-			display: inline-block;
+		svg {
 			width: 26px;
 			height: 26px;
-			margin: 0 10px 0 0;
-		}
-
-		&:nth-child(1):before {
-			background: url("../img/github.svg") no-repeat;
-			background-size: 100% 100%;
-		}
-
-		&:nth-child(2):before {
-			background: url("../img/demo.svg") no-repeat;
-			background-size: 100% 100%;
 		}
 
 		&_disabled {

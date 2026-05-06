@@ -174,8 +174,8 @@ function addScrollEventToImageSlides() {
 function showScrollAnimation(image) {
 	setTimeout(() => {
 		if (image.scrollHeight > dqs(".project-popup__image").clientHeight) {
-			dqs(".project-popup__image-scroll").classList.add(
-				"project-popup__image-scroll_animation"
+			dqs(".project-popup__image-scroll-hint").classList.add(
+				"project-popup__image-scroll-hint_animation"
 			);
 		}
 	}, 500);

@@ -33,12 +33,7 @@ function renderReviewsSlide({ name, grade, text, date, link }) {
     return `
         <div class="reviews__slide swiper-slide">
             <div class="reviews__slide-top">
-                ${imageCreator.newImg(
-					"local",
-					`reviews/user-avatar.svg`,
-					"Avatar",
-					"browser"
-				)}
+				<svg><use href="#icon-avatar" /></svg>
                 <h5>${name}</h5>
                 <h4 style="color: ${gradeColor};">
                     <span>${grade}/10</span>
