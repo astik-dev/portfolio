@@ -1,7 +1,9 @@
-@mixin container ($mw, $p) {
-	        // $mw + (padding left, right)
-	max-width: $mw + 40px;
-	width: 100%;
+@mixin container ($max-width, $padding-top) {
+	
+	$padding-inline: 20px;
+	
+	max-width: $max-width + calc($padding-inline * 2);
+	
 	margin: 0 auto;
-	padding: $p 20px 0 20px;
+	padding: $padding-top $padding-inline 0 $padding-inline;
 }
