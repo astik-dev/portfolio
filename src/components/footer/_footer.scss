@@ -1,4 +1,3 @@
-@use "../../scss/abstracts/variables" as *;
 @use "../../scss/abstracts/mixins" as *;
 
 
@@ -28,7 +27,7 @@
 
 		opacity: 0.5;
 
-		transition: $anim;
+		transition: all 0.3s;
 	}
 }
 
