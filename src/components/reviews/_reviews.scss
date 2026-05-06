@@ -38,7 +38,9 @@
 			}
 
 			h4 {
-				@include flex(flex, row, 8px, center, flex-start);
+				display: flex;
+				gap: 8px;
+				align-items: center;
 
 				span {
 					padding: 2px 0 0 0;
@@ -58,7 +60,9 @@
 		}
 
 		&-bottom {
-			@include flex(flex, row, 0, center, space-between);
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
 
 			span, a {
 				@include font(14px, 16px);

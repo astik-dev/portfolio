@@ -11,7 +11,8 @@
 	--items-gap: 20px;
 
 	&__items {
-		@include flex(flex, row, var(--items-gap), flex-start, flex-start);
+		display: flex;
+		gap: var(--items-gap);
 		flex-wrap: wrap;
 	}
 

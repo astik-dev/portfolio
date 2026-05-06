@@ -1,8 +1,9 @@
-@use "../abstracts/mixins" as *;
-
-
 .title-content {
-	@include flex(flex, column, 20px, center, center);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 20px;
 
 	& > h2 {
 		position: relative;

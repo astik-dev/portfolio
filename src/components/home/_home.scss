@@ -5,7 +5,11 @@
 
 	&__container {
 		@include container(742px, 20px);
-		@include flex(flex, row, 60px, center, center);
+
+		display: flex;
+		gap: 60px;
+		align-items: center;
+		justify-content: center;
 	}
 
 	&__left {

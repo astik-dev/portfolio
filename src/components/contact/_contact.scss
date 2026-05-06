@@ -9,12 +9,17 @@
 	}
 
 	&__links {
-		@include flex(flex, row, 20px, flex-start, center);
-		flex-wrap: wrap;	
+		display: flex;
+		justify-content: center;
+		gap: 20px;
+		flex-wrap: wrap;
 	}
 
 	&__link {
-		@include flex(flex, row, 0, center, center);
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
 		width: 60px;
 		height: 60px;
 
