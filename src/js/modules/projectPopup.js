@@ -165,7 +165,8 @@ function imageSlideScrollEvent(event) {
 }
 
 function addScrollEventToImageSlides() {
-	const swiperSlideElems = dqsa(".project-popup__image-swiper-wrapper .swiper-slide");
+	const swiperSlideElems =
+		dqsa(".project-popup__image .swiper-wrapper .swiper-slide");
 	swiperSlideElems.forEach(slide => {
 		slide.addEventListener('scroll', imageSlideScrollEvent, { once: true });
 	});
@@ -199,7 +200,7 @@ export function openProjectPopup(project, shouldPushState = true) {
 	for (let index = 1; index <= project.screenshots; index++) {
 		imageSlideElems += imageSlideHTML(project.folder, index);
 	}
-	dqs(".project-popup__image-swiper-wrapper").innerHTML = imageSlideElems;
+	dqs(".project-popup__image .swiper-wrapper").innerHTML = imageSlideElems;
 	if (projectPopupSwiper.activeIndex !== 0) isProgrammaticSlideChange = true;
 	projectPopupSwiper.update();
 	projectPopupSwiper.slideTo(0, 1, false);
