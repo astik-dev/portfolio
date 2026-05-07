@@ -155,15 +155,13 @@ function addPictureLoadHandlerToAllSlides() {
 }
 
 function imageSlideScrollEvent(event) {
-	const linkEl = event.target.querySelector("a");
-	track("project-popup-screenshot-scroll", buildUmamiEventProps(linkEl));
+	track("project-popup-screenshot-scroll", buildUmamiEventProps(event.target));
 }
 
 function addScrollEventToImageSlides() {
-	const swiperSlideElems =
-		dqsa(".project-popup__image .swiper-wrapper .swiper-slide");
-	swiperSlideElems.forEach(slide => {
-		slide.addEventListener('scroll', imageSlideScrollEvent, { once: true });
+	const slideLinkEls = dqsa(".project-popup__image .swiper-slide a");
+	slideLinkEls.forEach(linkEl => {
+		linkEl.addEventListener("scroll", imageSlideScrollEvent, { once: true });
 	});
 }
 
