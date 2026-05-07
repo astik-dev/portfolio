@@ -236,7 +236,6 @@ const projectPopupSwiper = new Swiper('.project-popup__image-swiper', {
 
 	modules: [ Navigation, Pagination ],
 
-	// Navigation arrows
 	navigation: {
 	    nextEl: '.project-popup__image .swiper-nav_right',
 	    prevEl: '.project-popup__image .swiper-nav_left',
