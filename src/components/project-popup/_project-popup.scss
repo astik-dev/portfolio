@@ -142,13 +142,16 @@
 	&__swiper-pagination {
 		position: absolute;
 		z-index: 5;
-		bottom: 0;
-		left: 0;
+		bottom: -1px;
+		left: -1px;
 
 		width: auto;
-		padding: 5px;
+		padding: 5px 6px 6px 6px;
+		
+		background: rgba(0, 0, 0, 0.6);
+		backdrop-filter: blur(3px);
 
-		background: #000;
+		pointer-events: none;
 	}
 	&__image-scroll-hint {
 		$icon-width: 70px;
@@ -296,6 +299,10 @@
 		}
 		&__image-swiper {
 			aspect-ratio: 16 / 9;
+		}
+		&__swiper-pagination {
+			font-size: 14px;
+			line-height: 16px;
 		}
 		.swiper-nav {
 			display: none;
