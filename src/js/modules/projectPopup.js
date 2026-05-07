@@ -248,7 +248,6 @@ const projectPopupSwiper = new Swiper('.project-popup__image-swiper', {
 	},
 
 	simulateTouch: false,
-	allowTouchMove: false,
 
 	on: {
 		slideChange: swiper => {

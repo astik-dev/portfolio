@@ -298,22 +298,7 @@
 			aspect-ratio: 16 / 9;
 		}
 		.swiper-nav {
-			z-index: 2;
-
-			background: #293548;
-			box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-
-			&_left {
-				left: 3px;
-			}
-			&_right {
-				right: 3px;
-			}
-
-			&:disabled {
-				opacity: 0;
-				visibility: hidden;
-			}
+			display: none;
 		}
 		&__btns {
 			padding-top: 15px;
