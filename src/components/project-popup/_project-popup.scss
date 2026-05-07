@@ -189,9 +189,6 @@
 
 	&__btns {
 		display: flex;
-		justify-content: center;
-		align-items: center;
-		flex-wrap: wrap;
 		gap: 20px;
 
 		padding: 20px 20px 0 20px;
@@ -201,12 +198,12 @@
 		}
 	}
 	&__btn {
+		flex: 1;
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		gap: 10px;
 
-		width: calc(50% - 10px);
 		height: 46px;
 
 		font-size: 20px;
@@ -319,13 +316,21 @@
 			}
 		}
 		&__btns {
-			padding: 15px 20px 0 20px;
-			flex-direction: column;
-			flex-wrap: nowrap;
+			padding-top: 15px;
 			gap: 10px;
 		}
 		&__btn {
-			width: 100%;
+			gap: 7px;
+
+			height: 43px;
+
+			font-size: 17px;
+			line-height: 20px;
+
+			svg {
+				width: 22px;
+				height: 22px;
+			}
 		}
 		&__close {
 			top: 0;
