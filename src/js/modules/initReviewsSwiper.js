@@ -20,13 +20,6 @@ new Swiper('.reviews__swiper', {
 	autoHeight: true,
 	grabCursor: true,
 
-	breakpoints: {	
-		// when window width is >= 767.5px
-		767.5: {
-			resistanceRatio: 0,
-		},
-	},
-
 	effect: "flip",
 	speed: 450,
 
