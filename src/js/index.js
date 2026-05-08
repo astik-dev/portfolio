@@ -1,6 +1,5 @@
 import { doc, dqs } from "./modules/utils.js";
-import { toggleBurgerMenu } from "./modules/burgerMenu.js";
-import { smoothScroll } from "./modules/smoothScroll.js";
+import { isBurgerMenuOpen, toggleBurgerMenu } from "./modules/burgerMenu.js";
 import {
 	openProjectPopup,
 	closeProjectPopup,
@@ -55,9 +54,7 @@ doc.addEventListener("click", e => {
 		dqs(".project-popup__image-swiper .swiper-slide-active a").click();
 
 	else if (e.target.matches('.header__menu a[href*="#"]')) {
-		e.preventDefault();
-		const href = e.target.getAttribute('href');
-		smoothScroll(href);
-		track("header-nav-link-click", { href });
+		if (isBurgerMenuOpen()) toggleBurgerMenu(false);
+		track("header-nav-link-click", { href: e.target.getAttribute("href") });
 	}
 });

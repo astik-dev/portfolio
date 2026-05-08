@@ -1,3 +1,15 @@
+$container-padding-top-and-bottom: 24px;
+$a-padding-top-and-bottom: 4.5px;
+$a-line-height: 23px;
+$height:
+	calc($container-padding-top-and-bottom * 2) +
+	calc($a-padding-top-and-bottom * 2) +
+	$a-line-height;
+
+$mobile-container-padding: 5px;
+$mobile-burger-size: 60px;
+$mobile-height: calc($mobile-container-padding * 2) + $mobile-burger-size;
+
 .header {
 	position: fixed;
 	z-index: 100;
@@ -10,7 +22,7 @@
 		width: 100%;
 		max-width: 1366px;
 		margin: 0 auto;
-		padding: 24px 20px;
+		padding: $container-padding-top-and-bottom 20px;
 	}
 
 	&__menu {
@@ -25,10 +37,10 @@
 
 				a {
 					display: inline-block;
-					padding: 4.5px 16px;
+					padding: $a-padding-top-and-bottom 16px;
 
 					font-size: 20px;
-					line-height: 23px;
+					line-height: $a-line-height;
 					color: #fff;
 
 					border-radius: 50px;
@@ -107,7 +119,7 @@
 			align-items: center;
 			justify-content: flex-end;
 
-			padding: 5px;
+			padding: $mobile-container-padding;
 		}
 
 		&__burger {
@@ -118,8 +130,8 @@
 			align-items: center;
 			justify-content: space-between;
 
-			width: 60px;
-			height: 60px;
+			width: $mobile-burger-size;
+			height: $mobile-burger-size;
 
 			padding: 20px 15px;
 

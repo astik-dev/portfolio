@@ -2,16 +2,24 @@ import { track } from "../analytics/umami.js";
 import { dqs } from "./utils.js";
 
 
-export function toggleBurgerMenu(shouldTrackCloseEvent = true) {
-	const
-		headerCont = dqs(".header__container"),
-		openCssClass = "header__container_open-burger";
+const OPEN_BURGER_MENU_CLASS = "header__container_open-burger";
 
-	if (headerCont.classList.contains(openCssClass)) {
+const headerContainerEl = dqs(".header__container");
+
+/**
+ * @returns {boolean}
+ */
+export function isBurgerMenuOpen() {
+	return headerContainerEl.classList.contains(OPEN_BURGER_MENU_CLASS);
+}
+
+export function toggleBurgerMenu(shouldTrackCloseEvent = true) {
+
+	if (isBurgerMenuOpen()) {
 		shouldTrackCloseEvent && track("hamburger-menu-close");
     } else {
 		track("hamburger-menu-open");
 	}
 
-	headerCont.classList.toggle(openCssClass);
+	headerContainerEl.classList.toggle(OPEN_BURGER_MENU_CLASS);
 }

@@ -1,5 +1,14 @@
+@use "../../components/header/header"; 
+
+
 html {
     scrollbar-gutter: stable;
+    scroll-behavior: smooth;
+    scroll-padding-top: header.$height;
+
+    @media (max-width: 575.5px) {
+        scroll-padding-top: header.$mobile-height;
+    }
 }
 
 body {
