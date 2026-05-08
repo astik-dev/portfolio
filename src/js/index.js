@@ -1,4 +1,4 @@
-import { doc } from "./modules/utils.js";
+import { doc, dqs } from "./modules/utils.js";
 import { toggleBurgerMenu } from "./modules/burgerMenu.js";
 import { smoothScroll } from "./modules/smoothScroll.js";
 import {
@@ -21,7 +21,8 @@ doc.addEventListener("click", e => {
 		  projectItem = e.target.closest(".projects__item"),
 		  loadMoreButton = e.target.closest(".projects__btn-load-more"),
 		  projectPopupSlideLink = e.target.closest(".project-popup__image-slide a"),
-		  closeBtnProjectPopup = e.target.closest(".project-popup__close");
+		  closeBtnProjectPopup = e.target.closest(".project-popup__close"),
+		  projectPopupFullscreenBtn = e.target.closest(".project-popup__fullscreen-btn");
 
 	if (burger)
 		toggleBurgerMenu();
@@ -49,6 +50,9 @@ doc.addEventListener("click", e => {
 
 	else if (closeBtnProjectPopup)
 		closeProjectPopup("button");
+
+	else if (projectPopupFullscreenBtn)
+		dqs(".project-popup__image-swiper .swiper-slide-active a").click();
 
 	else if (e.target.matches('.header__menu a[href*="#"]')) {
 		e.preventDefault();
