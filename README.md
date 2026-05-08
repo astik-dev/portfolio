@@ -9,7 +9,6 @@ Developed with HTML, SCSS, JavaScript, and Gulp.
 4. Lazy loading of images
 5. [Umami](https://github.com/umami-software/umami) analytics integration
 
-## Design
-Design by [Braian](https://www.figma.com/community/file/1202589711092010403/portafolio)  
-Licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)  
-Modifications: Yes
+## Credits
+- Design by [Braian](https://www.figma.com/community/file/1202589711092010403/portafolio), modified, licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)  
+- Fullscreen SVG icon by [Deemak Daksina](https://dribbble.com/deemakdaksina), modified, licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)  
