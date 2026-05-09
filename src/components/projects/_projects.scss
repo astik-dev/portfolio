@@ -14,6 +14,8 @@
 		display: flex;
 		gap: var(--items-gap);
 		flex-wrap: wrap;
+
+		width: 100%;
 	}
 
 	&__item {
@@ -180,7 +182,6 @@
 			flex-direction: column;
 			flex-wrap: nowrap;
 			align-items: center;
-			width: 100%;
 		}
 
 		&__item {
