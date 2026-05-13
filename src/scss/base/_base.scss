@@ -1,4 +1,5 @@
-@use "../../components/header/header"; 
+@use "../../components/header/header";
+@use "../../components/hamburger/hamburger";
 
 
 html {
@@ -7,7 +8,7 @@ html {
     scroll-padding-top: header.$height;
 
     @media (max-width: 575.5px) {
-        scroll-padding-top: header.$mobile-height;
+        scroll-padding-top: calc(hamburger.$size + (hamburger.$top * 2));
     }
 }
 

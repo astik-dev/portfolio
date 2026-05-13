@@ -1,5 +1,8 @@
 import { doc, dqs } from "./modules/utils.js";
-import { isBurgerMenuOpen, toggleBurgerMenu } from "./modules/burgerMenu.js";
+import {
+	isHamburgerMenuOpen,
+	toggleHamburgerMenu
+} from "./modules/hamburgerMenu.js";
 import {
 	openProjectPopup,
 	closeProjectPopup,
@@ -16,15 +19,20 @@ import "./analytics/trackDeviceInfo.js";
 
 doc.addEventListener("click", e => {
 
-	const burger = e.target.closest(".header__burger"),
+	const hamburger = e.target.closest(".hamburger"),
 		  projectItem = e.target.closest(".projects__item"),
 		  loadMoreButton = e.target.closest(".projects__btn-load-more"),
 		  projectPopupSlideLink = e.target.closest(".project-popup__image-slide a"),
 		  closeBtnProjectPopup = e.target.closest(".project-popup__close"),
 		  projectPopupFullscreenBtn = e.target.closest(".project-popup__fullscreen-btn");
 
-	if (burger)
-		toggleBurgerMenu();
+	if (
+		hamburger ||
+		// click on backdrop
+		(isHamburgerMenuOpen() && e.target.classList.contains("header__container"))
+	) {
+		toggleHamburgerMenu();
+	}
 
 	else if (projectItem) {
 		const projectIndex = projectItem.dataset.projectIndex;
@@ -54,7 +62,7 @@ doc.addEventListener("click", e => {
 		dqs(".project-popup__image-swiper .swiper-slide-active a").click();
 
 	else if (e.target.matches('.header__menu a[href*="#"]')) {
-		if (isBurgerMenuOpen()) toggleBurgerMenu(false);
+		if (isHamburgerMenuOpen()) toggleHamburgerMenu(false);
 		track("header-nav-link-click", { href: e.target.getAttribute("href") });
 	}
 });
