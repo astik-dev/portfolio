@@ -1,22 +1,14 @@
 import fileInclude from "gulp-file-include";
 import { Transform } from "stream";
 import { minify } from "html-minifier-terser";
-import imageCreator from "../../src/js/modules/imageCreator.js";
 import { renderProjectsItem } from "../../src/js/modules/renderProjectsItem.js";
 import { store } from "../store.js";
 
-function renderSkillsItem({ name, img, imgWEBP }) {
-
-	const fallback = `skills/${img}`;
-
-	const imgOrPicture = imgWEBP
-		? imageCreator.newWebpPic("external", `skills/${imgWEBP}`, fallback, name, "browser")
-		: imageCreator.newImg("external", fallback, name, "browser");
-
+function renderSkillsItem({ icon, label }) {
 	return `
 		<article class="skills__item">
-			${imgOrPicture}
-			<h4>${name}</h4>
+			<svg><use href="#icon-${icon}" /></svg>
+			<h4>${label}</h4>
 		</article>
 	`;
 }
@@ -63,15 +55,7 @@ function renderReviewsSlide({ name, grade, text, date, link }) {
     `;
 }
 
-function renderContactLink({ url, title, img, imgWEBP }) {
-
-	const webpPath = `contacts/${imgWEBP}`;
-	const fallback = `contacts/${img}`;
-
-	const imgOrPicture = imgWEBP
-		? imageCreator.newWebpPic("external", webpPath, fallback, title, "browser")
-		: imageCreator.newImg("external", fallback, title, "browser");
-		
+function renderContactLink({ title, icon, url }) {
 	return `
 		<a
 			class="contact__link"
@@ -81,7 +65,7 @@ function renderContactLink({ url, title, img, imgWEBP }) {
 			data-umami-event="contact-link-click"
 			data-umami-event-title="${title}"
 		>
-			${imgOrPicture}
+			<svg><use href="#icon-${icon}" /></svg>
 		</a>
 	`;
 }
