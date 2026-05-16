@@ -91,6 +91,7 @@ export const html = () => {
 						.map(renderReviewsSlide)
 						.join(""),
 				contactLinks: contactLinks.map(renderContactLink).join(""),
+				currentYear: new Date().getFullYear(),
 			}
 		}))
 		.pipe( // html-minifier-terser
