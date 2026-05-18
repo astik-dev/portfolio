@@ -1,6 +1,7 @@
 import Swiper from "swiper";
 import { EffectFlip, Navigation, Pagination } from "swiper/modules";
 import { track } from "../analytics/umami.js";
+import { dqsa } from "./utils.js";
 
 
 new Swiper('.reviews__swiper', {
@@ -36,4 +37,16 @@ new Swiper('.reviews__swiper', {
 			});
 		},
 	},
+});
+
+const navButtons = dqsa(".reviews .swiper-nav");
+navButtons.forEach(btn => {
+	
+	btn.addEventListener("mouseenter", () => {
+		navButtons.forEach(btn => btn.style.top = btn.offsetTop + "px");
+	});
+
+	btn.addEventListener("mouseleave", () => {
+		navButtons.forEach(btn => btn.style.top = "50%");
+	});
 });
