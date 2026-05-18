@@ -79,6 +79,7 @@ export const html = () => {
 		.pipe(fileInclude({
 			context: {
 				projectCount: projects.length,
+				reviewSlideCount: reviews.length,
 				projectItems:
 					projects
 						.slice(0, 4)
