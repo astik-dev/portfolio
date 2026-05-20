@@ -1,12 +1,14 @@
 import Swiper from "swiper";
-import { Navigation, Pagination } from "swiper/modules";
+import { Navigation, Pagination, Virtual } from "swiper/modules";
 import { track } from "../analytics/umami.js";
-import { dqsa } from "./utils.js";
+import { dqs, dqsa } from "./utils.js";
+import reviews from "../../../temp/reviews.json";
+import { renderReviewSlide } from "./renderReviewSlide.js";
 
 
 new Swiper('.reviews__swiper', {
 
-	modules: [ Navigation, Pagination ],
+	modules: [ Navigation, Pagination, Virtual ],
 
 	pagination: {
 		el: '.reviews__swiper-pagination',
@@ -16,6 +18,14 @@ new Swiper('.reviews__swiper', {
 	navigation: {
 		nextEl: '.reviews .swiper-nav_right',
 		prevEl: '.reviews .swiper-nav_left',
+	},
+
+	virtual: {
+		enabled: true,
+		slides: reviews,
+		renderSlide: renderReviewSlide,
+		addSlidesAfter: 1,
+		addSlidesBefore: 1,
 	},
 
 	autoHeight: true,
@@ -29,9 +39,10 @@ new Swiper('.reviews__swiper', {
 	spaceBetween: 50,
 
 	on: {
+		beforeInit: () => dqs(".reviews__slide").remove(),
 		slideChange: swiper => {
 
-			const activeSlideEl = swiper.slides[swiper.activeIndex];
+			const activeSlideEl = dqs(".reviews__slide.swiper-slide-active");
 			
 			track("reviews-swiper-slide-change", {
 				review: activeSlideEl.querySelector("a").getAttribute("href"),

@@ -5,6 +5,9 @@ const API_BASE_URL =
 	"https://opensheet.elk.sh/1K842-NO5cQoYdsCjDdWzTbxwYfTmaysR4V8oSBI0qMo/";
 
 export const fetchData = () => {
+
+	fs.mkdirSync(app.path.tempFolder, { recursive: true });
+
 	return Promise.all(
 		["projects", "skills", "reviews", "contactLinks"].map(async sheetName => {
 			
@@ -13,10 +16,8 @@ export const fetchData = () => {
 				throw new Error(`Error ${response.status} - ${response.statusText}`);
 			};
 			const data = await response.json();
-			store[sheetName] = data;
-			
+
 			if (sheetName === "projects") {
-				fs.mkdirSync(app.path.tempFolder, { recursive: true });
 				fs.writeFileSync(
 					`${app.path.tempFolder}/projects.json`,
 					JSON.stringify(data)
@@ -28,7 +29,15 @@ export const fetchData = () => {
 					`${app.path.tempFolder}/projectsById.json`,
 					JSON.stringify(projectsById)
 				);
+			} else if (sheetName === "reviews") {
+				data.sort((a, b) => -(a.text.length - b.text.length));
+				fs.writeFileSync(
+					`${app.path.tempFolder}/reviews.json`,
+					JSON.stringify(data)
+				);
 			}
+
+			store[sheetName] = data;
 		})
 	);
 };
