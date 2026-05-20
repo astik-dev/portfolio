@@ -1,12 +1,12 @@
 import Swiper from "swiper";
-import { EffectFlip, Navigation, Pagination } from "swiper/modules";
+import { Navigation, Pagination } from "swiper/modules";
 import { track } from "../analytics/umami.js";
 import { dqsa } from "./utils.js";
 
 
 new Swiper('.reviews__swiper', {
 
-	modules: [ Navigation, Pagination, EffectFlip ],
+	modules: [ Navigation, Pagination ],
 
 	pagination: {
 		el: '.reviews__swiper-pagination',
@@ -21,8 +21,12 @@ new Swiper('.reviews__swiper', {
 	autoHeight: true,
 	grabCursor: true,
 
-	effect: "flip",
-	speed: 450,
+	breakpoints: {
+		// when window width is >= 575.5px
+		575.5: { speed: 450 }
+	},
+
+	spaceBetween: 50,
 
 	on: {
 		slideChange: swiper => {
