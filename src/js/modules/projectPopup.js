@@ -148,7 +148,7 @@ function addPictureLoadHandlerToAllSlides() {
 		addSlidePictureLoadHandler(
 			slidePicture,
 			index === 0
-				? () => showScrollAnimation(slidePicture.querySelector("img"))
+				? () => scheduleScrollHintIfImageIsScrollable(slidePicture.querySelector("img"))
 				: undefined
 		);
 	});
@@ -165,7 +165,7 @@ function addScrollEventToImageSlides() {
 	});
 }
 
-function showScrollAnimation(image) {
+function scheduleScrollHintIfImageIsScrollable(image) {
 	setTimeout(() => {
 		if (image.scrollHeight > dqs(".project-popup__image").clientHeight) {
 			dqs(".project-popup__image-scroll-hint").classList.add(
