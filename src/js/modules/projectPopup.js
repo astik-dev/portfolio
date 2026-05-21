@@ -186,7 +186,6 @@ export function openProjectPopup(project, shouldPushState = true) {
 	projectPopup
 		.setLinkButtons(project.repository, project.demo, project.folder);
 
-	// image slides
 	let imageSlideElems = ``;
 	for (let index = 1; index <= project.screenshots; index++) {
 		imageSlideElems += imageSlideHTML(project.folder, index);
