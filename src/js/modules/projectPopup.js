@@ -10,6 +10,8 @@ import { renderResponsiveImage } from "./responsiveImage.js";
 const INITIAL_HISTORY_LENGTH = window.history.length;
 const PROJECT_PARAM = "project";
 
+const SCROLL_HINT_ANIMATION_CLASS = "project-popup__image-scroll-hint_animation";
+
 
 const projectPopup = {
 
@@ -159,13 +161,24 @@ function addScrollEventToImageSlides() {
 }
 
 function scheduleScrollHintIfImageIsScrollable(image) {
+	
+	const scrollableContainerEl = image.closest("a");
+	const scrollHintEl = dqs(".project-popup__image-scroll-hint");
+
+	if (scrollHintEl.classList.contains(SCROLL_HINT_ANIMATION_CLASS)) return;
+
 	setTimeout(() => {
-		if (image.scrollHeight > dqs(".project-popup__image").clientHeight) {
-			dqs(".project-popup__image-scroll-hint").classList.add(
-				"project-popup__image-scroll-hint_animation"
-			);
+		if (image.scrollHeight > scrollableContainerEl.clientHeight) {
+			scrollHintEl.classList.add(SCROLL_HINT_ANIMATION_CLASS);
 		}
 	}, 500);
+
+	scrollableContainerEl.addEventListener("scroll", () => {
+		const [ animation ] = scrollHintEl.getAnimations();
+		if (animation && animation.playState === "running") {
+			animation.updatePlaybackRate(2);
+		}
+	}, { once: true });
 }
 
 export function openProjectPopup(project, shouldPushState = true) {
