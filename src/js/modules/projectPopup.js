@@ -111,10 +111,10 @@ function buildUmamiEventProps(slideLinkEl) {
 
 /**
  * @param {HTMLPictureElement} picture 
- * @param {() => void} [onImageDisplay] 
+ * @param {number} slideIndex 
  * @returns {void}
  */
-function addSlidePictureLoadHandler(picture, onImageDisplay) {
+function addSlidePictureLoadHandler(picture, slideIndex) {
 
 	const imgEl = picture.querySelector("img");
 
@@ -131,7 +131,7 @@ function addSlidePictureLoadHandler(picture, onImageDisplay) {
 				const loaderEl =
 					slideEl.querySelector(".project-popup__image-slide-loader");
 				loaderEl.addEventListener("transitionend", loaderEl.remove);
-				onImageDisplay?.();
+				if (slideIndex === 0) scheduleScrollHintIfImageIsScrollable(imgEl);
 			});
 		});
 	}
@@ -144,14 +144,7 @@ function addSlidePictureLoadHandler(picture, onImageDisplay) {
 }
 
 function addPictureLoadHandlerToAllSlides() {
-	dqsa(".project-popup__image-slide picture").forEach((slidePicture, index) => {
-		addSlidePictureLoadHandler(
-			slidePicture,
-			index === 0
-				? () => scheduleScrollHintIfImageIsScrollable(slidePicture.querySelector("img"))
-				: undefined
-		);
-	});
+	dqsa(".project-popup__image-slide picture").forEach(addSlidePictureLoadHandler);
 }
 
 function imageSlideScrollEvent(event) {
