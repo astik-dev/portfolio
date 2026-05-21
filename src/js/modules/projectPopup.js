@@ -177,6 +177,9 @@ function scheduleScrollHintIfImageIsScrollable(image) {
 		const [ animation ] = scrollHintEl.getAnimations();
 		if (animation && animation.playState === "running") {
 			animation.updatePlaybackRate(2);
+		} else {
+			// Prevent hint animation if scroll starts before animation begins
+			scrollHintEl.style.display = "none";
 		}
 	}, { once: true });
 }
