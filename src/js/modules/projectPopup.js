@@ -295,7 +295,7 @@ const INITIAL_PROJECT_PARAM_VALUE = getQueryParam(PROJECT_PARAM);
 if (INITIAL_PROJECT_PARAM_VALUE) {
 	const project = projects.find(p => p.folder === INITIAL_PROJECT_PARAM_VALUE);
 	if (project) {
-		openProjectPopup(project, false);
+		window.addEventListener("load", () => openProjectPopup(project, false));
 	} else {
 		deleteQueryParam(PROJECT_PARAM, { replace: true });
 	}
