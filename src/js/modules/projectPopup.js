@@ -189,9 +189,8 @@ export function openProjectPopup(project, shouldPushState = true) {
 	if (shouldPushState) {
 		setQueryParam(PROJECT_PARAM, project.folder);
 	}
-
-	if (dqs(SCROLL_HINT_ANIMATION_CLASS)) {
-		dqs(SCROLL_HINT_ANIMATION_CLASS).style.display = "none";
+	if (dqs("." + SCROLL_HINT_ANIMATION_CLASS)) {
+		dqs("." + SCROLL_HINT_ANIMATION_CLASS).style.display = "none";
 	}
 
 	projectPopup.setTitle(project.title);
