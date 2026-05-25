@@ -31,6 +31,7 @@ export function renderReviewSlide({ name, grade, text, date, link }) {
                 <a
 					href="${link}"
 					target="_blank"
+                    rel="nofollow"
 					title="View on ${siteName}"
 					data-umami-event="review-source-link-click"
 					data-umami-event-url="${link}"
