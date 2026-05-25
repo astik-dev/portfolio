@@ -8,6 +8,8 @@ export function renderReviewSlide({ name, grade, text, date, link }) {
         "#2CB67D"; // green
     
 	const { hostname } = new URL(link);
+    
+    const siteName = hostname[0].toUpperCase() + hostname.split(".")[0].slice(1);
 
 	if (hostname === "freelancehunt.com") {
 		link += "#freelancer-review";
@@ -29,7 +31,7 @@ export function renderReviewSlide({ name, grade, text, date, link }) {
                 <a
 					href="${link}"
 					target="_blank"
-					title="Go to source"
+					title="View on ${siteName}"
 					data-umami-event="review-source-link-click"
 					data-umami-event-url="${link}"
 				>
