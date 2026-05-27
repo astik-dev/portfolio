@@ -9,7 +9,7 @@ function renderSkillsItem({ icon, label }) {
 	return `
 		<article class="skills__item">
 			<svg><use href="#icon-${icon}" /></svg>
-			<h4>${label}</h4>
+			${label}
 		</article>
 	`;
 }
