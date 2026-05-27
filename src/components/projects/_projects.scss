@@ -74,15 +74,20 @@
 				margin-bottom: 5px;
 			}
 
-			h5 {
+			h3 {
 				position: relative;
 
 				display: inline-block;
+				
+				max-width: 100%;
+
 				padding: 0 0 5px 0;
 
-				white-space: nowrap;
-				max-width: 100%;
 				overflow: hidden;
+
+				font-size: 20px;
+				line-height: 23px;
+				white-space: nowrap;
 				text-overflow: ellipsis;
 
 				&:after {
@@ -113,7 +118,7 @@
 					transform: scale(1.05);
 				}
 
-				h5 {
+				h3 {
 					&:after {
 						left: 0;
 
@@ -163,7 +168,7 @@
 					margin-bottom: 3px;
 				}
 
-				h5 {
+				h3 {
 					padding: 0 0 3px 0;
 				}
 			}

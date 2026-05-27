@@ -42,7 +42,7 @@ export function renderProjectsItem({ folder, title }, index, isHidden) {
 			)}
 			<div class="projects__item-title">
 				<svg><use href="#icon-eye" /></svg>
-				<h5>${title}</h5>
+				<h3>${title}</h3>
 			</div>
 		</article>
 	`;
