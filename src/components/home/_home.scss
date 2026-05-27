@@ -15,6 +15,12 @@
 	&__left {
 		text-align: right;
 
+		&-hello,
+		&-code {
+			font-size: 32px;
+			line-height: 38px;
+		}
+
 		&-hello {
 			position: relative;
 
@@ -46,7 +52,7 @@
 
 			padding: 15px 80px 35px 0;
 
-			span {
+			p {
 				position: absolute;
 				bottom: 20px;
 				right: 90px;
@@ -54,9 +60,9 @@
 				font-size: 22px;
 				line-height: 1;
 				font-weight: 300;
-				font-style: normal;
 			}
 		}
+
 		&-code {
 			color: #2CB67D;
 			white-space: nowrap;
@@ -109,6 +115,12 @@
 
 		&__left {
 
+			&-hello,
+			&-code {
+				font-size: 20px;
+				line-height: 23px;
+			}
+
 			&-hello {
 				padding: 0 44px 0 0;
 
@@ -124,7 +136,7 @@
 			&-name {
 				padding: 10px 48px 31px 0;
 
-				span {
+				p {
 					bottom: 15px;
 					right: 48px;
 
