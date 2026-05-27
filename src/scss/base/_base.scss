@@ -1,3 +1,6 @@
+@use "pkg:@fontsource-variable/roboto/wght.css";
+@use "pkg:@fontsource-variable/roboto/wght-italic.css";
+
 @use "../../components/header/header";
 @use "../../components/hamburger/hamburger";
 
@@ -14,4 +17,9 @@ html {
 
 body {
     background: #111827;
+
+    color: #FFF;
+	font-family: "Roboto Variable", sans-serif;
+	font-size: 16px;
+	line-height: 19px;
 }

@@ -52,6 +52,13 @@
 
 			padding: 15px 80px 35px 0;
 
+			h1 {
+				font-size: 80px;
+				line-height: 94px;
+				font-weight: 500;
+				font-style: italic;
+			}
+
 			p {
 				position: absolute;
 				bottom: 20px;
@@ -135,6 +142,11 @@
 
 			&-name {
 				padding: 10px 48px 31px 0;
+
+				h1 {
+					font-size: 55px;
+					line-height: 64px;
+				}
 
 				p {
 					bottom: 15px;
