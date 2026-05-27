@@ -19,11 +19,11 @@ export function renderReviewSlide({ name, grade, text, date, link }) {
         <div class="reviews__slide swiper-slide">
             <div class="reviews__slide-top">
 				<svg><use href="#icon-avatar" /></svg>
-                <h5>${name}</h5>
-                <h4 style="color: ${gradeColor};">
-                    <span>${grade}/10</span>
+                <p class="reviews__slide-author">${name}</p>
+                <div class="reviews__slide-rating" style="color: ${gradeColor};">
+                    <p>${grade}/10</p>
 					<svg><use href="#icon-star" /></svg>
-                </h4>
+                </div>
             </div>
             <p>${text}</p>
             <div class="reviews__slide-bottom">
