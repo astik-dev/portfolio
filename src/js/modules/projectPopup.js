@@ -16,7 +16,14 @@ const SCROLL_HINT_ANIMATION_CLASS = "project-popup__image-scroll-hint_animation"
 const projectPopup = {
 
 	setTitle(title) {
-		dqs(".project-popup__container h3").textContent = title;
+		const placeholderEl = dqs(".project-popup__h2-placeholder");
+		const titleEl = placeholderEl
+			? document.createElement("h2")
+			: dqs(".project-popup__container h2");
+		titleEl.textContent = title;
+		if (placeholderEl) {
+			placeholderEl.replaceWith(titleEl);
+		}
 	},
 
 	setDescription(descriptionText) {

@@ -44,9 +44,11 @@
 
 		transition: all 0.3s ease;
 
-		h3 {
+		h2 {
 			margin: 10px 0 5px 0;
 
+			font-size: 32px;
+			line-height: 38px;
 			text-align: center;
 		}
 
@@ -305,10 +307,12 @@
 
 			padding: 30px 0 20px 0;
 
-			h3 {
+			h2 {
 				padding: 0 20px;
 				margin: 15px 0 5px 0;
 
+				font-size: 20px;
+				line-height: 23px;
 				font-weight: 500;
 			}
 
