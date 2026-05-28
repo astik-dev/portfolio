@@ -1,10 +1,10 @@
-export function renderReviewSlide({ name, grade, text, date, link }) {
+export function renderReviewSlide({ name, rating, text, date, link }) {
 	
-	grade = +grade;
+	rating = +rating;
 
-    const gradeColor =
-        grade < 5 ? "#fa1111" : // red
-        grade < 7 ? "#fab43c" : // orange
+    const ratingColor =
+        rating < 5 ? "#fa1111" : // red
+        rating < 7 ? "#fab43c" : // orange
         "#2CB67D"; // green
     
 	const { hostname } = new URL(link);
@@ -20,8 +20,8 @@ export function renderReviewSlide({ name, grade, text, date, link }) {
             <header>
 				<svg><use href="#icon-avatar" /></svg>
                 <p class="reviews__slide-author">${name}</p>
-                <div class="reviews__slide-rating" style="color: ${gradeColor};">
-                    <p>${grade}/10</p>
+                <div class="reviews__slide-rating" style="color: ${ratingColor};">
+                    <p>${rating}/10</p>
 					<svg><use href="#icon-star" /></svg>
                 </div>
             </header>
