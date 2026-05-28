@@ -7,10 +7,10 @@ import { store } from "../store.js";
 
 function renderSkillsItem({ icon, label }) {
 	return `
-		<article class="skills__item">
+		<li>
 			<svg><use href="#icon-${icon}" /></svg>
 			${label}
-		</article>
+		</li>
 	`;
 }
 
