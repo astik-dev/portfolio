@@ -16,18 +16,20 @@ export function renderReviewSlide({ name, grade, text, date, link }) {
 	}
 
     return `
-        <div class="reviews__slide swiper-slide">
-            <div class="reviews__slide-top">
+        <article class="reviews__slide swiper-slide">
+            <header>
 				<svg><use href="#icon-avatar" /></svg>
                 <p class="reviews__slide-author">${name}</p>
                 <div class="reviews__slide-rating" style="color: ${gradeColor};">
                     <p>${grade}/10</p>
 					<svg><use href="#icon-star" /></svg>
                 </div>
-            </div>
+            </header>
             <p>${text}</p>
-            <div class="reviews__slide-bottom">
-                <span>${date}</span>
+            <footer>
+                <time datetime="${date.split(".").toReversed().join("-")}">
+                    ${date}
+                </time>
                 <a
 					href="${link}"
 					target="_blank"
@@ -38,7 +40,7 @@ export function renderReviewSlide({ name, grade, text, date, link }) {
 				>
 					${hostname}
 				</a>
-            </div>
-        </div>
+            </footer>
+        </article>
     `;
 }

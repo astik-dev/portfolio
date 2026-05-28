@@ -28,7 +28,7 @@
 		background: #293548;
 		border-radius: 15px;
 
-		&-top {			
+		header {
 			display: grid;
 			grid-template-columns: auto 1fr auto;
 			gap: 8px;
@@ -68,12 +68,12 @@
 			font-weight: 350;
 		}
 
-		&-bottom {
+		footer {
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
 
-			span, a {
+			time, a {
 				font-size: 14px;
 				line-height: 16px;
 				font-weight: 300;
@@ -82,7 +82,7 @@
 				opacity: 0.6;
 			}
 
-			span {
+			time {
 				font-style: italic;
 			}
 			
@@ -112,7 +112,7 @@
 
 		&__slide {
 
-			&-bottom {
+			footer {
                 
 				a:hover {
 					opacity: 0.8;
@@ -152,7 +152,7 @@
 		&__slide {
 			padding: 15px 15px 10px 15px;
 
-			&-top {
+			header {
 				padding: 0;
 			}
 		}
