@@ -59,9 +59,11 @@ navButtons.forEach(btn => {
 	
 	btn.addEventListener("mouseenter", () => {
 
+		const scrollY = Math.ceil(window.scrollY);
+		const documentHeight = document.documentElement.scrollHeight;
+
 		const isAtPageBottom =
-			Math.ceil(window.scrollY) + window.innerHeight >=
-			document.documentElement.scrollHeight;
+			scrollY > 0 && (scrollY + window.innerHeight >= documentHeight);
 			
 		navButtons.forEach(btn => {
 			btn.style[isAtPageBottom ? "bottom" : "top"] = btn.offsetTop + "px";
