@@ -60,7 +60,7 @@ navButtons.forEach(btn => {
 	btn.addEventListener("mouseenter", () => {
 
 		const isAtPageBottom =
-			window.scrollY + window.innerHeight >=
+			Math.ceil(window.scrollY) + window.innerHeight >=
 			document.documentElement.scrollHeight;
 			
 		navButtons.forEach(btn => {
