@@ -58,10 +58,19 @@ const navButtons = dqsa(".reviews .swiper-nav");
 navButtons.forEach(btn => {
 	
 	btn.addEventListener("mouseenter", () => {
-		navButtons.forEach(btn => btn.style.top = btn.offsetTop + "px");
+
+		const isAtPageBottom =
+			window.scrollY + window.innerHeight >=
+			document.documentElement.scrollHeight;
+			
+		navButtons.forEach(btn => {
+			btn.style[isAtPageBottom ? "bottom" : "top"] = btn.offsetTop + "px";
+			btn.style[isAtPageBottom ? "top" : "bottom"] = "auto";
+		});
 	});
 
 	btn.addEventListener("mouseleave", () => {
-		navButtons.forEach(btn => btn.style.top = "50%");
+		const topOrBottom = btn.style.top === "auto" ? "bottom" : "top";
+		navButtons.forEach(btn => btn.style[topOrBottom] = "var(--center-y)");
 	});
 });

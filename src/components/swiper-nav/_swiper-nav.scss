@@ -1,13 +1,15 @@
 .swiper-nav {
-	position: absolute;
-	top: 50%;
+	$diameter: 30px;
+	--center-y: calc(50% - #{$diameter} / 2);
 
-	width: 30px;
-	height: 30px;
+	position: absolute;
+	top: var(--center-y);
+
+	width: $diameter;
+	height: $diameter;
 
 	border-radius: 30px;
 	background: transparent;
-	transform: translateY(-50%);
 
 	cursor: pointer;
 
@@ -52,7 +54,7 @@
 	&_right {
 		right: 0;
 
-		transform: translateY(-50%) rotate(180deg);
+		transform: rotate(180deg);
 	}
 
 	&:disabled {
