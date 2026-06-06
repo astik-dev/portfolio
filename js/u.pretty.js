@@ -7,21 +7,21 @@
 				location: o,
 				document: c,
 				history: s,
-				top: u,
-				doNotTrack: f,
+				top: f,
+				doNotTrack: u,
 			} = t,
-			{ currentScript: d, referrer: h } = c;
-		if (!d) return;
-		const { hostname: l, href: m, origin: p } = o;
-		let g;
+			{ currentScript: l, referrer: d } = c;
+		if (!l) return;
+		const { hostname: h, href: m, origin: p } = o;
+		let y;
 		try {
-			g = m.startsWith("data:") ? void 0 : t.localStorage;
+			y = m.startsWith("data:") ? void 0 : t.localStorage;
 		} catch {}
-		const y = "data-",
+		const g = "data-",
 			v = "false",
 			b = "true",
-			T = d.getAttribute.bind(d),
-			w = (t) => T(`${y}${t}`),
+			T = l.getAttribute.bind(l),
+			w = (t) => T(`${g}${t}`),
 			S = w("website-id"),
 			x = w("host-url"),
 			k = w("before-send"),
@@ -38,7 +38,7 @@
 			K = `${(x || "https://gateway.umami.is").replace(/\/$/, "")}/api/send`,
 			R = `${e}x${a}`,
 			_ = /data-umami-event-([\w-_]+)/,
-			D = `${y}umami-event`,
+			D = `${g}umami-event`,
 			W = 300,
 			B = (t) => {
 				if (!t) return t;
@@ -54,7 +54,7 @@
 				screen: R,
 				language: n,
 				title: c.title,
-				hostname: l,
+				hostname: h,
 				url: Y,
 				referrer: Z,
 				tag: E,
@@ -70,11 +70,11 @@
 			U = () =>
 				et ||
 				!S ||
-				g?.getItem("umami.disabled") ||
-				(O && !P.includes(l)) ||
+				y?.getItem("umami.disabled") ||
+				(O && !P.includes(h)) ||
 				($ &&
 					(() => {
-						const t = f || r || i;
+						const t = u || r || i;
 						return 1 === t || "1" === t || "yes" === t;
 					})()),
 			q = async (e, a = "event") => {
@@ -89,7 +89,7 @@
 								headers: {
 									"Content-Type": "application/json",
 									"x-umami-website-id": S,
-									"x-umami-hostname": l,
+									"x-umami-hostname": h,
 									...(void 0 !== Q && { "x-umami-cache": Q }),
 								},
 								credentials: A,
@@ -142,8 +142,8 @@
 												(e.button && 1 === e.button);
 										return (
 											i || e.preventDefault(),
-											t(a).then(() => {
-												i || (("_top" === r ? u.location : o).href = n);
+											t(a).finally(() => {
+												i || (("_top" === r ? f.location : o).href = n);
 											})
 										);
 									}
@@ -195,33 +195,33 @@
 					s("largest-contentful-paint", (t) => {
 						e.lcp = Math.max(t.startTime - i, 0);
 					}));
-				let u = 0,
-					f = [];
+				let f = 0,
+					u = [];
 				s("layout-shift", (t) => {
 					if (!t.hadRecentInput) {
-						const a = f[f.length - 1],
-							n = f[0];
+						const a = u[u.length - 1],
+							n = u[0];
 						(a &&
 						t.startTime - a.startTime - a.duration < 1e3 &&
 						t.startTime - n.startTime < 5e3
-							? ((u += t.value), f.push(t))
-							: ((u = t.value), (f = [t])),
-							u > (e.cls || 0) && (e.cls = u));
+							? ((f += t.value), u.push(t))
+							: ((f = t.value), (u = [t])),
+							f > (e.cls || 0) && (e.cls = f));
 					}
 				});
-				let d,
-					h = {};
-				const l = (t) => {
+				let l,
+					d = {};
+				const h = (t) => {
 					t.forEach((t) => {
 						if (t.interactionId) {
-							const e = h[t.interactionId];
-							(!e || t.duration > e) && (h[t.interactionId] = t.duration);
+							const e = d[t.interactionId];
+							(!e || t.duration > e) && (d[t.interactionId] = t.duration);
 						}
 					});
 				};
 				try {
-					((d = new PerformanceObserver((t) => l(t.getEntries()))),
-						d.observe({ type: "event", buffered: !0, durationThreshold: 40 }));
+					((l = new PerformanceObserver((t) => h(t.getEntries()))),
+						l.observe({ type: "event", buffered: !0, durationThreshold: 40 }));
 				} catch {}
 				const m = (e) => {
 						try {
@@ -256,8 +256,8 @@
 								}
 							})(),
 							(() => {
-								d && l(d.takeRecords());
-								const t = Object.values(h).sort((t, e) => e - t);
+								l && h(l.takeRecords());
+								const t = Object.values(d).sort((t, e) => e - t);
 								if (t.length) {
 									const a = Math.floor(0.02 * Math.max(t.length, 10));
 									e.inp = t[Math.min(a, t.length - 1)];
@@ -276,9 +276,9 @@
 						}),
 						(i = 0),
 						(o = performance.now()),
-						(u = 0),
-						(f = []),
-						(h = {}),
+						(f = 0),
+						(u = []),
+						(d = {}),
 						(n = !1),
 						a && clearTimeout(a),
 						(a = setTimeout(p, 1e4)));
@@ -299,7 +299,7 @@
 			V,
 			X,
 			Y = B(m),
-			Z = B(h.startsWith(p) ? "" : h),
+			Z = B(d.startsWith(p) ? "" : d),
 			tt = !1,
 			et = !1;
 		M &&
