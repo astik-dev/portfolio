@@ -41,7 +41,7 @@ export const html = () => {
 				reviewSlideCount: reviews.length,
 				projectItems:
 					projects
-						.slice(0, 4)
+						.slice(0, 6)
 						.map((p, i) => renderProjectsItem(p, i, false))
 						.join(""),
 				skillItems: skills.map(renderSkillsItem).join(""),

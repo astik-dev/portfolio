@@ -3,7 +3,7 @@ import projects from "../../../temp/projects.json";
 import { renderProjectsItem } from "./renderProjectsItem.js";
 
 
-const PROJECTS_PER_LOAD = 4;
+const PROJECTS_PER_LOAD = 6;
 
 export const getLoadedProjectsCount = () => dqsa(".projects__item").length;
 
