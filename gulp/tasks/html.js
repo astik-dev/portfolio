@@ -19,7 +19,7 @@ function renderContactLink({ title, icon, url }) {
 		<a
 			class="contact__link"
 			href="${url}"
-			target="_blank"
+			${!url.startsWith("mailto") ? "target='_blank'" : ""}
 			title="${title}"
 			data-umami-event="contact-link-click"
 			data-umami-event-title="${title}"
