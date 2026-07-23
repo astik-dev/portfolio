@@ -7,11 +7,11 @@
 				location: o,
 				document: c,
 				history: s,
-				top: f,
-				doNotTrack: u,
+				top: u,
+				doNotTrack: f,
 			} = t,
-			{ currentScript: l, referrer: d } = c;
-		if (!l) return;
+			{ currentScript: d, referrer: l } = c;
+		if (!d) return;
 		const { hostname: h, href: m, origin: p } = o;
 		let y;
 		try {
@@ -20,7 +20,7 @@
 		const g = "data-",
 			v = "false",
 			b = "true",
-			T = l.getAttribute.bind(l),
+			T = d.getAttribute.bind(d),
 			w = (t) => T(`${g}${t}`),
 			S = w("website-id"),
 			x = w("host-url"),
@@ -74,7 +74,7 @@
 				(O && !P.includes(h)) ||
 				($ &&
 					(() => {
-						const t = u || r || i;
+						const t = f || r || i;
 						return 1 === t || "1" === t || "yes" === t;
 					})()),
 			q = async (e, a = "event") => {
@@ -143,7 +143,7 @@
 										return (
 											i || e.preventDefault(),
 											t(a).finally(() => {
-												i || (("_top" === r ? f.location : o).href = n);
+												i || (("_top" === r ? u.location : o).href = n);
 											})
 										);
 									}
@@ -165,11 +165,14 @@
 								? t(C())
 								: C(),
 				),
-			G = (t, e) => (
-				"string" == typeof t && (V = t),
-				(Q = ""),
-				q({ ...C(), data: "object" == typeof t ? t : e }, "identify")
-			),
+			G = (t, e) => {
+				const a = "string" == typeof t ? t : t.id;
+				return (
+					void 0 !== a && (V = a),
+					(Q = ""),
+					q({ ...C(), data: "object" == typeof t ? t : e }, "identify")
+				);
+			},
 			H = () => {
 				const e = {};
 				let a,
@@ -195,33 +198,33 @@
 					s("largest-contentful-paint", (t) => {
 						e.lcp = Math.max(t.startTime - i, 0);
 					}));
-				let f = 0,
-					u = [];
+				let u = 0,
+					f = [];
 				s("layout-shift", (t) => {
 					if (!t.hadRecentInput) {
-						const a = u[u.length - 1],
-							n = u[0];
+						const a = f[f.length - 1],
+							n = f[0];
 						(a &&
 						t.startTime - a.startTime - a.duration < 1e3 &&
 						t.startTime - n.startTime < 5e3
-							? ((f += t.value), u.push(t))
-							: ((f = t.value), (u = [t])),
-							f > (e.cls || 0) && (e.cls = f));
+							? ((u += t.value), f.push(t))
+							: ((u = t.value), (f = [t])),
+							u > (e.cls || 0) && (e.cls = u));
 					}
 				});
-				let l,
-					d = {};
+				let d,
+					l = {};
 				const h = (t) => {
 					t.forEach((t) => {
 						if (t.interactionId) {
-							const e = d[t.interactionId];
-							(!e || t.duration > e) && (d[t.interactionId] = t.duration);
+							const e = l[t.interactionId];
+							(!e || t.duration > e) && (l[t.interactionId] = t.duration);
 						}
 					});
 				};
 				try {
-					((l = new PerformanceObserver((t) => h(t.getEntries()))),
-						l.observe({ type: "event", buffered: !0, durationThreshold: 40 }));
+					((d = new PerformanceObserver((t) => h(t.getEntries()))),
+						d.observe({ type: "event", buffered: !0, durationThreshold: 40 }));
 				} catch {}
 				const m = (e) => {
 						try {
@@ -256,8 +259,8 @@
 								}
 							})(),
 							(() => {
-								l && h(l.takeRecords());
-								const t = Object.values(d).sort((t, e) => e - t);
+								d && h(d.takeRecords());
+								const t = Object.values(l).sort((t, e) => e - t);
 								if (t.length) {
 									const a = Math.floor(0.02 * Math.max(t.length, 10));
 									e.inp = t[Math.min(a, t.length - 1)];
@@ -276,9 +279,9 @@
 						}),
 						(i = 0),
 						(o = performance.now()),
-						(f = 0),
-						(u = []),
-						(d = {}),
+						(u = 0),
+						(f = []),
+						(l = {}),
 						(n = !1),
 						a && clearTimeout(a),
 						(a = setTimeout(p, 1e4)));
@@ -299,7 +302,7 @@
 			V,
 			X,
 			Y = B(m),
-			Z = B(d.startsWith(p) ? "" : d),
+			Z = B(l.startsWith(p) ? "" : l),
 			tt = !1,
 			et = !1;
 		M &&
