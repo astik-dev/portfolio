@@ -10,18 +10,18 @@
 				top: u,
 				doNotTrack: f,
 			} = t,
-			{ currentScript: d, referrer: l } = c;
-		if (!d) return;
+			{ currentScript: l, referrer: d } = c;
+		if (!l) return;
 		const { hostname: h, href: m, origin: p } = o;
-		let y;
+		let g;
 		try {
-			y = m.startsWith("data:") ? void 0 : t.localStorage;
+			g = m.startsWith("data:") ? void 0 : t.localStorage;
 		} catch {}
-		const g = "data-",
+		const y = "data-",
 			v = "false",
 			b = "true",
-			T = d.getAttribute.bind(d),
-			w = (t) => T(`${g}${t}`),
+			T = l.getAttribute.bind(l),
+			w = (t) => T(`${y}${t}`),
 			S = w("website-id"),
 			x = w("host-url"),
 			k = w("before-send"),
@@ -38,7 +38,7 @@
 			K = `${(x || "https://gateway.umami.is").replace(/\/$/, "")}/api/send`,
 			R = `${e}x${a}`,
 			_ = /data-umami-event-([\w-_]+)/,
-			D = `${g}umami-event`,
+			D = `${y}umami-event`,
 			W = 300,
 			B = (t) => {
 				if (!t) return t;
@@ -49,17 +49,22 @@
 					return t;
 				}
 			},
-			C = () => ({
-				website: S,
-				screen: R,
-				language: n,
-				title: c.title,
-				hostname: h,
-				url: Y,
-				referrer: Z,
-				tag: E,
-				id: V || void 0,
-			}),
+			C = () => {
+				return {
+					website: S,
+					screen: R,
+					language: n,
+					title: c.title,
+					hostname: h,
+					url: Y,
+					referrer:
+						((t = Z),
+						t === p || t?.startsWith(p + "/") ? t.slice(p.length) : t),
+					tag: E,
+					id: V || void 0,
+				};
+				var t;
+			},
 			J = (t, e, a) => {
 				a &&
 					("function" == typeof X && X(),
@@ -70,7 +75,7 @@
 			U = () =>
 				et ||
 				!S ||
-				y?.getItem("umami.disabled") ||
+				g?.getItem("umami.disabled") ||
 				(O && !P.includes(h)) ||
 				($ &&
 					(() => {
@@ -212,19 +217,19 @@
 							u > (e.cls || 0) && (e.cls = u));
 					}
 				});
-				let d,
-					l = {};
+				let l,
+					d = {};
 				const h = (t) => {
 					t.forEach((t) => {
 						if (t.interactionId) {
-							const e = l[t.interactionId];
-							(!e || t.duration > e) && (l[t.interactionId] = t.duration);
+							const e = d[t.interactionId];
+							(!e || t.duration > e) && (d[t.interactionId] = t.duration);
 						}
 					});
 				};
 				try {
-					((d = new PerformanceObserver((t) => h(t.getEntries()))),
-						d.observe({ type: "event", buffered: !0, durationThreshold: 40 }));
+					((l = new PerformanceObserver((t) => h(t.getEntries()))),
+						l.observe({ type: "event", buffered: !0, durationThreshold: 40 }));
 				} catch {}
 				const m = (e) => {
 						try {
@@ -259,8 +264,8 @@
 								}
 							})(),
 							(() => {
-								d && h(d.takeRecords());
-								const t = Object.values(l).sort((t, e) => e - t);
+								l && h(l.takeRecords());
+								const t = Object.values(d).sort((t, e) => e - t);
 								if (t.length) {
 									const a = Math.floor(0.02 * Math.max(t.length, 10));
 									e.inp = t[Math.min(a, t.length - 1)];
@@ -281,7 +286,7 @@
 						(o = performance.now()),
 						(u = 0),
 						(f = []),
-						(l = {}),
+						(d = {}),
 						(n = !1),
 						a && clearTimeout(a),
 						(a = setTimeout(p, 1e4)));
@@ -302,7 +307,7 @@
 			V,
 			X,
 			Y = B(m),
-			Z = B(l.startsWith(p) ? "" : l),
+			Z = B(d),
 			tt = !1,
 			et = !1;
 		M &&
