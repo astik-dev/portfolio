@@ -7,11 +7,11 @@
 				location: o,
 				document: c,
 				history: s,
-				top: u,
-				doNotTrack: f,
+				top: d,
+				doNotTrack: u,
 			} = t,
-			{ currentScript: l, referrer: d } = c;
-		if (!l) return;
+			{ currentScript: f, referrer: l } = c;
+		if (!f) return;
 		const { hostname: h, href: m, origin: p } = o;
 		let g;
 		try {
@@ -20,39 +20,40 @@
 		const y = "data-",
 			v = "false",
 			b = "true",
-			T = l.getAttribute.bind(l),
+			T = f.getAttribute.bind(f),
 			w = (t) => T(`${y}${t}`),
 			S = w("website-id"),
 			x = w("host-url"),
 			k = w("before-send"),
-			E = w("tag") || void 0,
-			M = w("auto-track") !== v,
-			$ = w("do-not-track") === b,
-			j = w("exclude-search") === b,
-			N = w("exclude-hash") === b,
-			O = w("domains") || "",
-			A = w("fetch-credentials") || "omit",
-			I = w("performance") === b,
-			L = w("auto-pageview") !== v,
-			P = O.split(",").map((t) => t.trim()),
-			K = `${(x || "https://gateway.umami.is").replace(/\/$/, "")}/api/send`,
-			R = `${e}x${a}`,
-			_ = /data-umami-event-([\w-_]+)/,
-			D = `${y}umami-event`,
-			W = 300,
-			B = (t) => {
+			E = w("distinct-id") || void 0,
+			M = w("tag") || void 0,
+			$ = w("auto-track") !== v,
+			j = w("do-not-track") === b,
+			N = w("exclude-search") === b,
+			O = w("exclude-hash") === b,
+			A = w("domains") || "",
+			I = w("fetch-credentials") || "omit",
+			L = w("performance") === b,
+			P = w("auto-pageview") !== v,
+			K = A.split(",").map((t) => t.trim()),
+			R = `${(x || "https://gateway.umami.is").replace(/\/$/, "")}/api/send`,
+			_ = `${e}x${a}`,
+			D = /data-umami-event-([\w-_]+)/,
+			W = `${y}umami-event`,
+			B = 300,
+			C = (t) => {
 				if (!t) return t;
 				try {
 					const e = new URL(t, o.href);
-					return (j && (e.search = ""), N && (e.hash = ""), e.toString());
+					return (N && (e.search = ""), O && (e.hash = ""), e.toString());
 				} catch {
 					return t;
 				}
 			},
-			C = () => {
+			J = () => {
 				return {
 					website: S,
-					screen: R,
+					screen: _,
 					language: n,
 					title: c.title,
 					hostname: h,
@@ -60,34 +61,34 @@
 					referrer:
 						((t = Z),
 						t === p || t?.startsWith(p + "/") ? t.slice(p.length) : t),
-					tag: E,
-					id: V || void 0,
+					tag: M,
+					id: at || void 0,
 				};
 				var t;
 			},
-			J = (t, e, a) => {
+			U = (t, e, a) => {
 				a &&
 					("function" == typeof X && X(),
 					(Z = Y),
-					(Y = B(a)),
-					Y !== Z && L && setTimeout(F, W));
+					(Y = C(a)),
+					Y !== Z && P && setTimeout(G, B));
 			},
-			U = () =>
+			q = () =>
 				et ||
 				!S ||
 				g?.getItem("umami.disabled") ||
-				(O && !P.includes(h)) ||
-				($ &&
+				(A && !K.includes(h)) ||
+				(j &&
 					(() => {
-						const t = f || r || i;
+						const t = u || r || i;
 						return 1 === t || "1" === t || "yes" === t;
 					})()),
-			q = async (e, a = "event") => {
-				if (U()) return;
+			z = async (e, a = "event") => {
+				if (q()) return;
 				const n = t[k];
 				if (("function" == typeof n && (e = await Promise.resolve(n(a, e))), e))
 					try {
-						const t = await fetch(K, {
+						const t = await fetch(R, {
 								keepalive: !0,
 								method: "POST",
 								body: JSON.stringify({ type: a, payload: e }),
@@ -95,18 +96,18 @@
 									"Content-Type": "application/json",
 									"x-umami-website-id": S,
 									"x-umami-hostname": h,
-									...(void 0 !== Q && { "x-umami-cache": Q }),
+									...(void 0 !== V && { "x-umami-cache": V }),
 								},
-								credentials: A,
+								credentials: I,
 							}),
 							n = await t.json();
-						n && ((et = !!n.disabled), (Q = n.cache));
+						n && ((et = !!n.disabled), (V = n.cache));
 					} catch (t) {}
 			},
-			z = () => {
+			F = () => {
 				tt ||
 					((tt = !0),
-					L && F(),
+					P && G(),
 					(() => {
 						const t = (t, e, a) => {
 							const n = t[e];
@@ -115,27 +116,27 @@
 								return (a.apply(null, e), r);
 							};
 						};
-						((s.pushState = t(s, "pushState", J)),
-							(s.replaceState = t(s, "replaceState", J)));
+						((s.pushState = t(s, "pushState", U)),
+							(s.replaceState = t(s, "replaceState", U)));
 					})(),
 					(() => {
 						const t = async (t) => {
-							const e = t.getAttribute(D);
+							const e = t.getAttribute(W);
 							if (e) {
 								const a = {};
 								return (
 									t.getAttributeNames().forEach((e) => {
-										const n = e.match(_);
+										const n = e.match(D);
 										n && (a[n[1]] = t.getAttribute(e));
 									}),
-									F(e, a)
+									G(e, a)
 								);
 							}
 						};
 						c.addEventListener(
 							"click",
 							(e) => {
-								const a = e.target.closest(`[${D}]`);
+								const a = e.target.closest(`[${W}]`);
 								if (a) {
 									if ("A" === a.tagName && a.href) {
 										const { href: n, target: r } = a,
@@ -148,7 +149,7 @@
 										return (
 											i || e.preventDefault(),
 											t(a).finally(() => {
-												i || (("_top" === r ? u.location : o).href = n);
+												i || (("_top" === r ? d.location : o).href = n);
 											})
 										);
 									}
@@ -158,27 +159,27 @@
 							!0,
 						);
 					})(),
-					I && H());
+					L && Q());
 			},
-			F = (t, e) =>
-				q(
+			G = (t, e) =>
+				z(
 					"string" == typeof t
-						? { ...C(), name: t, data: e }
+						? { ...J(), name: t, data: e }
 						: "object" == typeof t
 							? { ...t }
 							: "function" == typeof t
-								? t(C())
-								: C(),
+								? t(J())
+								: J(),
 				),
-			G = (t, e) => {
+			H = (t, e) => {
 				const a = "string" == typeof t ? t : t.id;
 				return (
-					void 0 !== a && (V = a),
-					(Q = ""),
-					q({ ...C(), data: "object" == typeof t ? t : e }, "identify")
+					void 0 !== a && (at = a),
+					(V = ""),
+					z({ ...J(), data: "object" == typeof t ? t : e }, "identify")
 				);
 			},
-			H = () => {
+			Q = () => {
 				const e = {};
 				let a,
 					n = !1,
@@ -203,33 +204,33 @@
 					s("largest-contentful-paint", (t) => {
 						e.lcp = Math.max(t.startTime - i, 0);
 					}));
-				let u = 0,
-					f = [];
+				let d = 0,
+					u = [];
 				s("layout-shift", (t) => {
 					if (!t.hadRecentInput) {
-						const a = f[f.length - 1],
-							n = f[0];
+						const a = u[u.length - 1],
+							n = u[0];
 						(a &&
 						t.startTime - a.startTime - a.duration < 1e3 &&
 						t.startTime - n.startTime < 5e3
-							? ((u += t.value), f.push(t))
-							: ((u = t.value), (f = [t])),
-							u > (e.cls || 0) && (e.cls = u));
+							? ((d += t.value), u.push(t))
+							: ((d = t.value), (u = [t])),
+							d > (e.cls || 0) && (e.cls = d));
 					}
 				});
-				let l,
-					d = {};
+				let f,
+					l = {};
 				const h = (t) => {
 					t.forEach((t) => {
 						if (t.interactionId) {
-							const e = d[t.interactionId];
-							(!e || t.duration > e) && (d[t.interactionId] = t.duration);
+							const e = l[t.interactionId];
+							(!e || t.duration > e) && (l[t.interactionId] = t.duration);
 						}
 					});
 				};
 				try {
-					((l = new PerformanceObserver((t) => h(t.getEntries()))),
-						l.observe({ type: "event", buffered: !0, durationThreshold: 40 }));
+					((f = new PerformanceObserver((t) => h(t.getEntries()))),
+						f.observe({ type: "event", buffered: !0, durationThreshold: 40 }));
 				} catch {}
 				const m = (e) => {
 						try {
@@ -264,8 +265,8 @@
 								}
 							})(),
 							(() => {
-								l && h(l.takeRecords());
-								const t = Object.values(d).sort((t, e) => e - t);
+								f && h(f.takeRecords());
+								const t = Object.values(l).sort((t, e) => e - t);
 								if (t.length) {
 									const a = Math.floor(0.02 * Math.max(t.length, 10));
 									e.inp = t[Math.min(a, t.length - 1)];
@@ -274,7 +275,7 @@
 							(e.duration = Math.round(performance.now() - o)),
 							(n = !0),
 							a && clearTimeout(a),
-							q({ ...C(), ...e }, "performance"));
+							z({ ...J(), ...e }, "performance"));
 					};
 				((X = () => {
 					(p(),
@@ -284,9 +285,9 @@
 						}),
 						(i = 0),
 						(o = performance.now()),
-						(u = 0),
-						(f = []),
-						(d = {}),
+						(d = 0),
+						(u = []),
+						(l = {}),
 						(n = !1),
 						a && clearTimeout(a),
 						(a = setTimeout(p, 1e4)));
@@ -299,21 +300,22 @@
 			};
 		t.umami ||
 			(t.umami = {
-				track: F,
-				identify: G,
-				getSession: () => ({ cache: Q, website: S }),
+				track: G,
+				identify: H,
+				getSession: () => ({ cache: V, website: S }),
 			});
-		let Q,
-			V,
+		let V,
 			X,
-			Y = B(m),
-			Z = B(d),
+			Y = C(m),
+			Z = C(l),
 			tt = !1,
-			et = !1;
-		M &&
-			!U() &&
-			("complete" === c.readyState
-				? z()
-				: c.addEventListener("readystatechange", z, !0));
+			et = !1,
+			at = E;
+		(E && H(E),
+			$ &&
+				!q() &&
+				("complete" === c.readyState
+					? F()
+					: c.addEventListener("readystatechange", F, !0)));
 	})(window);
 })();
