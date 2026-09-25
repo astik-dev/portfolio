@@ -7,21 +7,21 @@
 				location: o,
 				document: c,
 				history: s,
-				top: d,
-				doNotTrack: u,
+				top: u,
+				doNotTrack: f,
 			} = t,
-			{ currentScript: f, referrer: l } = c;
-		if (!f) return;
+			{ currentScript: d, referrer: l } = c;
+		if (!d) return;
 		const { hostname: h, href: m, origin: p } = o;
-		let g;
+		let y;
 		try {
-			g = m.startsWith("data:") ? void 0 : t.localStorage;
+			y = m.startsWith("data:") ? void 0 : t.localStorage;
 		} catch {}
-		const y = "data-",
+		const g = "data-",
 			v = "false",
 			b = "true",
-			T = f.getAttribute.bind(f),
-			w = (t) => T(`${y}${t}`),
+			T = d.getAttribute.bind(d),
+			w = (t) => T(`${g}${t}`),
 			S = w("website-id"),
 			x = w("host-url"),
 			k = w("before-send"),
@@ -39,7 +39,7 @@
 			R = `${(x || "https://gateway.umami.is").replace(/\/$/, "")}/api/send`,
 			_ = `${e}x${a}`,
 			D = /data-umami-event-([\w-_]+)/,
-			W = `${y}umami-event`,
+			W = `${g}umami-event`,
 			B = 300,
 			C = (t) => {
 				if (!t) return t;
@@ -76,11 +76,11 @@
 			q = () =>
 				et ||
 				!S ||
-				g?.getItem("umami.disabled") ||
+				y?.getItem("umami.disabled") ||
 				(A && !K.includes(h)) ||
 				(j &&
 					(() => {
-						const t = u || r || i;
+						const t = f || r || i;
 						return 1 === t || "1" === t || "yes" === t;
 					})()),
 			z = async (e, a = "event") => {
@@ -136,10 +136,12 @@
 						c.addEventListener(
 							"click",
 							(e) => {
-								const a = e.target.closest(`[${W}]`);
-								if (a) {
-									if ("A" === a.tagName && a.href) {
-										const { href: n, target: r } = a,
+								const a = e.target;
+								if (!a || "function" != typeof a.closest) return;
+								const n = a.closest(`[${W}]`);
+								if (n) {
+									if ("A" === n.tagName && n.href) {
+										const { href: a, target: r } = n,
 											i =
 												"_blank" === r ||
 												e.ctrlKey ||
@@ -148,12 +150,12 @@
 												(e.button && 1 === e.button);
 										return (
 											i || e.preventDefault(),
-											t(a).finally(() => {
-												i || (("_top" === r ? d.location : o).href = n);
+											t(n).finally(() => {
+												i || (("_top" === r ? u.location : o).href = a);
 											})
 										);
 									}
-									return t(a);
+									return t(n);
 								}
 							},
 							!0,
@@ -204,21 +206,21 @@
 					s("largest-contentful-paint", (t) => {
 						e.lcp = Math.max(t.startTime - i, 0);
 					}));
-				let d = 0,
-					u = [];
+				let u = 0,
+					f = [];
 				s("layout-shift", (t) => {
 					if (!t.hadRecentInput) {
-						const a = u[u.length - 1],
-							n = u[0];
+						const a = f[f.length - 1],
+							n = f[0];
 						(a &&
 						t.startTime - a.startTime - a.duration < 1e3 &&
 						t.startTime - n.startTime < 5e3
-							? ((d += t.value), u.push(t))
-							: ((d = t.value), (u = [t])),
-							d > (e.cls || 0) && (e.cls = d));
+							? ((u += t.value), f.push(t))
+							: ((u = t.value), (f = [t])),
+							u > (e.cls || 0) && (e.cls = u));
 					}
 				});
-				let f,
+				let d,
 					l = {};
 				const h = (t) => {
 					t.forEach((t) => {
@@ -229,8 +231,8 @@
 					});
 				};
 				try {
-					((f = new PerformanceObserver((t) => h(t.getEntries()))),
-						f.observe({ type: "event", buffered: !0, durationThreshold: 40 }));
+					((d = new PerformanceObserver((t) => h(t.getEntries()))),
+						d.observe({ type: "event", buffered: !0, durationThreshold: 40 }));
 				} catch {}
 				const m = (e) => {
 						try {
@@ -265,7 +267,7 @@
 								}
 							})(),
 							(() => {
-								f && h(f.takeRecords());
+								d && h(d.takeRecords());
 								const t = Object.values(l).sort((t, e) => e - t);
 								if (t.length) {
 									const a = Math.floor(0.02 * Math.max(t.length, 10));
@@ -285,8 +287,8 @@
 						}),
 						(i = 0),
 						(o = performance.now()),
-						(d = 0),
-						(u = []),
+						(u = 0),
+						(f = []),
 						(l = {}),
 						(n = !1),
 						a && clearTimeout(a),
