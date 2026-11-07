@@ -50,33 +50,33 @@
 	function r(r) {
 		const i = new WeakMap(),
 			o = [];
-		let c = !1,
-			s = !1,
+		let s = !1,
+			c = !1,
 			l = 0,
 			d = 0,
-			f = 0;
-		async function u(u, p = {}, m = !0) {
+			u = 0;
+		async function f(f, m = {}, p = !0) {
 			try {
-				if (!r.enabled || s || r.disabled() || o.length >= 20) return;
+				if (!r.enabled || c || r.disabled() || o.length >= 20) return;
 				const h = Date.now();
 				if (h < l) return;
 				const y = Math.floor(h / 6e4);
-				if ((d !== y && ((d = y), (f = 0)), f >= 20)) return;
-				if (u && "object" == typeof u) {
-					if (h - (i.get(u) || 0) < 1e3) return;
-					i.set(u, h);
+				if ((d !== y && ((d = y), (u = 0)), u >= 20)) return;
+				if (f && "object" == typeof f) {
+					if (h - (i.get(f) || 0) < 1e3) return;
+					i.set(f, h);
 				}
-				f++;
+				u++;
 				const g = r.context(),
 					b = r.cache(),
-					v = u && "object" == typeof u ? u : null,
+					v = f && "object" == typeof f ? f : null,
 					w =
 						"string" == typeof v?.message
 							? v.message
-							: "string" == typeof u
-								? u
+							: "string" == typeof f
+								? f
 								: "Non-Error exception",
-					k = {
+					T = {
 						version: 1,
 						website: g.website,
 						eventId: a(),
@@ -85,40 +85,41 @@
 							e("string" == typeof v?.name ? v.name : "Error", 200) || "Error",
 						message: e(w),
 						stack: e("string" == typeof v?.stack ? v.stack : "", 16e3),
-						handled: m,
+						handled: p,
 						url: t(g.url),
 						id: g.id,
+						salt: g.salt,
 						screen: g.screen,
 						language: g.language,
-						release: e(p.release || r.release, 100),
-						environment: e(p.environment || r.environment, 50),
-						tags: n(p.tags),
-						...(p.fingerprint?.length
-							? { fingerprint: p.fingerprint.slice(0, 5).map((t) => e(t, 200)) }
+						release: e(m.release || r.release, 100),
+						environment: e(m.environment || r.environment, 50),
+						tags: n(m.tags),
+						...(m.fingerprint?.length
+							? { fingerprint: m.fingerprint.slice(0, 5).map((t) => e(t, 200)) }
 							: {}),
 					};
 				let S;
-				s = !0;
+				c = !0;
 				try {
-					S = r.beforeSend(k);
+					S = r.beforeSend(T);
 				} finally {
-					s = !1;
+					c = !1;
 				}
-				const T = await S;
-				if (!T || r.disabled()) return;
+				const k = await S;
+				if (!k || r.disabled()) return;
 				(o.push({
 					payload: {
-						...T,
-						website: k.website,
-						eventId: k.eventId,
+						...k,
+						website: T.website,
+						eventId: T.eventId,
 						timestamp: h,
 						version: 1,
 					},
 					cache: b,
 				}),
 					(async function () {
-						if (!c) {
-							c = !0;
+						if (!s) {
+							s = !0;
 							try {
 								for (; o.length; ) {
 									const e = o.shift();
@@ -161,7 +162,7 @@
 										}
 								}
 							} finally {
-								c = !1;
+								s = !1;
 							}
 						}
 					})().catch(() => {}));
@@ -171,7 +172,7 @@
 			r.enabled &&
 				(window.addEventListener("error", (e) => {
 					e.message &&
-						u(
+						f(
 							e.error || {
 								name: "Error",
 								message: e.message,
@@ -184,38 +185,38 @@
 						);
 				}),
 				window.addEventListener("unhandledrejection", (e) => {
-					u(e.reason, {}, !1);
+					f(e.reason, {}, !1);
 				})),
-			{ captureException: (e, t) => u(e, t) }
+			{ captureException: (e, t) => f(e, t) }
 		);
 	}
 	((e) => {
 		const {
 				screen: { width: t, height: n },
 				navigator: { language: a, doNotTrack: i, msDoNotTrack: o },
-				location: c,
-				document: s,
+				location: s,
+				document: c,
 				history: l,
 				top: d,
-				doNotTrack: f,
+				doNotTrack: u,
 			} = e,
-			{ currentScript: u, referrer: p } = s,
-			m = e.umamiConfig || {};
-		if (!u && !m.websiteId) return;
-		const { hostname: h, href: y, origin: g } = c;
+			{ currentScript: f, referrer: m } = c,
+			p = e.umamiConfig || {};
+		if (!f && !p.websiteId) return;
+		const { hostname: h, href: y, origin: g } = s;
 		let b;
 		try {
 			b = y.startsWith("data:") ? void 0 : e.localStorage;
 		} catch {}
 		const v = "data-",
 			w = "false",
-			k = "true",
-			S = u ? u.getAttribute.bind(u) : () => null,
-			T = (e) => {
+			T = "true",
+			S = f ? f.getAttribute.bind(f) : () => null,
+			k = (e) => {
 				const t = S(`${v}${e}`);
 				if (null != t) return t;
 				const n =
-					m[((e) => e.replace(/-([a-z])/g, (e) => e[1].toUpperCase()))(e)];
+					p[((e) => e.replace(/-([a-z])/g, (e) => e[1].toUpperCase()))(e)];
 				return null == n || "function" == typeof n
 					? null
 					: Array.isArray(n)
@@ -223,77 +224,90 @@
 						: String(n);
 			},
 			$ = () => {
-				const t = T("before-send"),
-					n = t ? e[t] : m.beforeSend;
+				const t = k("before-send"),
+					n = t ? e[t] : p.beforeSend;
 				return "function" == typeof n ? n : void 0;
 			},
-			x = T("website-id"),
-			E = T("host-url"),
-			j = T("distinct-id") || void 0,
-			M = T("tag") || void 0,
-			I = T("auto-track") !== w,
-			A = T("do-not-track") === k,
-			L = T("exclude-search") === k,
-			O = T("exclude-hash") === k,
-			N = T("domains") || "",
-			U = T("fetch-credentials") || "omit",
-			R = T("performance") === k,
-			C = T("auto-pageview") !== w,
-			D = N.split(",").map((e) => e.trim()),
-			P = `${(E || "https://gateway.umami.is").replace(/\/$/, "")}/api/send`,
-			z = `${t}x${n}`,
-			_ = /data-umami-event-([\w-_]+)/,
-			J = `${v}umami-event`,
-			K = 300,
-			W = (e) => {
+			x = k("website-id"),
+			E = k("host-url"),
+			j = k("distinct-id") || void 0,
+			M = k("tag") || void 0,
+			I = k("salt") || void 0,
+			U = k("salt-rotation"),
+			L = k("auto-track") !== w,
+			O = k("do-not-track") === T,
+			A = k("exclude-search") === T,
+			D = k("exclude-hash") === T,
+			C = k("domains") || "",
+			N = k("fetch-credentials") || "omit",
+			R = k("performance") === T,
+			P = k("auto-pageview") !== w,
+			z = C.split(",").map((e) => e.trim()),
+			_ = `${(E || "https://gateway.umami.is").replace(/\/$/, "")}/api/send`,
+			J = `${t}x${n}`,
+			K = /data-umami-event-([\w-_]+)/,
+			W = `${v}umami-event`,
+			B = 300,
+			V = (e) => {
 				if (!e) return e;
 				try {
-					const t = new URL(e, c.href);
-					return (L && (t.search = ""), O && (t.hash = ""), t.toString());
+					const t = new URL(e, s.href);
+					return (A && (t.search = ""), D && (t.hash = ""), t.toString());
 				} catch {
 					return e;
 				}
 			},
-			B = () => {
+			q = () => {
+				if (I) return I;
+				const e = { hourly: 13, daily: 10, weekly: 10, monthly: 7 }[U];
+				if (!e) return;
+				const t = new Date();
+				return (
+					"weekly" === U && t.setUTCDate(t.getUTCDate() - t.getUTCDay()),
+					t.toISOString().slice(0, e)
+				);
+			},
+			F = () => {
 				return {
 					website: x,
-					screen: z,
+					screen: J,
 					language: a,
-					title: s.title,
+					title: c.title,
 					hostname: h,
-					url: ee,
+					url: ae,
 					referrer:
-						((e = te),
+						((e = re),
 						e === g || e?.startsWith(`${g}/`) ? e.slice(g.length) : e),
 					tag: M,
-					id: re || void 0,
+					id: se || void 0,
+					salt: q(),
 				};
 				var e;
 			},
-			V = (e, t, n) => {
+			G = (e, t, n) => {
 				n &&
-					("function" == typeof Z && Z(),
-					(te = ee),
-					(ee = W(n)),
-					ee !== te && C && setTimeout(H, K));
+					("function" == typeof ne && ne(),
+					(re = ae),
+					(ae = V(n)),
+					ae !== re && P && setTimeout(Y, B));
 			},
-			q = () =>
-				ae ||
+			H = () =>
+				oe ||
 				!x ||
 				b?.getItem("umami.disabled") ||
 				("umami.disabled" === e.name && d !== e) ||
-				(N && !D.includes(h)) ||
-				(A &&
+				(C && !z.includes(h)) ||
+				(O &&
 					(() => {
-						const e = f || i || o;
+						const e = u || i || o;
 						return 1 === e || "1" === e || "yes" === e;
 					})()),
-			F = async (e, t = "event") => {
-				if (q()) return;
+			Q = async (e, t = "event") => {
+				if (H()) return;
 				const n = $();
 				if (("function" == typeof n && (e = await Promise.resolve(n(t, e))), e))
 					try {
-						const n = await fetch(P, {
+						const n = await fetch(_, {
 								keepalive: !0,
 								method: "POST",
 								body: JSON.stringify({ type: t, payload: e }),
@@ -301,18 +315,18 @@
 									"Content-Type": "application/json",
 									"x-umami-website-id": x,
 									"x-umami-hostname": h,
-									...(void 0 !== Y && { "x-umami-cache": Y }),
+									...(void 0 !== te && { "x-umami-cache": te }),
 								},
-								credentials: U,
+								credentials: N,
 							}),
 							a = await n.json();
-						a && ((ae = !!a.disabled), (Y = a.cache));
+						a && ((oe = !!a.disabled), (te = a.cache));
 					} catch {}
 			},
-			G = () => {
-				ne ||
-					((ne = !0),
-					C && H(),
+			X = () => {
+				ie ||
+					((ie = !0),
+					P && Y(),
 					(() => {
 						const e = (e, t, n) => {
 							const a = e[t];
@@ -321,29 +335,29 @@
 								return (n.apply(null, t), r);
 							};
 						};
-						((l.pushState = e(l, "pushState", V)),
-							(l.replaceState = e(l, "replaceState", V)));
+						((l.pushState = e(l, "pushState", G)),
+							(l.replaceState = e(l, "replaceState", G)));
 					})(),
 					(() => {
 						const e = async (e) => {
-							const t = e.getAttribute(J);
+							const t = e.getAttribute(W);
 							if (t) {
 								const n = {};
 								return (
 									e.getAttributeNames().forEach((t) => {
-										const a = t.match(_);
+										const a = t.match(K);
 										a && (n[a[1]] = e.getAttribute(t));
 									}),
-									H(t, n)
+									Y(t, n)
 								);
 							}
 						};
-						s.addEventListener(
+						c.addEventListener(
 							"click",
 							(t) => {
 								const n = t.target;
 								if (!n || "function" != typeof n.closest) return;
-								const a = n.closest(`[${J}]`);
+								const a = n.closest(`[${W}]`);
 								if (a) {
 									if ("A" === a.tagName && a.href) {
 										const { href: n, target: r } = a,
@@ -356,7 +370,7 @@
 										return (
 											i || t.preventDefault(),
 											e(a).finally(() => {
-												i || (("_top" === r ? d.location : c).href = n);
+												i || (("_top" === r ? d.location : s).href = n);
 											})
 										);
 									}
@@ -366,180 +380,198 @@
 							!0,
 						);
 					})(),
-					R && X());
+					R && ee());
 			},
-			H = (e, t) =>
-				F(
+			Y = (e, t) =>
+				Q(
 					"string" == typeof e
-						? { ...B(), name: e, data: t }
+						? { ...F(), name: e, data: t }
 						: "object" == typeof e
 							? { ...e }
 							: "function" == typeof e
-								? e(B())
-								: B(),
+								? e(F())
+								: F(),
 				),
-			Q = (e, t) => {
+			Z = (e, t) => {
 				const n = "string" == typeof e ? e : e.id;
 				return (
-					void 0 !== n && (re = n),
-					F({ ...B(), data: "object" == typeof e ? e : t }, "identify")
+					void 0 !== n && (se = n),
+					Q({ ...F(), data: "object" == typeof e ? e : t }, "identify")
 				);
 			},
-			X = () => {
+			ee = () => {
 				const t = {};
 				let n,
 					a = !1,
 					r = !0,
 					i = 0,
 					o = 0;
-				const c = (e, t) => {
+				const s = (t) => {
+					try {
+						return e.performance?.getEntriesByType?.(t) || [];
+					} catch {
+						return [];
+					}
+				};
+				let l = (() => {
+					if (c.prerendering) return 1 / 0;
+					const e = s("navigation")?.[0],
+						t = e?.activationStart || 0,
+						n = s("visibility-state")?.find(
+							(e) => "hidden" === e.name && e.startTime >= t,
+						);
+					return n?.startTime ?? ("hidden" === c.visibilityState ? 0 : 1 / 0);
+				})();
+				const d = (e, t) => {
 					try {
 						new PerformanceObserver((e) => {
 							e.getEntries().forEach(t);
 						}).observe({ type: e, buffered: !0 });
 					} catch {}
 				};
-				(c("navigation", (e) => {
+				(d("navigation", (e) => {
 					((i = e.activationStart || 0),
 						(t.ttfb = Math.max(e.responseStart - i, 0)));
 				}),
-					c("paint", (e) => {
-						"first-contentful-paint" === e.name &&
+					d("paint", (e) => {
+						r &&
+							"first-contentful-paint" === e.name &&
+							e.startTime < l &&
 							(t.fcp = Math.max(e.startTime - i, 0));
 					}),
-					c("largest-contentful-paint", (e) => {
-						t.lcp = Math.max(e.startTime - i, 0);
+					d("largest-contentful-paint", (e) => {
+						r && e.startTime < l && (t.lcp = Math.max(e.startTime - i, 0));
 					}));
-				let l = 0,
-					d = [];
-				c("layout-shift", (e) => {
+				let u = 0,
+					f = [];
+				d("layout-shift", (e) => {
 					if (!e.hadRecentInput) {
-						const n = d[d.length - 1],
-							a = d[0];
+						const n = f[f.length - 1],
+							a = f[0];
 						(n &&
 						e.startTime - n.startTime - n.duration < 1e3 &&
 						e.startTime - a.startTime < 5e3
-							? ((l += e.value), d.push(e))
-							: ((l = e.value), (d = [e])),
-							l > (t.cls || 0) && (t.cls = l));
+							? ((u += e.value), f.push(e))
+							: ((u = e.value), (f = [e])),
+							u > (t.cls || 0) && (t.cls = u));
 					}
 				});
-				let f,
-					u = {};
-				const p = (e) => {
+				let m,
+					p = {};
+				const h = (e) => {
 					e.forEach((e) => {
 						if (e.interactionId) {
-							const t = u[e.interactionId];
-							(!t || e.duration > t) && (u[e.interactionId] = e.duration);
+							const t = p[e.interactionId];
+							(!t || e.duration > t) && (p[e.interactionId] = e.duration);
 						}
 					});
 				};
 				try {
-					((f = new PerformanceObserver((e) => p(e.getEntries()))),
-						f.observe({ type: "event", buffered: !0, durationThreshold: 40 }));
+					((m = new PerformanceObserver((e) => h(e.getEntries()))),
+						m.observe({ type: "event", buffered: !0, durationThreshold: 40 }));
 				} catch {}
-				const m = (t) => {
-						try {
-							return e.performance?.getEntriesByType?.(t) || [];
-						} catch {
-							return [];
-						}
-					},
-					h = () => {
-						a ||
-							((() => {
-								if (r) {
-									if (void 0 === t.ttfb) {
-										const e = m("navigation")?.[0];
-										e &&
-											(t.ttfb = Math.max(
-												e.responseStart - (e.activationStart || 0),
-												0,
-											));
-									}
-									if (void 0 === t.fcp) {
-										const e = m("paint")?.find(
-											(e) => "first-contentful-paint" === e.name,
-										);
-										e && (t.fcp = Math.max(e.startTime - i, 0));
-									}
-									if (void 0 === t.lcp) {
-										const e = m("largest-contentful-paint"),
-											n = e?.[e.length - 1];
-										n && (t.lcp = Math.max(n.startTime - i, 0));
-									}
+				const y = () => {
+					a ||
+						((() => {
+							if (r) {
+								if (void 0 === t.ttfb) {
+									const e = s("navigation")?.[0];
+									e &&
+										(t.ttfb = Math.max(
+											e.responseStart - (e.activationStart || 0),
+											0,
+										));
 								}
-							})(),
-							(() => {
-								f && p(f.takeRecords());
-								const e = Object.values(u).sort((e, t) => t - e);
-								if (e.length) {
-									const n = Math.floor(0.02 * Math.max(e.length, 10));
-									t.inp = e[Math.min(n, e.length - 1)];
+								if (void 0 === t.fcp) {
+									const e = s("paint")?.find(
+										(e) => "first-contentful-paint" === e.name,
+									);
+									e &&
+										e.startTime < l &&
+										(t.fcp = Math.max(e.startTime - i, 0));
 								}
-							})(),
-							(t.duration = Math.round(performance.now() - o)),
-							(a = !0),
-							n && clearTimeout(n),
-							F({ ...B(), ...t }, "performance"));
-					};
-				((Z = () => {
-					(h(),
+								if (void 0 === t.lcp) {
+									const e = s("largest-contentful-paint"),
+										n = e?.[e.length - 1];
+									n &&
+										n.startTime < l &&
+										(t.lcp = Math.max(n.startTime - i, 0));
+								}
+							}
+						})(),
+						(() => {
+							m && h(m.takeRecords());
+							const e = Object.values(p).sort((e, t) => t - e);
+							if (e.length) {
+								const n = Math.floor(0.02 * Math.max(e.length, 10));
+								t.inp = e[Math.min(n, e.length - 1)];
+							}
+						})(),
+						(t.duration = Math.round(performance.now() - o)),
+						(a = !0),
+						n && clearTimeout(n),
+						Q({ ...F(), ...t }, "performance"));
+				};
+				((ne = () => {
+					(y(),
 						(r = !1),
 						Object.keys(t).forEach((e) => {
 							delete t[e];
 						}),
 						(i = 0),
 						(o = performance.now()),
-						(l = 0),
-						(d = []),
-						(u = {}),
+						(u = 0),
+						(f = []),
+						(p = {}),
 						(a = !1),
 						n && clearTimeout(n),
-						(n = setTimeout(h, 1e4)));
+						(n = setTimeout(y, 1e4)));
 				}),
-					(n = setTimeout(h, 1e4)),
-					s.addEventListener("visibilitychange", () => {
-						"hidden" === s.visibilityState && h();
-					}),
-					e.addEventListener("pagehide", h));
+					(n = setTimeout(y, 1e4)));
+				const g = (e) => {
+					"hidden" === c.visibilityState &&
+						(l === 1 / 0 && (l = e.timeStamp || performance.now()), y());
+				};
+				(c.addEventListener("visibilitychange", g, !0),
+					c.addEventListener("prerenderingchange", g, !0),
+					e.addEventListener("pagehide", y));
 			};
-		let Y,
-			Z,
-			ee = W(y),
-			te = W(p),
-			ne = !1,
-			ae = !1,
-			re = j;
+		let te,
+			ne,
+			ae = V(y),
+			re = V(m),
+			ie = !1,
+			oe = !1,
+			se = j;
 		if (!e.umami) {
 			const t = r({
-				endpoint: P,
-				enabled: T("errors") === k,
-				disabled: () => !!q(),
-				context: B,
-				cache: () => Y,
+				endpoint: _,
+				enabled: k("errors") === T,
+				disabled: () => !!H(),
+				context: F,
+				cache: () => te,
 				updateCache: (e) => {
-					Y = e;
+					te = e;
 				},
-				release: T("release") || "",
-				environment: T("environment") || "production",
+				release: k("release") || "",
+				environment: k("environment") || "production",
 				beforeSend: async (e) => {
 					const t = $();
 					return "function" == typeof t ? t("error", e) : e;
 				},
 			});
 			e.umami = {
-				track: H,
-				identify: Q,
-				getSession: () => ({ cache: Y, website: x }),
+				track: Y,
+				identify: Z,
+				getSession: () => ({ cache: te, website: x }),
 				...t,
 			};
 		}
-		(j && Q(j),
-			I &&
-				!q() &&
-				("complete" === s.readyState
-					? G()
-					: s.addEventListener("readystatechange", G, !0)));
+		(j && Z(j),
+			L &&
+				!H() &&
+				("complete" === c.readyState
+					? X()
+					: c.addEventListener("readystatechange", X, !0)));
 	})(window);
 })();
